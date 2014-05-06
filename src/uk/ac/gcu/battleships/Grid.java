@@ -1,5 +1,8 @@
 package uk.ac.gcu.battleships;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Class representing the game board.
  * A Grid will contain information about the state of the game,
@@ -7,13 +10,18 @@ package uk.ac.gcu.battleships;
  * There is one Grid for one player.
  * @author Yann Prono
  * @author Anthony Cerf
+ * @version 1.0
  */
 public class Grid {
+	
 	/** Two-dimensional array which represents the grid. */
 	private char[][] board;
 
 	/** Default character used in the Grid. */
 	public static final char DEFAULT_CHAR = '-';
+
+	/** List of all Ships in the Grid. */
+	private List <Ship> ships;
 
 
 	/**
@@ -28,6 +36,8 @@ public class Grid {
 				this.board[i][j] = Grid.DEFAULT_CHAR;
 			}
 		}
+
+		this.ships = new ArrayList <Ship>();
 	}
 
 	/**
@@ -42,7 +52,7 @@ public class Grid {
 			res = this.board[line][row];
 		}
 		catch(ArrayIndexOutOfBoundsException e) {
-			System.out.println("***** POSITION UNDEFINIED *****");
+			res = 0;
 		}
 		return res;
 	}
@@ -81,6 +91,79 @@ public class Grid {
 
 		return res;
 	}
+
+	/**
+	 * Method adding a Ship in this Grid and in the list. 
+	 * @param s Ship to add.
+	 * @return {@code true} only if the Ship has been added in the Grid.
+	 */
+	public boolean addShip (Ship s) {
+		boolean add = this.checkPosition(s);
+		// If the Ship can be added ==> add in the List and in the Grid.
+		if(add) {
+			// add to the list
+			this.ships.add(s);
+			//add  in the board
+			this.addShipIntoGrid(s);
+		}
+		else {
+			System.out.println("***** YOU CAN'T ADD THIS SHIP AT THE DEFINED POSITION *****");
+		}
+		return add ;
+	}
+
+	/**
+	 * Method which changes chars in the Grid with the position's Ship.
+	 * This method is called only if the Ship can be added in the Grid. 
+	 * @param s Ship to add.
+	 */
+	private void addShipIntoGrid(Ship s) {
+		boolean horizon = s.shipOrientation == 'h';
+
+		if(horizon) {
+			for(int i =s.shipPosition_x; i <s.shipPosition_x+s.shipSize;i++) {
+				this.board[s.shipPosition_y][i] = 'x';	
+			}
+		}
+		else {
+			for(int i =s.shipPosition_y; i <s.shipPosition_y+s.shipSize;i++) {
+				this.board[i][s.shipPosition_x] = 'x';
+			}
+		}
+	}
+	
+	/**
+	 * Method enables to check if the Ship can be added in the Grid
+	 * @param s Ship to add
+	 * @return {@code true} only if the Ship can be added.
+	 */
+	private boolean checkPosition(Ship s) {
+		boolean add = true;
+		boolean horizon = s.shipOrientation == 'h';
+		// Horizontal ship
+		if(horizon) {
+			int i = s.shipPosition_x;
+			while(i <s.shipPosition_x+s.shipSize && add) {
+				char res = this.returnCharacter(i, s.shipPosition_y);
+				if(res != Grid.DEFAULT_CHAR || res == 0) {
+					add = false;	
+				}
+				i++;
+			}
+		}
+		// Vertical ship
+		else {
+			int i = s.shipPosition_y;
+			while(i <s.shipPosition_y+s.shipSize && add) {
+				char res = this.returnCharacter(s.shipPosition_x, i);
+				if(res != Grid.DEFAULT_CHAR || res == 0) {
+					add = false; 
+				}
+				i++;
+			}	
+		}
+		return add;
+	}
 	
 	/**
 	 * Getter for the Two-dimensional array
@@ -88,5 +171,14 @@ public class Grid {
 	 */
 	public char[][] getBoard() {
 		return this.board;
-	} 
+	}
+	
+	/**
+	 * Getter for the List of Ships which are on the Grid.
+	 * @return The list of Ships. 
+	 */
+	public List<Ship> getShips() {
+		return this.ships;
+	}
+
 }
