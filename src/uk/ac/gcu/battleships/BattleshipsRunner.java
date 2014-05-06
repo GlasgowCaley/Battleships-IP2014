@@ -10,7 +10,7 @@ public class BattleshipsRunner {
 		System.out.print(testGrid.toString());
 		
 		// testing Ship
-		Ship testShip = new Ship();
+		Ship testShip = new Ship(3,0,1,'h');
 		//bool hit = testShip.isHit(3);
 		
 		
