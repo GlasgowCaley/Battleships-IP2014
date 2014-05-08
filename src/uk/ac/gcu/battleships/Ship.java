@@ -19,7 +19,7 @@ package uk.ac.gcu.battleships;
 		
 		//Used to determine if the position n of the ship has already been hit
 		public boolean isHit(int position){
-			
+			position = position - 1;
 			if(this.shipHealth[position] == '+')
 				return false;
 			else
