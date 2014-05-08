@@ -9,10 +9,7 @@ public class Player  {
 	}
 	
 	public void createShip(int x, int y, int size, char orientation){
-		Ship S = new Ship;
-		S.setPosition(x,y);
-		S.setShipSize(size);
-		S.setShipOrientation(orientation);
+		Ship S = new Ship(size, x, y, orientation);
 		myGrid.addShip(S);
 	}
 	
