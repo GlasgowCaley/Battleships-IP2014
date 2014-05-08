@@ -12,9 +12,13 @@ package uk.ac.gcu.battleships;
 		void testHit(int x_guess, int y_guess){
 			for(byte i = 0; i < this.shipSize; i++){
 				if(this.shipCoordinates[i][0] == x_guess && this.shipCoordinates[i][1] == y_guess)
-					if(this.isHit(i) == false)
-						this.markHit(i);
+					if(this.isHit(i) == false){
+						return true;
+						/*Removed temporarily until we know how ships are to be "hit"
+						this.markHit(i); */
+					}
 			}
+			return false;
 		}
 		
 		//Used to determine if the position n of the ship has already been hit
