@@ -1,10 +1,10 @@
 package uk.ac.gcu.battleships;
 
 	public class Ship {
-		int shipSize;					//Size of the ship 2, 3 or 4
-		int shipPosition_x;				//Ship start position on board; x, y
+		int shipSize;				//Size of the ship 2, 3 or 4
+		int shipPosition_x;			//Ship start position on board; x, y
 		int shipPosition_y;
-		char[] shipHealth;				//Ship health. bow, rear, stern
+		char[] shipHealth;			//Ship health. bow, rear, stern
 		int[][] shipCoordinates;		//Every coordinate in which the ship exists. X,Y
 		char shipOrientation;			//Input orientation on creation Note to self: catch exceptions
 		
@@ -26,7 +26,7 @@ package uk.ac.gcu.battleships;
 				return true;
 		}
 		
-		//Used to mark the ships shipHealth array whenever the ship takes a hit
+		//Used to mark the ships shipHealth array whenever the ship takes a hit. Called by testHit
 		void markHit(int position){
 			this.shipHealth[position] = 'o';
 		}
