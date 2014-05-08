@@ -9,7 +9,7 @@ package uk.ac.gcu.battleships;
 		char shipOrientation;			//Input orientation on creation Note to self: catch exceptions
 		
 		//Used by crew to ponder if their ship has been hit.
-		void testHit(int x_guess, int y_guess){
+		boolean testHit(int x_guess, int y_guess){
 			for(byte i = 0; i < this.shipSize; i++){
 				if(this.shipCoordinates[i][0] == x_guess && this.shipCoordinates[i][1] == y_guess)
 					if(this.isHit(i) == false){
