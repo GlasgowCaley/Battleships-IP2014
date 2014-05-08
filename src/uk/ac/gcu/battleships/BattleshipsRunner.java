@@ -11,9 +11,9 @@ public class BattleshipsRunner {
 		
 		// testing Ship
 		Ship testShip = new Ship(3,0,1,'h');
-		//bool hit = testShip.isHit(3);
-		
-		
+		boolean hit = testShip.isHit(3);
+		System.out.println("Has the test ship position 3 been hit? " + hit);
+
 		System.out.println("Completed test");
 		
 		
