@@ -169,7 +169,7 @@ public class Grid {
 	 * Method enables to know if the player's guess
 	 * hit a Ship in this Grid.   
 	 * @param g Guess of the ennemy player.
-	 * @return {@ode true} if all ships has been sunk.
+	 * @return {@ode true} if all ships have been sunk.
 	 */
 	public boolean checkGuess(Guess g) {
 		int x = g.get_X();
