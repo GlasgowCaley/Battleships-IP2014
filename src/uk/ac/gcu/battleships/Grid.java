@@ -122,12 +122,12 @@ public class Grid {
 
 		if(horizon) {
 			for(int i =s.shipPosition_x; i <s.shipPosition_x+s.shipSize;i++) {
-				this.board[s.shipPosition_y][i] = 'x';	
+				this.board[s.shipPosition_y][i] = 's';	
 			}
 		}
 		else {
 			for(int i =s.shipPosition_y; i <s.shipPosition_y+s.shipSize;i++) {
-				this.board[i][s.shipPosition_x] = 'x';
+				this.board[i][s.shipPosition_x] = 's';
 			}
 		}
 	}
@@ -166,6 +166,37 @@ public class Grid {
 	}
 	
 	/**
+	 * Method enables to know if the player's guess
+	 * hit a Ship in this Grid.   
+	 * @param g Guess of the ennemy player.
+	 * @return {@ode true} if all ships has been sunk.
+	 */
+	public boolean checkGuess(Guess g) {
+		int x = g.get_X();
+		int y = g.get_Y();
+		int l = this.ships.size();
+		boolean hit = false;
+		boolean sunk = true;
+		int i = 0;
+		
+		while(!hit && i<l){
+			hit = this.ships.get(i).testHit(x, y);
+			if(hit) 
+				this.board[y][x] = 'o';
+			else
+				this.board[y][x] = 'x';
+			i++;
+		}
+		
+		for(int j = 0;j<l;j++) {
+			if(this.ships.get(j).isSunk())
+				sunk = false;
+		}
+		
+		return sunk;		
+	}
+	
+	/**
 	 * Getter for the Two-dimensional array
 	 * @return The array which represents the Grid. 
 	 */
@@ -180,5 +211,5 @@ public class Grid {
 	public List<Ship> getShips() {
 		return this.ships;
 	}
-
+	
 }
