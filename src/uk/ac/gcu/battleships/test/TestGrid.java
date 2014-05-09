@@ -188,7 +188,7 @@ public class TestGrid {
 		boolean ok = false;
 		Ship s = new Ship(2,2,0,'h');
 		ok = g.addShip(s);
-		Guess gu = new Guess((byte)2,(byte)0);
+		Guess gu = new Guess(2,0);
 		boolean a = g.checkGuess(gu);
 		char r = g.returnCharacter(0,2);
 	
@@ -209,7 +209,7 @@ public class TestGrid {
 		Ship s = new Ship(2,2,0,'h');
 		ok = g.addShip(s);
 		
-		Guess gu = new Guess((byte)2,(byte)1);
+		Guess gu = new Guess(2,1);
 		boolean a = g.checkGuess(gu);
 		
 		char r = g.returnCharacter(1,2);
