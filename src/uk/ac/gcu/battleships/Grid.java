@@ -19,6 +19,12 @@ public class Grid {
 
 	/** Default character used in the Grid. */
 	public static final char DEFAULT_CHAR = '-';
+	
+	/** Character used for a Ship which is hit. */
+	public static final char HIT = 'x';
+	
+	/** Character used for a hit missed. */
+	public static final char HIT_MISSED = 'o';
 
 	/** List of all Ships in the Grid. */
 	private List <Ship> ships;
@@ -182,9 +188,9 @@ public class Grid {
 		while(!hit && i<l){
 			hit = this.ships.get(i).testHit(x, y);
 			if(hit) 
-				this.board[y][x] = 'o';
+				this.board[y][x] = Grid.HIT;
 			else
-				this.board[y][x] = 'x';
+				this.board[y][x] = Grid.HIT_MISSED;
 			i++;
 		}
 		
@@ -219,7 +225,7 @@ public class Grid {
 			res += String.format(format,line);
 
 			for(int j = 0; j<this.board[i].length;j++){
-				if(this.returnCharacter(i, j) != 'x')
+				if(this.returnCharacter(i, j) != Grid.HIT_MISSED)
 					res += String.format(format,this.returnCharacter(i, j));
 				else 
 					res += String.format(format,Grid.DEFAULT_CHAR);
@@ -259,7 +265,7 @@ public class Grid {
 
 			for(int j = 0; j<this.board[i].length;j++){
 				char c = this.returnCharacter(i, j);
-				if(c == 'x' || c== 'o')
+				if(c == Grid.HIT || c== Grid.HIT_MISSED)
 					res += String.format(format,this.returnCharacter(i, j));
 				else 
 					res += String.format(format,Grid.DEFAULT_CHAR);	
