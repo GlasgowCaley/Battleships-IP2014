@@ -13,9 +13,8 @@ package uk.ac.gcu.battleships;
 			for(byte i = 0; i < this.shipSize; i++){
 				if(this.shipCoordinates[i][0] == x_guess && this.shipCoordinates[i][1] == y_guess)
 					if(this.isHit(i) == false){
+						this.markHit(i);
 						return true;
-						/*Removed temporarily until we know how ships are to be "hit"
-						this.markHit(i); */
 					}
 			}
 			return false;

@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import uk.ac.gcu.battleships.Grid;
+import uk.ac.gcu.battleships.Guess;
 import uk.ac.gcu.battleships.Ship;
 
 /** 
@@ -17,7 +18,7 @@ public class TestGrid {
 	 * Test the size and contents after the constructor.	
 	 */
 	@Test
-	public void testConstructor() {
+	public void test_1_Constructor() {
 		// Initialisation 
 		int size = 10;
 		Grid g = new Grid(size);
@@ -61,7 +62,7 @@ public class TestGrid {
 	 * Test the returnCharacter() method in normals conditions.
 	 */
 	@Test
-	public void testReturnCharacter() {
+	public void test_2_ReturnCharacter() {
 		// Initialisation
 		Grid g = new Grid(5);
 		int line = 2;
@@ -80,7 +81,7 @@ public class TestGrid {
 	 * Test the returnCharacter method to throw an Exception.
 	 */
 	@Test
-	public void testReturnCharacterException() {		
+	public void test_3_ReturnCharacterException() {		
 		// Initialisation
 		Grid g = new Grid(5);
 		int row = 3;
@@ -95,7 +96,7 @@ public class TestGrid {
 	 * Test the addShip method (horizontal Ship).
 	 */
 	@Test
-	public void testAddShipHorizon() {		
+	public void test_4_AddShipHorizon() {		
 		// Initialisation
 		Grid g = new Grid(5);
 		boolean ok = false;
@@ -117,7 +118,7 @@ public class TestGrid {
 	 * Test the addShip method (vertical Ship).
 	 */
 	@Test
-	public void testAddShipVertical() {		
+	public void test_5_AddShipVertical() {		
 		// Initialisation
 		Grid g = new Grid(5);
 		boolean ok = false;
@@ -140,7 +141,7 @@ public class TestGrid {
 	 * Test the addShip method when a Ship is too bigger relative to the Grid.
 	 */
 	@Test
-	public void testAddShip_OutOfBounds() {		
+	public void test_6_AddShip_OutOfBounds() {		
 		// Initialisation
 		Grid g = new Grid(3);
 		boolean ok = false;
@@ -159,7 +160,7 @@ public class TestGrid {
 	 * Test the addShip method with conflicts between two ships.
 	 */
 	@Test
-	public void testAddShip_ConflictShips() {		
+	public void test_7_AddShip_ConflictShips() {		
 		// Initialisation
 		Grid g = new Grid(3);
 		boolean ok = false;
@@ -173,7 +174,49 @@ public class TestGrid {
 		// TEST
 		assertTrue("The result should be TRUE",ok);
 		assertFalse("The result should be FALSE",ok2);
-		assertEquals("They should have onyl a ship on the grid",1,nb);
+		assertEquals("They should have only a ship on the grid",1,nb);
 	}
-
+	
+	/** 
+	 * Test the checkGuess method.
+	 * In this case, the guess hits a ship.
+	 */
+	@Test
+	public void test_8_CheckGuess() {		
+		// Initialisation
+		Grid g = new Grid(5);
+		boolean ok = false;
+		Ship s = new Ship(2,2,0,'h');
+		ok = g.addShip(s);
+		Guess gu = new Guess(2,0);
+		boolean a = g.checkGuess(gu);
+		char r = g.returnCharacter(0,2);
+	
+		// TEST
+		assertFalse("The result should be FALSE",a);
+		assertEquals("The guess shoud hit the ship",'o',r);
+	}
+	
+	/** 
+	 * Test the checkGuess method.
+	 * In this case, the guess doesn't hit a ship.
+	 */
+	@Test
+	public void test_9_CheckGuess_NoHit() {		
+		// Initialisation
+		Grid g = new Grid(5);
+		boolean ok = false;
+		Ship s = new Ship(2,2,0,'h');
+		ok = g.addShip(s);
+		
+		Guess gu = new Guess(2,1);
+		boolean a = g.checkGuess(gu);
+		
+		char r = g.returnCharacter(1,2);
+	
+		// TEST
+		assertFalse("The result should be FALSE",a);
+		assertEquals("The guess shouldn't hit the ship",'x',r);
+	}
+	
 }

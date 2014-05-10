@@ -52,27 +52,42 @@ public class Game
             int i = choice.nextInt(); // Save the user's choice as int i
             
             // Call the appropriate method
-            // I think I might change this to a switch statement in the next version
-            if (i == 1) {
-                newGame(); // Call newGame method
-            }
             
-            else if (i == 2) {
-                playGame(); // Call playGame method
-            }
+            switch(i) {
             
-            else if (i == 3) {
-                viewResults(); // Call viewResults method
-            }
+            	default :
+            	
+            		System.out.println("Invalid Input");
+            	
+            	break;
+            	
+            	case 1 :
+            		
+            		newGame(); // Call newGame method
+            		
+            	break;
+            	
+            	case 2 :
+            		
+            		playGame(); // Call playGame method
+            		
+            	break;
+            	
+            	case 3 :
+            		
+            		viewResults(); // Call viewResults method
+            		
+            	break;
+            	
+            	case 4 :
+            	
+            		done = true; // If user quits, the loop is done
+            		quitGame(); // Call quitGame method
+            		
+            	break;
+            	
+            } 	
             
-            else if (i == 4) {
-                done = true; // If user quits, the loop is done
-                quitGame(); // Call quitGame method
-            }
-            
-            else { 
-                System.out.println("Invalid input");
-            }
         }
     }   
 
@@ -81,8 +96,66 @@ public class Game
     * In version 1.0 this will simply return a string
     */
     private void newGame()
+    // next step is to add input validation, also seems silly to have the grids x axis as a to j, put input as 1 to 10.
     {
         System.out.println("New game created, but you can't play it yet.");
+        //create two players
+        
+        //player 1
+        Player player1 = new Player();
+    		//get size of ship
+        	System.out.println("Please enter the size of ship " ); //+ count
+            Scanner input = new Scanner(System.in);
+            String temp = input.nextLine();
+            int p1Size = Integer.parseInt(temp);
+
+        	//get position of ship
+        	System.out.println("Please enter the horrizontal(1 to 10) coordinate of ship " ); //+ count
+        	input = new Scanner(System.in);
+            temp = input.nextLine();
+            int p1Horiz =  Integer.parseInt(temp);
+            
+        	System.out.println("Please enter the vertical(1 to 10) coordinate of ship " ); //+ count
+        	input = new Scanner(System.in);
+            temp = input.nextLine();
+            int p1Vert =  Integer.parseInt(temp);
+            
+        	//get orientation of ship -- presumably v h
+            System.out.println("Please enter the Orientation(v or h) coordinate of ship " ); //+ count
+        	input = new Scanner(System.in);
+            temp = input.nextLine();
+            char p1Orient = temp.charAt(0);
+            
+        	//call player.createShip method
+            player1.createShip(p1Size,p1Horiz,p1Vert,p1Orient);
+        
+        //player 2
+            Player player2 = new Player();
+        		//get size of ship
+            	System.out.println("Player 2 Please enter the size of ship " ); //+ count
+                input = new Scanner(System.in);
+                temp = input.nextLine();
+                int p2Size = Integer.parseInt(temp);
+
+            	//get position of ship
+            	System.out.println("Player 2 Please enter the horrizontal(1 to 10) coordinate of ship " ); //+ count
+            	input = new Scanner(System.in);
+                temp = input.nextLine();
+                int p2Horiz =  Integer.parseInt(temp);
+                
+            	System.out.println("Player 2 Please enter the vertical(1 to 10) coordinate of ship " ); //+ count
+            	input = new Scanner(System.in);
+                temp = input.nextLine();
+                int p2Vert =  Integer.parseInt(temp);
+                
+            	//get orientation of ship -- presumably v h
+                System.out.println("Player 2 Please enter the Orientation(v or h) coordinate of ship " ); //+ count
+            	input = new Scanner(System.in);
+                temp = input.nextLine();
+                char p2Orient = temp.charAt(0);
+                
+            	//call player.createShip method
+                player2.createShip(p2Size,p2Horiz,p2Vert,p2Orient);
     }
 
     /**
@@ -111,4 +184,10 @@ public class Game
         System.out.println("Thanks for playing!");
         System.exit(0);
     }
+    
+    public static void main(String[] args) {
+    	Game game = new Game();
+    }
+    
 }
+

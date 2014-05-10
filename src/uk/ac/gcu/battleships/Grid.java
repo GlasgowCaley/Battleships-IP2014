@@ -19,6 +19,12 @@ public class Grid {
 
 	/** Default character used in the Grid. */
 	public static final char DEFAULT_CHAR = '-';
+	
+	/** Character used for a Ship which is hit. */
+	public static final char HIT = 'x';
+	
+	/** Character used for a hit missed. */
+	public static final char HIT_MISSED = 'o';
 
 	/** List of all Ships in the Grid. */
 	private List <Ship> ships;
@@ -122,12 +128,12 @@ public class Grid {
 
 		if(horizon) {
 			for(int i =s.shipPosition_x; i <s.shipPosition_x+s.shipSize;i++) {
-				this.board[s.shipPosition_y][i] = 'x';	
+				this.board[s.shipPosition_y][i] = 's';	
 			}
 		}
 		else {
 			for(int i =s.shipPosition_y; i <s.shipPosition_y+s.shipSize;i++) {
-				this.board[i][s.shipPosition_x] = 'x';
+				this.board[i][s.shipPosition_x] = 's';
 			}
 		}
 	}
@@ -166,6 +172,114 @@ public class Grid {
 	}
 	
 	/**
+	 * Method enables to know if the player's guess
+	 * hit a Ship in this Grid.   
+	 * @param g Guess of the ennemy player.
+	 * @return {@ode true} if all ships have been sunk.
+	 */
+	public boolean checkGuess(Guess g) {
+		int x = g.get_X();
+		int y = g.get_Y();
+		int l = this.ships.size();
+		boolean hit = false;
+		boolean sunk = true;
+		int i = 0;
+		
+		while(!hit && i<l){
+			hit = this.ships.get(i).testHit(x, y);
+			if(hit) 
+				this.board[y][x] = Grid.HIT;
+			else
+				this.board[y][x] = Grid.HIT_MISSED;
+			i++;
+		}
+		
+		for(int j = 0;j<l;j++) {
+			if(this.ships.get(j).isSunk())
+				sunk = false;
+		}
+		
+		return sunk;		
+	}
+	
+	/**
+	 * Method displaying the Grid player into the console.
+	 */
+	public void displayOwnGrid(){
+		// Format
+		String format = "%-4s";
+
+		String res = new String(String.format(format,""));;
+		char row = 'A';
+		int line = 1;
+
+		//loop to display row letter
+		for(int i = 0; i<this.board.length;i++){
+			res += String.format(format,row);
+			row++;
+		}
+
+		//loop to display line number and each character
+		for(int i = 0; i<this.board.length;i++){
+			res+= System.getProperty("line.separator");
+			res += String.format(format,line);
+
+			for(int j = 0; j<this.board[i].length;j++){
+				if(this.returnCharacter(i, j) != Grid.HIT_MISSED)
+					res += String.format(format,this.returnCharacter(i, j));
+				else 
+					res += String.format(format,Grid.DEFAULT_CHAR);
+					
+			}
+
+			line++;
+		}
+
+		// Word wrap
+		res+= System.getProperty("line.separator");
+
+		System.out.println(res);
+	}
+	
+	/**
+	 * Method displaying the ennemy grid into the console.
+	 */
+	public void displayEnnemyGrid(){
+		// Format
+		String format = "%-4s";
+
+		String res = new String(String.format(format,""));;
+		char row = 'A';
+		int line = 1;
+
+		//loop to display row letter
+		for(int i = 0; i<this.board.length;i++){
+			res += String.format(format,row);
+			row++;
+		}
+
+		//loop to display line number and each character
+		for(int i = 0; i<this.board.length;i++){
+			res+= System.getProperty("line.separator");
+			res += String.format(format,line);
+
+			for(int j = 0; j<this.board[i].length;j++){
+				char c = this.returnCharacter(i, j);
+				if(c == Grid.HIT || c== Grid.HIT_MISSED)
+					res += String.format(format,this.returnCharacter(i, j));
+				else 
+					res += String.format(format,Grid.DEFAULT_CHAR);	
+			}
+			line++;
+		}
+
+		// Word wrap
+		res+= System.getProperty("line.separator");
+
+		System.out.println(res);
+	}
+	
+	/**
 	 * Getter for the Two-dimensional array
 	 * @return The array which represents the Grid. 
 	 */
@@ -180,5 +294,5 @@ public class Grid {
 	public List<Ship> getShips() {
 		return this.ships;
 	}
-
+	
 }
