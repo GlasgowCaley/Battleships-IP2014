@@ -236,6 +236,44 @@ public class Grid {
 	}
 	
 	/**
+	 * Method displaying the ennemy grid into the console.
+	 */
+	public void displayEnnemyGrid(){
+		// Format
+		String format = "%-4s";
+
+		String res = new String(String.format(format,""));;
+		char row = 'A';
+		int line = 1;
+
+		//loop to display row letter
+		for(int i = 0; i<this.board.length;i++){
+			res += String.format(format,row);
+			row++;
+		}
+
+		//loop to display line number and each character
+		for(int i = 0; i<this.board.length;i++){
+			res+= System.getProperty("line.separator");
+			res += String.format(format,line);
+
+			for(int j = 0; j<this.board[i].length;j++){
+				char c = this.returnCharacter(i, j);
+				if(c == 'x' || c== 'o')
+					res += String.format(format,this.returnCharacter(i, j));
+				else 
+					res += String.format(format,Grid.DEFAULT_CHAR);	
+			}
+			line++;
+		}
+
+		// Word wrap
+		res+= System.getProperty("line.separator");
+
+		System.out.println(res);
+	}
+	
+	/**
 	 * Getter for the Two-dimensional array
 	 * @return The array which represents the Grid. 
 	 */
