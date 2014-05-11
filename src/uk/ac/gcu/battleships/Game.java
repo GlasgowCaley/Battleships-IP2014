@@ -156,6 +156,10 @@ public class Game
                 
             	//call player.createShip method
                 player2.createShip(p2Size,p2Horiz,p2Vert,p2Orient);
+                
+                //set the references to the opponet's grids
+                player2.opponetGrid=player1.myGrid;
+                player1.opponetGrid=player2.myGrid;
     }
 
     /**
