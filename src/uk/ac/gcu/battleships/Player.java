@@ -3,21 +3,24 @@ package uk.ac.gcu.battleships;
 public class Player  {
     public String name;
     public Grid myGrid;
+    public Grid opponetGrid;
      
     public Player(){
         myGrid = new Grid(10);
     }
      
  
-    public void createShip(int size, int x, int y, char orientation){
+    public boolean createShip(int size, int x, int y, char orientation){
         Ship S = new Ship(size, x, y, orientation);
-        myGrid.addShip(S);
+        return myGrid.addShip(S);
     }
  
      
     public boolean makeGuess(Guess G){
-        return(G.get_X()==2&&G.get_Y()==2);
+    	return opponetGrid.checkGuess(G);
     }
+      
+
      
     //TESTING
     /*
