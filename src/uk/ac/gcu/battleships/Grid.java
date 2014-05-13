@@ -42,7 +42,7 @@ public class Grid {
 				this.board[i][j] = Grid.DEFAULT_CHAR;
 			}
 		}*/
-		Grid.FillArray(this.board);
+		Grid.initArray(this.board);
 
 		this.ships = new ArrayList <Ship>();
 	}
