@@ -120,13 +120,6 @@ public class Grid {
 		return res;
 	}
 	
-	public static void main(String[] args) {
-		Grid g = new Grid(5);
-		Ship s = new Ship(2,0,0,'v');
-		g.addShip(s);
-		System.out.println(g);
-	}
-
 	/**
 	 * Method adding a Ship in this Grid and in the list. 
 	 * @param s Ship to add.
