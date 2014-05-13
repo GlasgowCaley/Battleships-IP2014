@@ -31,19 +31,22 @@ public class Grid {
 
 
 	/**
+	 * Constructor which creates the square array which represents the game board
+	 * By default, the size of the grid is 5.
+	 */
+	public Grid() {
+		this.board = new char[5][5];
+		Grid.initArray(this.board);
+		this.ships = new ArrayList <Ship>();
+	}
+	
+	/**
 	 * Constructor which creates the square array which represents the game board.
 	 * @param size Array's size.
 	 */
 	public Grid(int size) {
 		this.board = new char[size][size];
-
-		/*for(int i = 0; i<size;i++){
-			for(int j = 0;j<size;j++) {
-				this.board[i][j] = Grid.DEFAULT_CHAR;
-			}
-		}*/
 		Grid.initArray(this.board);
-
 		this.ships = new ArrayList <Ship>();
 	}
 	
