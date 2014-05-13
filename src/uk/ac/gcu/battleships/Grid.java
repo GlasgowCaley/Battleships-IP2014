@@ -37,15 +37,16 @@ public class Grid {
 	public Grid(int size) {
 		this.board = new char[size][size];
 
-		for(int i = 0; i<size;i++){
+		/*for(int i = 0; i<size;i++){
 			for(int j = 0;j<size;j++) {
 				this.board[i][j] = Grid.DEFAULT_CHAR;
 			}
-		}
+		}*/
+		Grid.FillArray(this.board);
 
 		this.ships = new ArrayList <Ship>();
 	}
-
+	
 	/**
 	 * Method returning the character at a specified position.
 	 * @param line Integer corresponding at the number of the line.
@@ -61,6 +62,17 @@ public class Grid {
 			res = 0;
 		}
 		return res;
+	}
+	
+	/**
+	 * Method filling the two dimensional array with dash.
+	 */
+	private static void initArray(char[][] array) {
+		for(int i = 0; i<array.length;i++){
+			for(int j = 0;j<array[i].length;j++) {
+				array[i][j] = Grid.DEFAULT_CHAR;
+			}
+		}
 	}
 
 	/**
