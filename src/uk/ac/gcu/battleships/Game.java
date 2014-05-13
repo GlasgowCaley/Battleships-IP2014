@@ -45,7 +45,7 @@ public class Game
         // Carry out appropriate method relating to user choice
         boolean done = false; // Loop is not finished
         while (!done) {
-            while(!choice.hasNextInt()) { // While user enters a valid integer into the Scanner
+            while(!choice.hasNextInt()) { // While user enters invalid input
                 System.out.println("Invalid input");
                 choice.next();
             }
@@ -56,34 +56,24 @@ public class Game
             switch(i) {
             
             	default :
-            	
             		System.out.println("Invalid Input");
-            	
             	break;
             	
             	case 1 :
-            		
             		newGame(); // Call newGame method
-            		
             	break;
             	
             	case 2 :
-            		
             		playGame(); // Call playGame method
-            		
             	break;
             	
             	case 3 :
-            		
             		viewResults(); // Call viewResults method
-            		
             	break;
             	
             	case 4 :
-            	
             		done = true; // If user quits, the loop is done
             		quitGame(); // Call quitGame method
-            		
             	break;
             	
             } 	
@@ -93,12 +83,13 @@ public class Game
 
     /**
     * Starts a new game
-    * In version 1.0 this will simply return a string
+    * Get input relating to size & position of ships
     */
     private void newGame()
-    // next step is to add input validation, also seems silly to have the grids x axis as a to j, put input as 1 to 10.
+    // We need to do input validation
+    // We need to fix the A-J thing
     {
-        System.out.println("New game created, but you can't play it yet.");
+        System.out.println("New game created");
         //create two players
         
         //player 1
@@ -138,7 +129,7 @@ public class Game
                 int p2Size = Integer.parseInt(temp);
 
             	//get position of ship
-            	System.out.println("Player 2 Please enter the horrizontal(1 to 10) coordinate of ship " ); //+ count
+            	System.out.println("Player 2 Please enter the horizontal(1 to 10) coordinate of ship " ); //+ count
             	input = new Scanner(System.in);
                 temp = input.nextLine();
                 int p2Horiz =  Integer.parseInt(temp);
@@ -185,9 +176,6 @@ public class Game
         System.exit(0);
     }
     
-    public static void main(String[] args) {
-    	Game game = new Game();
-    }
-    
+   
 }
 
