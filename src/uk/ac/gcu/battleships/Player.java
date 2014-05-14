@@ -29,10 +29,9 @@ public class Player  {
     			else if (i==3)  System.out.println("SUBMARINE: " );
     				else System.out.println("BATTLESHIP: " );
     		this.addBoat(i);
-    	}
-    	
-    	
+    	} 	
     }
+    
     public void addBoat(int b){
     	 Scanner input = new Scanner(System.in);
          String temp = input.nextLine();
@@ -59,7 +58,7 @@ public class Player  {
      		input.next();
      	}
          temp = input.nextLine();
-         int vert =  Integer.parseInt(temp);
+         int vert =  Integer.parseInt(temp)-1;
          
      	//get orientation of ship -- presumably v h
         System.out.println("Please enter the Orientation(v or h) coordinate of ship " ); //+ count
