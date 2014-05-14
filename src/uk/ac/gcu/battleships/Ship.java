@@ -18,7 +18,7 @@ package uk.ac.gcu.battleships;
 			}
 			return false;
 		}
-		
+
 		//Useless now. Leaving for testing purposes
 		//Used to determine if the position n of the ship has already been hit
 		public boolean isHit(int position){
