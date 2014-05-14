@@ -74,6 +74,7 @@ public class Player  {
          
      	//call player.createShip method
          this.createShip(b,changeX(horiz),vert,orient);
+         //Test comit
          
     }
     
