@@ -193,20 +193,6 @@ public class Grid {
 		return add;
 	}
 	
-	public static void main(String[] arg) {
-		Grid g= new Grid();
-		Ship s = new Ship(3,0,0,'h');
-		g.addShip(s);
-		Guess one =  new Guess(0,0);
-		g.checkGuess(one);
-		System.out.println(g);
-		one =  new Guess(0,0);
-		g.checkGuess(one);
-		System.out.println(g);
-		
-		
-	}
-	
 	/**
 	 * Method enables to know if the player's guess
 	 * hit a Ship in this Grid.   
