@@ -68,7 +68,7 @@ public class Player  {
         char orient = temp.charAt(0);
         
         //Not proud of this while loop... Fix into test methods!
-        while(temp.length() != 1 && (int)orient != 72 || (int)orient != 104 || (int)orient != 86 || (int)orient != 118){
+        while(temp.length() != 1){
         	System.out.println("That is not a valid orientation ");
         	temp = input.nextLine();
         	orient = temp.charAt(0);
