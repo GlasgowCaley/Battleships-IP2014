@@ -11,8 +11,6 @@ public class Player  {
 	public Player(){
 		myGrid = new Grid();
 	}
-
-<<<<<<< HEAD
  
     public boolean createShip(int size, int x, int y, char orientation){
         Ship S = new Ship(size, x, y, orientation);
@@ -38,25 +36,20 @@ public class Player  {
     public void addBoat(int b){
     	 Scanner input = new Scanner(System.in);
          String temp = input.nextLine();
-         
-         temp.length();
-         
-         
-
+    
      	//get position of ship
-         char c = 0 ;
+        char c = 0 ;
         System.out.println("Please enter the horizontal(A to E) coordinate of ship " ); //+ count
      	input = new Scanner(System.in);
      	
-     	do {
-     		System.out.println("You must enter a single character");
-     		temp=input.next(); 
-     		}while (temp.length() != 1);
-     		
+     	temp = input.next(); 
      	
-     	if ((c < 'a'|| c >'e') && (c <= 'A'|| c >'E' )) {
-     		System.out.println("this character is not within the correct range");
-     		input.next();
+     	c = temp.charAt(0);
+     	
+     	while ((int)c < 65 || (int)c > 74 && (int)c < 97 || (int)c > 106 || temp.length() != 1){
+     		System.out.println("This is not a valid character");
+     		temp = input.next();
+     		c = temp.charAt(0);
      	}
      		
      	System.out.println("Please enter the vertical(1 to 5) coordinate of ship " ); //+ count
