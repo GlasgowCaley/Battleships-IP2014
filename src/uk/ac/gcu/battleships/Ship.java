@@ -18,8 +18,9 @@ package uk.ac.gcu.battleships;
 			}
 			return false;
 		}
-		
-		//Useless now. Leaving for testing purposes
+
+			//Testing push
+		//Useless now. Leaving for testing purposes...
 		//Used to determine if the position n of the ship has already been hit
 		public boolean isHit(int position){
 			if(this.shipHealth[position] == '+')
@@ -38,9 +39,9 @@ package uk.ac.gcu.battleships;
 			//The ship has been sunk if no '+' is found in shipHealth
 			for(byte i = 0; i < this.shipSize; i++){
 				if(this.shipHealth[i] == '+')
-					return true;
+					return false;
 			}
-			return false;
+			return true;
 		}
 		
 		void resetShipHealth(){
