@@ -39,9 +39,9 @@ package uk.ac.gcu.battleships;
 			//The ship has been sunk if no '+' is found in shipHealth
 			for(byte i = 0; i < this.shipSize; i++){
 				if(this.shipHealth[i] == '+')
-					return true;
+					return false;
 			}
-			return false;
+			return true;
 		}
 		
 		void resetShipHealth(){
