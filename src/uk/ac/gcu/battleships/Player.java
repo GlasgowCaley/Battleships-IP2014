@@ -77,8 +77,10 @@ public class Player  {
     	int i=0;
     	boolean enc=false;
     	while(i<=27 && !enc){
-    		if(c-'a'==i||c-'A'==i) enc=true;
-    		i++;
+    		if(c-'a'==i||c-'A'==i) 
+    			enc=true;
+    		else
+    			i++;
     	}
     	return i;
     }
