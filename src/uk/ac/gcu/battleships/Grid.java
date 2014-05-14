@@ -193,6 +193,20 @@ public class Grid {
 		return add;
 	}
 	
+	public static void main(String[] arg) {
+		Grid g= new Grid();
+		Ship s = new Ship(3,0,0,'h');
+		g.addShip(s);
+		Guess one =  new Guess(0,0);
+		g.checkGuess(one);
+		System.out.println(g);
+		one =  new Guess(0,0);
+		g.checkGuess(one);
+		System.out.println(g);
+		
+		
+	}
+	
 	/**
 	 * Method enables to know if the player's guess
 	 * hit a Ship in this Grid.   
@@ -209,7 +223,8 @@ public class Grid {
 		
 		while(!hit && i<l){
 			hit = this.ships.get(i).testHit(x, y);
-			if(hit) 
+			System.out.println(hit);
+			if(hit || this.returnCharacter(y, x) == Grid.HIT) 
 				this.board[y][x] = Grid.HIT;
 			else
 				this.board[y][x] = Grid.HIT_MISSED;
@@ -227,40 +242,19 @@ public class Grid {
 	/**
 	 * Method displaying the Grid player into the console.
 	 */
-	public void displayOwnGrid(){
-		// Format
-		String format = "%-4s";
+	public char[][] displayOwnGrid(){
+		int length = this.board.length;
+		char[][] array = new char[length][length];		
+		Grid.initArray(array);
 
-		String res = new String(String.format(format,""));;
-		char row = 'A';
-		int line = 1;
-
-		//loop to display row letter
 		for(int i = 0; i<this.board.length;i++){
-			res += String.format(format,row);
-			row++;
-		}
-
-		//loop to display line number and each character
-		for(int i = 0; i<this.board.length;i++){
-			res+= System.getProperty("line.separator");
-			res += String.format(format,line);
-
 			for(int j = 0; j<this.board[i].length;j++){
-				if(this.returnCharacter(i, j) != Grid.HIT_MISSED)
-					res += String.format(format,this.returnCharacter(i, j));
-				else 
-					res += String.format(format,Grid.DEFAULT_CHAR);
-					
+				char tmp = this.returnCharacter(i, j);			
+				if(tmp == Grid.HIT || tmp == 's')
+					array[i][j] = tmp;
 			}
-
-			line++;
 		}
-
-		// Word wrap
-		res+= System.getProperty("line.separator");
-
-		System.out.println(res);
+		return array;
 	}
 	
 	/**
