@@ -226,7 +226,8 @@ public class Grid {
 	}
 	
 	/**
-	 * Method displaying the Grid player into the console.
+	 * Method displaying the Grid player into the console.	
+	 * @return The array for the own player.
 	 */
 	public char[][] displayOwnGrid(){
 		int length = this.board.length;
