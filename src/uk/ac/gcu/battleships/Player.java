@@ -1,7 +1,6 @@
 package uk.ac.gcu.battleships;
 
 import java.util.Scanner;
-import java.io.*;
 
 public class Player  {
 	public String name;
