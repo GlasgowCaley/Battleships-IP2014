@@ -1,6 +1,5 @@
 package uk.ac.gcu.battleships;
 
-import java.io.*;
 import java.util.Scanner;
 /**
  * Game Class
@@ -86,92 +85,22 @@ public class Game
     * Get input relating to size & position of ships
     */
     private void newGame()
-    // We need to do input validation
-    // We need to fix the A-J thing
     {
+    	// Confirmation message
         System.out.println("New game created");
-        //create two players
         
-        //player 1
+        // Instantiate 2 Players
         Player player1 = new Player();
+        Player player2 = new Player();
         
-    		//get size of ship
-	        System.out.println("Player 1 Please enter the size of ship " ); //+ count
-	        Scanner input = new Scanner(System.in); // save entire user input
-	        while (!input.hasNextInt()) { // input validation. While there is no int in input...
-	        	System.out.println("Player 1 Invalid! You must enter an integer");
-	        	input.next(); // next input
-	        }
-	        String temp = input.nextLine(); // save current line of user input in temp
-	        int p1Size = Integer.parseInt(temp); // look for integer in temp. Save int to p1size
-            
-        	//get position of ship
-        	System.out.println("Player 1 Please enter the horizontal(1 to 10) coordinate of ship " ); //+ count
-        	input = new Scanner(System.in);
-        	while (!input.hasNextInt()) {
-        		System.out.println("invalid! You must enter an integer");
-        		input.next();
-        	}
-            temp = input.nextLine();
-            int p1Horiz =  Integer.parseInt(temp);
-            
-        	System.out.println("Player 1 Please enter the vertical(1 to 10) coordinate of ship " ); //+ count
-        	input = new Scanner(System.in);
-        	while (!input.hasNextInt()) {
-        		System.out.println("invalid! You must enter an integer");
-        		input.next();
-        	}
-            temp = input.nextLine();
-            int p1Vert =  Integer.parseInt(temp);
-            
-        	//get orientation of ship -- presumably v h
-            System.out.println("Player 1 Please enter the Orientation(v or h) coordinate of ship " ); //+ count
-        	input = new Scanner(System.in);
-            temp = input.nextLine();
-            char p1Orient = temp.charAt(0);
-            
-        	//call player.createShip method
-            player1.createShip(p1Size,p1Horiz,p1Vert,p1Orient);
+        // Create ships for both players
+        player1.addFleet();
+        player2.addFleet();
         
-        //player 2
-            Player player2 = new Player();
-        		//get size of ship
-            	System.out.println("Player 2 Please enter the size of ship " ); //+ count
-                input = new Scanner(System.in);
-                while (!input.hasNextInt()) {
-            		System.out.println("invalid! You must enter an integer");
-            		input.next();
-            	}
-                temp = input.nextLine();
-                int p2Size = Integer.parseInt(temp);
-
-            	//get position of ship
-            	System.out.println("Player 2 Please enter the horizontal(1 to 10) coordinate of ship " ); //+ count
-            	input = new Scanner(System.in);
-            	while (!input.hasNextInt()) {
-            		System.out.println("invalid! You must enter an integer");
-            		input.next();
-            	}
-                temp = input.nextLine();
-                int p2Horiz =  Integer.parseInt(temp);
-                
-            	System.out.println("Player 2 Please enter the vertical(1 to 10) coordinate of ship " ); //+ count
-            	input = new Scanner(System.in);
-            	while (!input.hasNextInt()) {
-            		System.out.println("invalid! You must enter an integer");
-            		input.next();
-            	}
-                temp = input.nextLine();
-                int p2Vert =  Integer.parseInt(temp);
-                
-            	//get orientation of ship -- presumably v h
-                System.out.println("Player 2 Please enter the Orientation(v or h) coordinate of ship " ); //+ count
-            	input = new Scanner(System.in);
-                temp = input.nextLine();
-                char p2Orient = temp.charAt(0);
-                
-            	//call player.createShip method
-                player2.createShip(p2Size,p2Horiz,p2Vert,p2Orient);
+        // Create opponent grids
+        player1.opponentGrid=player2.myGrid;
+        player2.opponentGrid=player1.myGrid;
+        		
     }
 
     /**

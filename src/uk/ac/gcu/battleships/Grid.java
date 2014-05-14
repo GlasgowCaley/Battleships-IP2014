@@ -218,7 +218,7 @@ public class Grid {
 		}
 		
 		for(int j = 0;j<l;j++) {
-			if(this.ships.get(j).isSunk())
+			if(!this.ships.get(j).isSunk())
 				sunk = false;
 		}
 		
