@@ -1,6 +1,7 @@
 package uk.ac.gcu.battleships;
 
 import java.util.Scanner;
+import java.io.*;
 
 public class Player  {
 	public String name;
@@ -28,9 +29,10 @@ public class Player  {
     			else if (i==3)  System.out.println("SUBMARINE: " );
     				else System.out.println("BATTLESHIP: " );
     		this.addBoat(i);
-    	} 	
+    	}
+    	
+    	
     }
-    
     public void addBoat(int b){
     	 Scanner input = new Scanner(System.in);
          String temp = input.nextLine();
@@ -57,13 +59,20 @@ public class Player  {
      		input.next();
      	}
          temp = input.nextLine();
-         int vert =  Integer.parseInt(temp)-1;
+         int vert =  Integer.parseInt(temp);
          
      	//get orientation of ship -- presumably v h
         System.out.println("Please enter the Orientation(v or h) coordinate of ship " ); //+ count
      	input = new Scanner(System.in);
         temp = input.nextLine();
         char orient = temp.charAt(0);
+        
+        //Not proud of this while loop... Fix into test methods!
+        while(temp.length() != 1 && (int)orient != 72 || (int)orient != 104 || (int)orient != 86 || (int)orient != 118){
+        	System.out.println("That is not a valid orientation ");
+        	temp = input.nextLine();
+        	orient = temp.charAt(0);
+        }
          
      	//call player.createShip method
         this.createShip(b,(this.changeX(c)),vert,orient);
@@ -75,10 +84,8 @@ public class Player  {
     	int i=0;
     	boolean enc=false;
     	while(i<=27 && !enc){
-    		if(c-'a'==i||c-'A'==i) 
-    			enc=true;
-    		else
-    			i++;
+    		if(c-'a'==i||c-'A'==i) enc=true;
+    		i++;
     	}
     	return i;
     }
