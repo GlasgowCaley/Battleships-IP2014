@@ -31,21 +31,25 @@ public class Grid {
 
 
 	/**
+	 * Constructor which creates the square array which represents the game board
+	 * By default, the size of the grid is 5.
+	 */
+	public Grid() {
+		this.board = new char[5][5];
+		Grid.initArray(this.board);
+		this.ships = new ArrayList <Ship>();
+	}
+	
+	/**
 	 * Constructor which creates the square array which represents the game board.
 	 * @param size Array's size.
 	 */
 	public Grid(int size) {
 		this.board = new char[size][size];
-
-		for(int i = 0; i<size;i++){
-			for(int j = 0;j<size;j++) {
-				this.board[i][j] = Grid.DEFAULT_CHAR;
-			}
-		}
-
+		Grid.initArray(this.board);
 		this.ships = new ArrayList <Ship>();
 	}
-
+	
 	/**
 	 * Method returning the character at a specified position.
 	 * @param line Integer corresponding at the number of the line.
@@ -62,33 +66,51 @@ public class Grid {
 		}
 		return res;
 	}
+	
+	/**
+	 * Method filling the two dimensional array with dash.
+	 */
+	private static void initArray(char[][] array) {
+		for(int i = 0; i<array.length;i++){
+			for(int j = 0;j<array[i].length;j++) {
+				array[i][j] = Grid.DEFAULT_CHAR;
+			}
+		}
+	}
 
 	/**
 	 * Method displaying the grid into the console.
 	 */
 	public String toString(){
-		// Format
-		String format = "%-4s";
-
-		String res = new String(String.format(format,""));;
+		int k = 4;
+		String format = "%-3s";
+		String limit = "    +"+new String(new char[this.board.length]).replace("\0","---+");
+		//StringBuffer r =new StringBuffer("    ");
+		String deca = new String(new char[k]).replace("\0"," ");
+		String res = deca;
 		char row = 'A';
 		int line = 1;
 
 		//loop to display row letter
 		for(int i = 0; i<this.board.length;i++){
-			res += String.format(format,row);
+			res+= "  "+row+" ";	 	 
 			row++;
 		}
-
+		res+= System.getProperty("line.separator");
+		res+= limit;
+	
 		//loop to display line number and each character
 		for(int i = 0; i<this.board.length;i++){
 			res+= System.getProperty("line.separator");
-			res += String.format(format,line);
-
-			for(int j = 0; j<this.board[i].length;j++){
-				res += String.format(format,this.board[i][j]);
+			res += " "+String.format(format, line);
+			
+			for(int j = 0; j<this.board[i].length;j++) {
+				res+= "| ";
+				res += this.board[i][j]+" ";
 			}
-
+			res+= "|";
+			res+= System.getProperty("line.separator");
+			res+= limit;
 			line++;
 		}
 
@@ -97,7 +119,7 @@ public class Grid {
 
 		return res;
 	}
-
+	
 	/**
 	 * Method adding a Ship in this Grid and in the list. 
 	 * @param s Ship to add.
