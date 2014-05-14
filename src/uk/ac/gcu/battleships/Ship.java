@@ -9,17 +9,17 @@ package uk.ac.gcu.battleships;
 		char shipOrientation;			//Input orientation on creation Note to self: catch exceptions
 		
 		//Used by crew to ponder if their ship has been hit.
-		boolean testHit(int x_guess, int y_guess){
+		boolean testHit(int x_guess, int y_guess){
 			for(byte i = 0; i < this.shipSize; i++){
-				if(this.shipCoordinates[i][0] == x_guess && this.shipCoordinates[i][1] == y_guess)
-					if(this.isHit(i) == false){
-						this.markHit(i);
-						return true;
-					}
+				if(this.shipCoordinates[i][0] == x_guess && this.shipCoordinates[i][1] == y_guess){
+					this.markHit(i);
+					return true;
+				}
 			}
 			return false;
 		}
 		
+		//Useless now. Leaving for testing purposes
 		//Used to determine if the position n of the ship has already been hit
 		public boolean isHit(int position){
 			if(this.shipHealth[position] == '+')

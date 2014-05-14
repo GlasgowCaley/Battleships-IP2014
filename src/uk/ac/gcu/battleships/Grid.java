@@ -209,7 +209,8 @@ public class Grid {
 		
 		while(!hit && i<l){
 			hit = this.ships.get(i).testHit(x, y);
-			if(hit) 
+			System.out.println(hit);
+			if(hit || this.returnCharacter(y, x) == Grid.HIT) 
 				this.board[y][x] = Grid.HIT;
 			else
 				this.board[y][x] = Grid.HIT_MISSED;
@@ -225,81 +226,47 @@ public class Grid {
 	}
 	
 	/**
-	 * Method displaying the Grid player into the console.
+	 * Method displaying the Grid player into the console.	
+	 * @return The array for the own player.
 	 */
-	public void displayOwnGrid(){
-		// Format
-		String format = "%-4s";
+	public char[][] displayOwnGrid(){
+		int length = this.board.length;
+		char[][] array = new char[length][length];		
+		Grid.initArray(array);
 
-		String res = new String(String.format(format,""));;
-		char row = 'A';
-		int line = 1;
-
-		//loop to display row letter
 		for(int i = 0; i<this.board.length;i++){
-			res += String.format(format,row);
-			row++;
-		}
-
-		//loop to display line number and each character
-		for(int i = 0; i<this.board.length;i++){
-			res+= System.getProperty("line.separator");
-			res += String.format(format,line);
-
 			for(int j = 0; j<this.board[i].length;j++){
-				if(this.returnCharacter(i, j) != Grid.HIT_MISSED)
-					res += String.format(format,this.returnCharacter(i, j));
-				else 
-					res += String.format(format,Grid.DEFAULT_CHAR);
-					
+				char tmp = this.returnCharacter(i, j);			
+				if(tmp == Grid.HIT || tmp == 's')
+					array[i][j] = tmp;
 			}
-
-			line++;
 		}
-
-		// Word wrap
-		res+= System.getProperty("line.separator");
-
-		System.out.println(res);
+		return array;
 	}
 	
 	/**
 	 * Method displaying the ennemy grid into the console.
+	 * @return : 2D Array which represents the Opponent's grid, with hit and misses
 	 */
-	public void displayEnnemyGrid(){
+	public char[][] displayEnnemyGrid(){
 		// Format
-		String format = "%-4s";
 
-		String res = new String(String.format(format,""));;
-		char row = 'A';
-		int line = 1;
+		char[][] array = new char[this.board.length][this.board.length];
+		Grid.initArray(array);
 
-		//loop to display row letter
-		for(int i = 0; i<this.board.length;i++){
-			res += String.format(format,row);
-			row++;
-		}
 
 		//loop to display line number and each character
 		for(int i = 0; i<this.board.length;i++){
-			res+= System.getProperty("line.separator");
-			res += String.format(format,line);
-
 			for(int j = 0; j<this.board[i].length;j++){
 				char c = this.returnCharacter(i, j);
-				if(c == Grid.HIT || c== Grid.HIT_MISSED)
-					res += String.format(format,this.returnCharacter(i, j));
-				else 
-					res += String.format(format,Grid.DEFAULT_CHAR);	
+				if(c == Grid.HIT || c== Grid.HIT_MISSED){
+					array[i][j] = c;
+				}
 			}
-			line++;
 		}
-
-		// Word wrap
-		res+= System.getProperty("line.separator");
-
-		System.out.println(res);
+		return array ;		
 	}
+
 	
 	/**
 	 * Getter for the Two-dimensional array
