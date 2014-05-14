@@ -3,15 +3,16 @@ package uk.ac.gcu.battleships;
 public class Player  {
     public String name;
     public Grid myGrid;
+    public Grid opponentGrid;
      
     public Player(){
-        myGrid = new Grid(10);
+        myGrid = new Grid();
     }
      
  
-    public void createShip(int size, int x, int y, char orientation){
+    public boolean createShip(int size, int x, int y, char orientation){
         Ship S = new Ship(size, x, y, orientation);
-        myGrid.addShip(S);
+        return myGrid.addShip(S);
     }
  
      
