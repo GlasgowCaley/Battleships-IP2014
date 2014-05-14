@@ -194,7 +194,7 @@ public class TestGrid {
 	
 		// TEST
 		assertFalse("The result should be FALSE",a);
-		assertEquals("The guess shoud hit the ship",'o',r);
+		assertEquals("The guess shoud hit the ship",Grid.HIT,r);
 	}
 	
 	/** 
@@ -216,7 +216,7 @@ public class TestGrid {
 	
 		// TEST
 		assertFalse("The result should be FALSE",a);
-		assertEquals("The guess shouldn't hit the ship",'x',r);
+		assertEquals("The guess shouldn't hit the ship",Grid.HIT_MISSED,r);
 	}
 	
 }
