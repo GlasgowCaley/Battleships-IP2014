@@ -245,41 +245,27 @@ public class Grid {
 	
 	/**
 	 * Method displaying the ennemy grid into the console.
+	 * @return : 2D Array which represents the Opponent's grid, with hit and misses
 	 */
-	public void displayEnnemyGrid(){
+	public char[][] displayEnnemyGrid(){
 		// Format
-		String format = "%-4s";
 
-		String res = new String(String.format(format,""));;
-		char row = 'A';
-		int line = 1;
+		char[][] array = new char[this.board.length][this.board.length];
+		Grid.initArray(array);
 
-		//loop to display row letter
-		for(int i = 0; i<this.board.length;i++){
-			res += String.format(format,row);
-			row++;
-		}
 
 		//loop to display line number and each character
 		for(int i = 0; i<this.board.length;i++){
-			res+= System.getProperty("line.separator");
-			res += String.format(format,line);
-
 			for(int j = 0; j<this.board[i].length;j++){
 				char c = this.returnCharacter(i, j);
-				if(c == Grid.HIT || c== Grid.HIT_MISSED)
-					res += String.format(format,this.returnCharacter(i, j));
-				else 
-					res += String.format(format,Grid.DEFAULT_CHAR);	
+				if(c == Grid.HIT || c== Grid.HIT_MISSED){
+					array[i][j] = c;
+				}
 			}
-			line++;
 		}
-
-		// Word wrap
-		res+= System.getProperty("line.separator");
-
-		System.out.println(res);
+		return array ;		
 	}
+
 	
 	/**
 	 * Getter for the Two-dimensional array
