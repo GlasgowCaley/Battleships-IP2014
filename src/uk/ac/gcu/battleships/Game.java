@@ -94,20 +94,33 @@ public class Game
         
         //player 1
         Player player1 = new Player();
+        
     		//get size of ship
-        	System.out.println("Please enter the size of ship " ); //+ count
-            Scanner input = new Scanner(System.in);
-            String temp = input.nextLine();
-            int p1Size = Integer.parseInt(temp);
-
+	        System.out.println("Please enter the size of ship " ); //+ count
+	        Scanner input = new Scanner(System.in); // save entire user input
+	        while (!input.hasNextInt()) { // input validation. While there is no int in input...
+	        	System.out.println("Invalid! You must enter an integer");
+	        	input.next(); // next input
+	        }
+	        String temp = input.nextLine(); // save current line of user input in temp
+	        int p1Size = Integer.parseInt(temp); // look for integer in temp. Save int to p1size
+            
         	//get position of ship
-        	System.out.println("Please enter the horrizontal(1 to 10) coordinate of ship " ); //+ count
+        	System.out.println("Please enter the horizontal(1 to 10) coordinate of ship " ); //+ count
         	input = new Scanner(System.in);
+        	while (!input.hasNextInt()) {
+        		System.out.println("invalid! You must enter an integer");
+        		input.next();
+        	}
             temp = input.nextLine();
             int p1Horiz =  Integer.parseInt(temp);
             
         	System.out.println("Please enter the vertical(1 to 10) coordinate of ship " ); //+ count
         	input = new Scanner(System.in);
+        	while (!input.hasNextInt()) {
+        		System.out.println("invalid! You must enter an integer");
+        		input.next();
+        	}
             temp = input.nextLine();
             int p1Vert =  Integer.parseInt(temp);
             
@@ -125,17 +138,29 @@ public class Game
         		//get size of ship
             	System.out.println("Player 2 Please enter the size of ship " ); //+ count
                 input = new Scanner(System.in);
+                while (!input.hasNextInt()) {
+            		System.out.println("invalid! You must enter an integer");
+            		input.next();
+            	}
                 temp = input.nextLine();
                 int p2Size = Integer.parseInt(temp);
 
             	//get position of ship
             	System.out.println("Player 2 Please enter the horizontal(1 to 10) coordinate of ship " ); //+ count
             	input = new Scanner(System.in);
+            	while (!input.hasNextInt()) {
+            		System.out.println("invalid! You must enter an integer");
+            		input.next();
+            	}
                 temp = input.nextLine();
                 int p2Horiz =  Integer.parseInt(temp);
                 
             	System.out.println("Player 2 Please enter the vertical(1 to 10) coordinate of ship " ); //+ count
             	input = new Scanner(System.in);
+            	while (!input.hasNextInt()) {
+            		System.out.println("invalid! You must enter an integer");
+            		input.next();
+            	}
                 temp = input.nextLine();
                 int p2Vert =  Integer.parseInt(temp);
                 
@@ -175,7 +200,7 @@ public class Game
         System.out.println("Thanks for playing!");
         System.exit(0);
     }
+
     
-   
 }
 
