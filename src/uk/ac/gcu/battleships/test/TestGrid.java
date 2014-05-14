@@ -91,7 +91,7 @@ public class TestGrid {
 
 		assertEquals("The result should be ' ' (Exception)",0,res);
 	}
-	
+
 	/** 
 	 * Test the addShip method (horizontal Ship).
 	 */
@@ -102,8 +102,8 @@ public class TestGrid {
 		boolean ok = false;
 		Ship s = new Ship(4,0,0,'h');
 		Ship s2 = new Ship(3,2,2,'h');
-		
-		
+
+
 		ok = g.addShip(s);
 		boolean ok2 = g.addShip(s2);
 		int nb = g.getShips().size();
@@ -113,7 +113,7 @@ public class TestGrid {
 		assertTrue("The result should be TRUE",ok2);
 		assertEquals("They should have 2 ships on the grid",2,nb);
 	}
-	
+
 	/** 
 	 * Test the addShip method (vertical Ship).
 	 */
@@ -124,19 +124,19 @@ public class TestGrid {
 		boolean ok = false;
 		Ship s = new Ship(3,0,0,'v');
 		Ship s2 = new Ship(2,1,2,'v');
-	
+
 		ok = g.addShip(s);
 		boolean ok2 = g.addShip(s2);
 		System.out.println(g);
 		int nb = g.getShips().size();
 
 		// TEST
-		
+
 		assertTrue("The result 1 should be TRUE",ok);
 		assertTrue("The result should be TRUE",ok2);
 		assertEquals("They should have 2 ships on the grid",2,nb);
 	}
-	
+
 	/** 
 	 * Test the addShip method when a Ship is too bigger relative to the Grid.
 	 */
@@ -151,11 +151,11 @@ public class TestGrid {
 		int nb = g.getShips().size();
 
 		// TEST
-		
+
 		assertTrue("The result should be FALSE",!ok);
 		assertEquals("They should no have ships on the grid",0,nb);
 	}
-	
+
 	/** 
 	 * Test the addShip method with conflicts between two ships.
 	 */
@@ -176,7 +176,7 @@ public class TestGrid {
 		assertFalse("The result should be FALSE",ok2);
 		assertEquals("They should have only a ship on the grid",1,nb);
 	}
-	
+
 	/** 
 	 * Test the checkGuess method.
 	 * In this case, the guess hits a ship.
@@ -191,12 +191,12 @@ public class TestGrid {
 		Guess gu = new Guess(2,0);
 		boolean a = g.checkGuess(gu);
 		char r = g.returnCharacter(0,2);
-	
+
 		// TEST
 		assertFalse("The result should be FALSE",a);
 		assertEquals("The guess shoud hit the ship",Grid.HIT,r);
 	}
-	
+
 	/** 
 	 * Test the checkGuess method.
 	 * In this case, the guess doesn't hit a ship.
@@ -208,15 +208,69 @@ public class TestGrid {
 		boolean ok = false;
 		Ship s = new Ship(2,2,0,'h');
 		ok = g.addShip(s);
-		
+
 		Guess gu = new Guess(2,1);
 		boolean a = g.checkGuess(gu);
-		
+
 		char r = g.returnCharacter(1,2);
-	
+
 		// TEST
 		assertFalse("The result should be FALSE",a);
 		assertEquals("The guess shouldn't hit the ship",Grid.HIT_MISSED,r);
 	}
-	
+
+	@Test
+	public void test_10_displayOwnGrid(){
+		Grid gr = new Grid(2);
+		boolean ok = true;
+		Ship s = new Ship ( 2, 0,0,'v');
+		gr.addShip(s);
+		char[][] board = gr.displayOwnGrid();
+		char[][] array = new char[2][2];
+		for ( int i = 0 ; i < 2 ; i++){
+			for ( int j = 0; j < 2;j++){
+				array[i][j] = Grid.DEFAULT_CHAR;
+			}		
+		}
+
+		array[0][0] = 's';
+		array[1][0] = 's';
+
+		for ( int i = 0 ; i < 2 ; i++){
+			for ( int j = 0; j < 2;j++){
+				if(!(board[i][j] == array[i][j]))
+				ok = false;
+			}
+		}
+		assertTrue("It should be true", ok);
+	}
+
+	@Test
+	public void test_11_displayEnnemyGrid(){
+		Grid gr = new Grid(2);
+		boolean ok = true;
+		Ship s = new Ship ( 2, 0,0,'h');
+		gr.addShip(s);
+		Guess g = new Guess(0,0);
+		gr.checkGuess(g);
+		char[][] board = gr.displayEnnemyGrid();
+		char[][] array = new char[2][2];
+		for ( int i = 0 ; i < 2 ; i++){
+			for ( int j = 0; j < 2;j++){
+				array[i][j] = Grid.DEFAULT_CHAR;
+			}		
+		}
+
+		
+		array[0][0] = 'x';
+
+		for ( int i = 0 ; i < 2 ; i++){
+			for ( int j = 0; j < 2;j++){
+				if(!(board[i][j] == array[i][j]))
+				ok = false;
+			}
+		}
+		assertTrue("It should be True",ok);
+	}
+
 }
