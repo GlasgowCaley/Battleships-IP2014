@@ -48,10 +48,10 @@ public class Player  {
         
  	
      	//get position of ship
-        System.out.println("Please enter the horrizontal(A to E) coordinate of ship " ); //+ count
+        System.out.println("Please enter the horizontal(A to E) coordinate of ship " ); //+ count
      	input = new Scanner(System.in);
      	while (!input.hasNextInt()) {
-     		System.out.println("invalid! You must enter an letter");
+     		System.out.println("invalid! You must enter a letter");
      		input.next();
      	}
          temp = input.nextLine();
@@ -74,7 +74,7 @@ public class Player  {
          
      	//call player.createShip method
          this.createShip(b,changeX(horiz),vert,orient);
-         //Test comit
+         
          
     }
     
