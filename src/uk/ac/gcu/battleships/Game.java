@@ -168,7 +168,7 @@ public class Game
 
 
 	/**
-	 * Method displaying a two dimensionnal array into the console.
+	 * Method displaying a two dimensional array into the console.
 	 */
 	public String display(char[][] array){
 		int k = 4;
@@ -236,7 +236,7 @@ public class Game
 		String temp;
      	while (!sc.hasNextInt()) {
      		System.out.println("invalid! You must enter an integer");
-     		sc.nextLine();
+     		sc.next();
      	}
          temp = sc.nextLine();
          int y =  Integer.parseInt(temp)-1;
@@ -257,4 +257,5 @@ public class Game
 	
 	//public void setGuess() {} 
 	
+
 }
