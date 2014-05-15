@@ -150,12 +150,12 @@ public class Grid {
 
 		if(horizon) {
 			for(int i =s.shipPosition_x; i <s.shipPosition_x+s.shipSize;i++) {
-				this.board[s.shipPosition_y][i] = 's';	
+				this.board[s.shipPosition_y][i] = s.character;	
 			}
 		}
 		else {
 			for(int i =s.shipPosition_y; i <s.shipPosition_y+s.shipSize;i++) {
-				this.board[i][s.shipPosition_x] = 's';
+				this.board[i][s.shipPosition_x] = s.character;
 			}
 		}
 	}
@@ -243,7 +243,7 @@ public class Grid {
 		for(int i = 0; i<this.board.length;i++){
 			for(int j = 0; j<this.board[i].length;j++){
 				char tmp = this.returnCharacter(i, j);			
-				if(tmp == Grid.HIT || tmp == 's')
+				if(tmp == Grid.HIT || tmp == 'S' || tmp == 'D' || tmp == 'B')
 					array[i][j] = tmp;
 			}
 		}
