@@ -19,8 +19,8 @@ public class Player  {
 		while(name.length() ==0) {
 			name = sc.next(); // Save name of the player			
 		}
-
-
+		char f = name.charAt(0);
+		name = Character.toUpperCase(f) + name.substring(1,name.length());
 	}
 
 	public boolean createShip(int size, int x, int y, char orientation){
@@ -51,9 +51,9 @@ public class Player  {
 			}
 
 			while(!add) {
-				System.out.println(name);
-				add = this.addBoat(i);
 				System.out.println(this.myGrid);
+				System.out.println(name);				
+				add = this.addBoat(i);				
 			}    		
 		}
 	}
@@ -64,7 +64,7 @@ public class Player  {
 		boolean add = false;
 
 		// Get starting position of ship
-		char c = 0 ;
+		char c = 0 ;		
 		System.out.println("Please enter the horizontal (A to E) coordinate of ship " ); //+ count
 		int x = Game.readXAxis(); // Get X Axis value, save to x
 
@@ -93,22 +93,25 @@ public class Player  {
 
 
 	public boolean enterGuess(Guess g) {
+		String dec = "      ";
 		Scanner sc = new Scanner(System.in);
 		Game.clearConsole(); // Empty the screen		
-		System.out.println("Captain " +this.name); // Display name of player whose turn it is
+		System.out.println(dec+"-- Captain " +this.name+" --"); // Display name of player whose turn it is
 		sc.nextLine();
-		System.out.println(Game.display(this.myGrid.displayOwnGrid())); // Show own grid
+		System.out.println(dec+"State of your fleet"); // Display name of player whose turn it is
+		System.out.print(Game.display(this.myGrid.displayOwnGrid())); // Show own grid
+		System.out.println("\n"+dec+"State of the fight"); // Display name of player whose turn it is
 		System.out.println(Game.display(this.opponentGrid.displayEnnemyGrid())); // Show enemy grid
-		System.out.println("Enter your guess:  "); // Ask for guess
+		System.out.println("\tYour guess\n"); // Ask for guess
 		boolean same = false;
 
 		while(!same) {
 			// 	Read the guess
-			System.out.println("Enter X coordinate :");
+			System.out.print("Enter the letter coordinate : ");
 			int x = Game.readXAxis(); // Call readXAxis
 			g.set_X(x);
 
-			System.out.println("Enter Y coordinate :");
+			System.out.print("Enter the number coordinate : ");
 			int y = Game.readYAxis(); // Call readYAxis
 			g.set_Y(y);
 			char c = this.opponentGrid.returnCharacter(y, x);

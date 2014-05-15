@@ -85,9 +85,9 @@ public class Game
 		// Instantiate 2 Players and Create ships for both players
 		for (int i = 0; i<2; i++){
 			Game.clearConsole(); // Clear the screen
-			System.out.println("PLAYER "+(i+1)+" enter your name: "); // Player 1/2 - enter your name
+			System.out.print("Player "+(i+1)+": "); // Player 1/2 - enter your name
 			player[i]= new Player();
-			System.out.println("Captain " +player[i].name+", it is time to deploy your fleet");
+			System.out.println("\nCaptain " +player[i].name+", it is time to deploy your fleet!\n");
 			player[i].addFleet(); // Call addFleet to start placing boats
 		}
 

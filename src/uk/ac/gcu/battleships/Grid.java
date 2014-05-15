@@ -213,7 +213,7 @@ public class Grid {
 			hit = this.ships.get(i).testHit(x, y);
 			if(hit && (this.returnCharacter(y, x) != Grid.HIT)) { 
 				this.board[y][x] = Grid.HIT;
-				System.out.println("Hit!");
+				System.out.println("You have hit a Ship!");
 				if(this.ships.get(i).isSunk()) 
 					System.out.println("Sunk!");
 			}
@@ -290,7 +290,7 @@ public class Grid {
 			hit = this.ships.get(i).testHit(x, y);
 			if(hit && (this.returnCharacter(y, x) != Grid.HIT)) { 
 				this.board[y][x] = Grid.HIT;
-				System.out.println("Hit!");
+				System.out.println("You have hit a Ship!");
 				charac = 'h';
 				if(this.ships.get(i).isSunk()) {
 					System.out.println("Sunk!");
