@@ -97,9 +97,10 @@ public class Game
 		// Confirmation message
 		System.out.println("New game created");
 
+		
 		// Instantiate 2 Players and Create ships for both players
 		for (int i = 0; i<2; i++){
-
+			Game.clearConsole();
 			System.out.println("PLAYER "+(i+1)+" enter your name: ");
 			player[i]= new Player();
 			System.out.println("Captain " +player[i].name+", it is time to deploy your fleet");
@@ -128,6 +129,7 @@ public class Game
 		int y;
 
 		do{
+			Game.clearConsole();
 			System.out.println("Captain " +player[turn].name);        	
 			System.out.println(display(player[turn].myGrid.displayOwnGrid()));
 			System.out.println(display(player[turn].opponentGrid.displayEnnemyGrid()));
@@ -143,7 +145,8 @@ public class Game
 			
 			win=player[turn].makeGuess(g);
 			if(!win) turn = (turn+1)%2;
-
+			sc.nextLine();
+			
 		}while(!win);
 	}
 
@@ -255,7 +258,13 @@ public class Game
 		return i;
 	}
 	
-	//public void setGuess() {} 
+	//public void setGuess() {}
+	
+	public static void clearConsole() {
+		for(int i = 0; i <25;i++) {
+			System.out.println(System.getProperty("line.separator"));
+		}
+	}
 	
 
 }
