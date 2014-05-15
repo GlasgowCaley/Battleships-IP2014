@@ -207,7 +207,7 @@ public class Game
 	 */
 	public static int readXAxis() {
 		Scanner sc = new Scanner(System.in);
-		String temp = sc.nextLine();
+		String temp = sc.next();
 		char c = temp.charAt(0);
 
 		while ((int)c < 65 || (int)c > 74 && (int)c < 97 || (int)c > 106 || temp.length() != 1){
@@ -230,7 +230,7 @@ public class Game
      		System.out.println("invalid! You must enter an integer");
      		sc.nextLine();
      	}
-         temp = sc.nextLine();
+         temp = sc.next();
          int y =  Integer.parseInt(temp)-1;
          return y;
 	}
