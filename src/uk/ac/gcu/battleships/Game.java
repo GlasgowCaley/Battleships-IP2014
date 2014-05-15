@@ -149,7 +149,7 @@ public class Game
 			
 		}while(!win);
 		
-		System.out.println(player[turn].name);
+		System.out.println(player[turn].name+" wins the game !");
 	}
 
 	/**
