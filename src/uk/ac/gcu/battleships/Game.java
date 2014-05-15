@@ -94,7 +94,9 @@ public class Game
         Player player2 = new Player();
         
         // Create ships for both players
+        System.out.println("Player 1 please place your ships");
         player1.addFleet();
+        System.out.println("Player 2 please place your ships");
         player2.addFleet();
         
         // Create opponent grids

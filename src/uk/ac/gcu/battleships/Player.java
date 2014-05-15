@@ -29,13 +29,13 @@ public class Player  {
     		boolean add = false;
     		switch(i) {
     		case 2:
-    			name = "DESTROYER: ";
+    			name = "Place your Destroyer (Size 2)";
     			break;
     		case 3:
-    			name = "SUBMARINE: ";
+    			name = "Place your Submarine (Size 3)";
     			break;
     		case 4:
-    			name = "BATTLESHIP: ";
+    			name = "Place your Battleship (Size 4)";
     			break;
     		}
     		
@@ -49,7 +49,7 @@ public class Player  {
     
     public boolean addBoat(int b){
     	 Scanner input = new Scanner(System.in);
-         String temp = input.nextLine();
+         String temp;
          boolean add = false;
     
      	//get position of ship
