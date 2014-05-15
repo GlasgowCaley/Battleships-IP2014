@@ -281,8 +281,8 @@ public class TestGrid {
 			}		
 		}
 
-		array[0][0] = 's';
-		array[1][0] = 's';
+		array[0][0] = 'D';
+		array[1][0] = 'D';
 
 		for ( int i = 0 ; i < 2 ; i++){
 			for ( int j = 0; j < 2;j++){
@@ -329,9 +329,11 @@ public class TestGrid {
 	 * Test if a ship is added on the grid
 	 */
 	public void test_14_AddShipIntoGrid(){
-		Grid g = new Grid();
+		Grid g = new Grid(10);
+		System.out.println(g);
 		Ship s = new Ship(2,0,0,'h');
 		boolean ok = g.addShip(s);
+		System.out.println(g); 
 		char c1 = g.returnCharacter(0, 0);
 		char c2 = g.returnCharacter(0, 1);
 		char c3 = g.returnCharacter(3,3);
@@ -339,8 +341,8 @@ public class TestGrid {
 
 		//Test
 		assertTrue("It should be True",ok);
-		assertEquals("It should have a ship here",'s',c1);
-		assertEquals("It should have a ship here",'s',c2);
+		assertEquals("It should have a ship here",'D',c1);
+		assertEquals("It should have a ship here",'D',c2);
 		assertEquals("It shouldn't have a ship here",'-',c3);
 
 	}
