@@ -113,7 +113,7 @@ public class Game
 
 		do {
 			Game.clearConsole(); // Empty the screen		
-			System.out.println("Captain " +player[turn].name); // Display name of player whose turn it is
+			System.out.println("Captain " +player[turn].name + " and his pirate crew"); // Display name of player whose turn it is
 			sc.nextLine();
 			System.out.println("Your Fleet");
 			System.out.println(display(player[turn].myGrid.displayOwnGrid())); // Show own grid
