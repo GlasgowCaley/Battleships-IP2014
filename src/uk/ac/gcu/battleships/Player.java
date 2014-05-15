@@ -67,7 +67,6 @@ public class Player  {
      	input = new Scanner(System.in);
         temp = input.nextLine(); // 
         char orient = temp.toUpperCase().charAt(0);
-        System.out.println(orient);
         
         //Not proud of this while loop... Fix into test methods!
 
