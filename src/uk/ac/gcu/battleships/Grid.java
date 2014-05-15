@@ -213,9 +213,10 @@ public class Grid {
 			hit = this.ships.get(i).testHit(x, y);
 			if(hit && (this.returnCharacter(y, x) != Grid.HIT)) { 
 				this.board[y][x] = Grid.HIT;
-				System.out.println("Hit!");
 				if(this.ships.get(i).isSunk()) 
-					System.out.println("Sunk!");
+					System.out.println("You have hit and sunk a Ship!");
+				else
+					System.out.println("You have hit a Ship!");
 			}
 			else {
 				this.board[y][x] = Grid.HIT_MISSED;
@@ -275,6 +276,50 @@ public class Grid {
 		}
 		return array ;		
 	}
+	
+	public char checkGuessAI(Guess g) {
+		int x = g.get_X();
+		int y = g.get_Y();
+		int l = this.ships.size();
+		boolean hit = false;
+		boolean miss = false;
+		boolean sunk = true;
+		char charac = 'm';
+		int i = 0;
+
+		while(!hit && i<l){
+			hit = this.ships.get(i).testHit(x, y);
+			if(hit && (this.returnCharacter(y, x) != Grid.HIT)) { 
+				this.board[y][x] = Grid.HIT;
+				System.out.println("You have hit a Ship!");
+				charac = 'h';
+				if(this.ships.get(i).isSunk()) {
+					System.out.println("Sunk!");
+					charac = 's';
+				}
+			}
+			else {
+				this.board[y][x] = Grid.HIT_MISSED;
+			}
+			
+			i++;
+		}
+		if(this.returnCharacter(y, x) == Grid.HIT_MISSED){ 
+			System.out.println("Miss!");
+			charac = 'm';
+		}
+
+		for(int j = 0;j<l;j++) {
+			if(!this.ships.get(j).isSunk())
+				sunk = false;
+		}
+		if (sunk == true)
+		{
+			charac = 'w';
+		}
+		return charac;		
+	}
+	
 
 	/**
 	 * Getter for the Two-dimensional array
