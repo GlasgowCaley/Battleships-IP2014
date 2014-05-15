@@ -102,17 +102,20 @@ public class TestGrid {
 		boolean ok = false;
 		Ship s = new Ship(4,0,0,'h');
 		Ship s2 = new Ship(2,2,2,'h');
-		
+		Ship s3 = new Ship(2,0,1,'h');
+
 
 
 		ok = g.addShip(s);
 		boolean ok2 = g.addShip(s2);
+		boolean ok3 = g.addShip(s3);
 		int nb = g.getShips().size();
 
 		// TEST
 		assertTrue("The result should be TRUE",ok);
 		assertTrue("The result should be TRUE",ok2);
-		assertEquals("They should have 2 ships on the grid",2,nb);
+		assertTrue("The result should be TRUE",ok3);
+		assertEquals("They should have 2 ships on the grid",3,nb);
 	}
 
 	/** 
@@ -125,17 +128,20 @@ public class TestGrid {
 		boolean ok = false;
 		Ship s = new Ship(3,0,0,'v');
 		Ship s2 = new Ship(2,1,2,'v');
+		Ship s3 = new Ship(2,3,0,'v');
 
 		ok = g.addShip(s);
 		boolean ok2 = g.addShip(s2);
-		System.out.println(g);
+		boolean ok3 = g.addShip(s3);
+
 		int nb = g.getShips().size();
 
 		// TEST
 
 		assertTrue("The result 1 should be TRUE",ok);
 		assertTrue("The result should be TRUE",ok2);
-		assertEquals("They should have 2 ships on the grid",2,nb);
+		assertTrue("The result should be TRUE",ok3);
+		assertEquals("They should have 2 ships on the grid",3,nb);
 	}
 
 	/** 
@@ -147,7 +153,6 @@ public class TestGrid {
 		Grid g = new Grid(3);
 		boolean ok = false;
 		Ship s = new Ship(4,0,0,'h');
-
 		ok = g.addShip(s);
 		int nb = g.getShips().size();
 
@@ -175,7 +180,46 @@ public class TestGrid {
 		// TEST
 		assertTrue("The result should be TRUE",ok);
 		assertFalse("The result should be FALSE",ok2);
-		assertEquals("They should have only a ship on the grid",1,nb);
+		assertEquals("It should have only a ship on the grid",1,nb);
+	}
+
+	/**
+	 * Test when the player wants to add a ship Out of the grid
+	 */
+	@Test
+	public void test_8_AddShip_ArrayOutOfBounds(){
+		Grid g = new Grid(3);
+		Ship s = new Ship(2,5,5,'h');
+		boolean ok = g.addShip(s);
+		int nb = g.getShips().size();
+
+		//Test
+		assertFalse("The result should be false",ok);
+		assertEquals("It shouldn't have ship on the grid",0,nb);
+
+	}
+
+	/**
+	 * Test when I try to add 3 ship
+	 */
+
+	@Test
+	public void test_9_AddShip(){
+		Grid g = new Grid(10);
+		Ship s1 = new Ship(2,0,0,'h');
+		Ship s2 = new Ship(3,4,4,'v');
+		Ship s3 = new Ship(4,2,8,'h');
+
+		boolean ok1 = g.addShip(s1);
+		boolean ok2 = g.addShip(s2);
+		boolean ok3 = g.addShip(s3);
+		int nb = g.getShips().size();
+
+		//Test
+		assertTrue("The result should be true",ok1);
+		assertTrue("The result should be true",ok2);
+		assertTrue("The result should be true",ok3);
+		assertEquals("It should have 3 ships on the grid",3,nb);
 	}
 
 	/** 
@@ -183,7 +227,7 @@ public class TestGrid {
 	 * In this case, the guess hits a ship.
 	 */
 	@Test
-	public void test_8_CheckGuess() {		
+	public void test_10_CheckGuess() {		
 		// Initialisation
 		Grid g = new Grid(5);
 		boolean ok = false;
@@ -203,7 +247,7 @@ public class TestGrid {
 	 * In this case, the guess doesn't hit a ship.
 	 */
 	@Test
-	public void test_9_CheckGuess_NoHit() {		
+	public void test_11_CheckGuess_NoHit() {		
 		// Initialisation
 		Grid g = new Grid(5);
 		boolean ok = false;
@@ -220,8 +264,11 @@ public class TestGrid {
 		assertEquals("The guess shouldn't hit the ship",Grid.HIT_MISSED,r);
 	}
 
+	/**
+	 * Test the displaying of the Own Grid
+	 */
 	@Test
-	public void test_10_displayOwnGrid(){
+	public void test_12_displayOwnGrid(){
 		Grid gr = new Grid(2);
 		boolean ok = true;
 		Ship s = new Ship ( 2, 0,0,'v');
@@ -240,14 +287,17 @@ public class TestGrid {
 		for ( int i = 0 ; i < 2 ; i++){
 			for ( int j = 0; j < 2;j++){
 				if(!(board[i][j] == array[i][j]))
-				ok = false;
+					ok = false;
 			}
 		}
 		assertTrue("It should be true", ok);
 	}
 
+	/**
+	 * Test the displaying of the ennemy grid
+	 */
 	@Test
-	public void test_11_displayEnnemyGrid(){
+	public void test_13_displayEnnemyGrid(){
 		Grid gr = new Grid(2);
 		boolean ok = true;
 		Ship s = new Ship ( 2, 0,0,'h');
@@ -262,16 +312,37 @@ public class TestGrid {
 			}		
 		}
 
-		
+
 		array[0][0] = 'x';
 
 		for ( int i = 0 ; i < 2 ; i++){
 			for ( int j = 0; j < 2;j++){
 				if(!(board[i][j] == array[i][j]))
-				ok = false;
+					ok = false;
 			}
 		}
 		assertTrue("It should be True",ok);
+	}
+
+	@Test
+	/**
+	 * Test if a ship is added on the grid
+	 */
+	public void test_14_AddShipIntoGrid(){
+		Grid g = new Grid();
+		Ship s = new Ship(2,0,0,'h');
+		boolean ok = g.addShip(s);
+		char c1 = g.returnCharacter(0, 0);
+		char c2 = g.returnCharacter(0, 1);
+		char c3 = g.returnCharacter(3,3);
+		System.out.println(g);
+
+		//Test
+		assertTrue("It should be True",ok);
+		assertEquals("It should have a ship here",'s',c1);
+		assertEquals("It should have a ship here",'s',c2);
+		assertEquals("It shouldn't have a ship here",'-',c3);
+
 	}
 
 }
