@@ -7,8 +7,8 @@ import org.junit.Test;
 public class TestGame {
 
 	@Test
-	public void testFailure() throws Exception {
-		
+	public void test() {
+		fail("Not yet implemented");
 	}
 
 }

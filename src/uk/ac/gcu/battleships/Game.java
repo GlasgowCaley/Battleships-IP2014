@@ -13,38 +13,27 @@ import java.util.Scanner;
 
 public class Game
 {
-	
-	
-	/**
-	 * Creates an object of type Game
-	 * Calls method showMenu
-	 */
+	// Instantiate 2 players
 	private Player []player=new Player[2];
-	
-	
-	private Guess g;
 
+	// Instantiate Guess
+	private Guess g;
+	
+	// Game method, calls showMenu and kick-starts the game
 	public Game() 
 	{
 		this.g= new Guess(0,0);
-		showMenu();
+		showMenu(); // call showMenu
 	}
 
-	/**
-	 * Creates a menu
-	 * If user enters 1, call newGame method
-	 * If user enters 2, call playGame method
-	 * If user enters 3, call viewResults method
-	 * If user enters 4, call quitGame method
-	 */
+	// Draw menu
 	private void showMenu()
 	{
 		// Display a numbered list of the user's options
-		System.out.println("Welcome to Battleships! Please type your choice (1-4)");
-		System.out.println("1. New Game");
-		System.out.println("2. Play Game");
-		System.out.println("3. View Results");
-		System.out.println("4. Quit");
+		System.out.println("Welcome to Battleships! Please type your choice (1-3)");
+		System.out.println("1. Start a New Game");
+		System.out.println("2. View Results");
+		System.out.println("3. Exit the Game");
 
 		// Get the user's choice
 		Scanner choice = new Scanner(System.in);
@@ -63,7 +52,7 @@ public class Game
 			switch(i) {
 
 			default :
-				System.out.println("Invalid Input");
+				System.out.println("Invalid Input"); // Error - try again
 				break;
 
 			case 1 :
@@ -71,100 +60,86 @@ public class Game
 				break;
 
 			case 2 :
-				playGame(); // Call playGame method
-				break;
-
-			case 3 :
 				viewResults(); // Call viewResults method
 				break;
 
-			case 4 :
+			case 3 :
 				done = true; // If user quits, the loop is done
 				quitGame(); // Call quitGame method
 				break;
-
 			} 	
-
 		}
 	}   
 
-	/**
-	 * Starts a new game
-	 * Get input relating to size & position of ships
-	 */
+	// Start a new game
 	private void newGame()
 	{
-		// Confirmation message
-		System.out.println("New game created");
-
+		// AI or Player?
 		
+		// Confirmation message
+		System.out.println("New game created!");
+
 		// Instantiate 2 Players and Create ships for both players
 		for (int i = 0; i<2; i++){
-			Game.clearConsole();
-			System.out.println("PLAYER "+(i+1)+" enter your name: ");
+			Game.clearConsole(); // Clear the screen
+			System.out.println("PLAYER "+(i+1)+" enter your name: "); // Player 1/2 - enter your name
 			player[i]= new Player();
 			System.out.println("Captain " +player[i].name+", it is time to deploy your fleet");
-			player[i].addFleet();
+			player[i].addFleet(); // Call addFleet to start placing boats
 		}
 
 		// Create opponent grids
 		player[0].opponentGrid=player[1].myGrid;
 		player[1].opponentGrid=player[0].myGrid;
 
+		// Start to play the game
 		this.playGame();
 
 	}
 
-	/**
-	 * Begins the existing game
-	 * In version 1.0 this will simply return a string
-	 */
+	// Play Game
 	private void playGame()
 	{
 		System.out.println("The game has begun! Good luck!");
 		Scanner sc = new Scanner(System.in);  
 		int turn=0;
-		boolean win=false;
-		int x;
-		int y;
+		boolean win=false; // Game is not won
+		int x; // x coordinate
+		int y; // y coordinate 
 
-		do{
-			Game.clearConsole();			
-			System.out.println("Captain " +player[turn].name);
+		do {
+			Game.clearConsole(); // Empty the screen		
+			System.out.println("Captain " +player[turn].name); // Display name of player whose turn it is
 			sc.nextLine();
-			System.out.println(display(player[turn].myGrid.displayOwnGrid()));
-			System.out.println(display(player[turn].opponentGrid.displayEnnemyGrid()));
-			System.out.println("Enter your guess:  ");
+			System.out.println(display(player[turn].myGrid.displayOwnGrid())); // Show own grid
+			System.out.println(display(player[turn].opponentGrid.displayEnnemyGrid())); // Show enemy grid
+			System.out.println("Enter your guess:  "); // Ask for guess
+			
 			// Read the guess
 			System.out.println("Enter X coordinate :");
-			x = Game.readXAxis();
+			x = Game.readXAxis(); // Call readXAxis
 			this.g.set_X(x);
 		
 			System.out.println("Enter Y coordinate :");
-			y = Game.readYAxis();
+			y = Game.readYAxis(); // Call readYAxis
 			this.g.set_Y(y);
 			
 			win=player[turn].makeGuess(g);
 			if(!win) turn = (turn+1)%2;
 			sc.nextLine();
 			
-		}while(!win);
+		} while(!win); // while the game is not won
 		
-		System.out.println(player[turn].name+" wins the game !");
+		System.out.println(player[turn].name+" wins the game !"); 
 	}
 
-	/**
-	 * Shows results of the game
-	 * In version 1.0 this will simply return a string
-	 */
+	// View Results
 	private void viewResults()
 	{
-		System.out.println("View results");
+		System.out.println("The previous game was won by: "); // Should probably use the code above to display winner
 	}
 
-	/**
-	 * Quits the game
-	 */
+	// Quit the Game
 	private void quitGame()
 	{
 		System.out.println("Thanks for playing!");
