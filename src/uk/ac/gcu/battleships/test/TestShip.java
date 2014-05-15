@@ -47,4 +47,28 @@ public class TestShip {
 		assertTrue("This should be true", s.isSunk());
 		
 	}
+	
+	@Test
+	public void test_4_isHit(){	//hit vertical ship
+		Ship s = new Ship(3,0,0,'h');
+		s.testHit(1, 0);
+		assertFalse("This should be false", s.isHit(0));
+		assertTrue("This should be true", s.isHit(1));
+		assertFalse("This should be false", s.isHit(2));
+	}
+	
+	@Test
+	public void test_5_isHit(){
+		Ship s = new Ship(3,0,0,'v');
+		assertFalse("This should be false", s.testHit(1, 0));
+		assertTrue("This should be true", s.testHit(0, 1));
+		
+		assertTrue("This should be true", s.isHit(1));
+		assertFalse("This should be false", s.isHit(0));
+		
+	}
 }
+
+
+
+
