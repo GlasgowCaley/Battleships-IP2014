@@ -101,7 +101,8 @@ public class TestGrid {
 		Grid g = new Grid(5);
 		boolean ok = false;
 		Ship s = new Ship(4,0,0,'h');
-		Ship s2 = new Ship(3,2,2,'h');
+		Ship s2 = new Ship(2,2,2,'h');
+		
 
 
 		ok = g.addShip(s);
@@ -165,7 +166,7 @@ public class TestGrid {
 		Grid g = new Grid(3);
 		boolean ok = false;
 		Ship s = new Ship(2,0,0,'h');
-		Ship s2 = new Ship(2,0,1,'v');
+		Ship s2 = new Ship(2,1,0,'v');
 
 		ok = g.addShip(s);
 		boolean ok2 = g.addShip(s2);

@@ -171,8 +171,9 @@ public class Grid {
 		// Horizontal ship
 		if(horizon) {
 			int i = s.shipPosition_x;
-			while(i <s.shipPosition_x+s.shipSize && add) {
-				char res = this.returnCharacter(i, s.shipPosition_y);
+			while(i <s.shipPosition_x + s.shipSize && add) {
+				
+				char res = this.returnCharacter(s.shipPosition_y,i);
 				if(res != Grid.DEFAULT_CHAR || res == 0) {
 					add = false;	
 				}
@@ -183,7 +184,7 @@ public class Grid {
 		else {
 			int i = s.shipPosition_y;
 			while(i <s.shipPosition_y+s.shipSize && add) {
-				char res = this.returnCharacter(s.shipPosition_x, i);
+				char res = this.returnCharacter(i,s.shipPosition_x);
 				if(res != Grid.DEFAULT_CHAR || res == 0) {
 					add = false; 
 				}
@@ -209,9 +210,13 @@ public class Grid {
 		
 		while(!hit && i<l){
 			hit = this.ships.get(i).testHit(x, y);
-			System.out.println(hit);
-			if(hit || this.returnCharacter(y, x) == Grid.HIT) 
+			
+			if(hit || this.returnCharacter(y, x) == Grid.HIT) { 
 				this.board[y][x] = Grid.HIT;
+				System.out.println("Hit!");
+				if(this.ships.get(i).isSunk()) 
+					System.out.println("Sunk!");
+			}
 			else
 				this.board[y][x] = Grid.HIT_MISSED;
 			i++;
@@ -267,7 +272,6 @@ public class Grid {
 		return array ;		
 	}
 
-	
 	/**
 	 * Getter for the Two-dimensional array
 	 * @return The array which represents the Grid. 
