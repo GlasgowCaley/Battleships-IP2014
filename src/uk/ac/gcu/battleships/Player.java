@@ -58,17 +58,8 @@ public class Player  {
      	//get position of ship
         char c = 0 ;
         System.out.println("Please enter the horizontal(A to E) coordinate of ship " ); //+ count
-     	input = new Scanner(System.in);
      	
-     	temp = input.next(); 
-     	
-     	c = temp.charAt(0);
-     	
-     	while ((int)c < 65 || (int)c > 74 && (int)c < 97 || (int)c > 106 || temp.length() != 1){
-     		System.out.println("This is not a valid character");
-     		temp = input.next();
-     		c = temp.charAt(0);
-     	}
+        int x = Game.readXAxis();
      		
      	System.out.println("Please enter the vertical(1 to 5) coordinate of ship " ); //+ count
      	input = new Scanner(System.in);
@@ -93,20 +84,8 @@ public class Player  {
         }
          
      	//call player.createShip method
-        add  = this.createShip(b,(this.changeX(c)),vert,orient);
+        add  = this.createShip(b,x,vert,orient);
         return add;         
     }
     
-    public int changeX(char c){ //The method changes any letter into a number
-    	int i=0;
-    	boolean enc=false;
-    	while(i<=27 && !enc){
-    		if(c-'a'==i||c-'A'==i) 
-    			enc=true;
-    		else
-    			i++;
-    	}
-    	return i;
-    }
-
 }
