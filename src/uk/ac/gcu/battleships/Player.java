@@ -24,19 +24,33 @@ public class Player  {
     
     public void addFleet(){
     	
+    	String name = "";
     	for(int i=2; i<=4; i++){
-    		if (i==2) System.out.println("DESTROYER: " );
-    			else if (i==3)  System.out.println("SUBMARINE: " );
-    				else System.out.println("BATTLESHIP: " );
-    		this.addBoat(i);
-    		System.out.println(this.myGrid);
+    		boolean add = false;
+    		switch(i) {
+    		case 2:
+    			name = "DESTROYER: ";
+    			break;
+    		case 3:
+    			name = "SUBMARINE: ";
+    			break;
+    		case 4:
+    			name = "BATTLESHIP: ";
+    			break;
+    		}
+    		
+    		while(!add) {
+    			System.out.println(name);
+    			add = this.addBoat(i);
+    			System.out.println(this.myGrid);
+    		}    		
     	}
-    	
-    	
     }
-    public void addBoat(int b){
+    
+    public boolean addBoat(int b){
     	 Scanner input = new Scanner(System.in);
          String temp = input.nextLine();
+         boolean add = false;
     
      	//get position of ship
         char c = 0 ;
@@ -76,9 +90,8 @@ public class Player  {
         }
          
      	//call player.createShip method
-        this.createShip(b,(this.changeX(c)),vert,orient);
-         
-         
+        add  = this.createShip(b,(this.changeX(c)),vert,orient);
+        return add;         
     }
     
     public int changeX(char c){ //The method changes any letter into a number
