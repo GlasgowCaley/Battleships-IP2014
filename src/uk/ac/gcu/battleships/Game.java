@@ -106,7 +106,7 @@ public class Game
 		boolean win=false; // Game is not won
 		int x; // x coordinate
 		int y; // y coordinate
-		boolean same = false;
+
 
 		do {
 			Game.clearConsole(); // Empty the screen		
@@ -115,6 +115,7 @@ public class Game
 			System.out.println(display(player[turn].myGrid.displayOwnGrid())); // Show own grid
 			System.out.println(display(player[turn].opponentGrid.displayEnnemyGrid())); // Show enemy grid
 			System.out.println("Enter your guess:  "); // Ask for guess
+			boolean same = false;
 			while(!same) {
 				// 	Read the guess
 				System.out.println("Enter X coordinate :");
@@ -134,9 +135,10 @@ public class Game
 					same = true;
 					win=player[turn].makeGuess(g);
 				}
-				if(!win) turn = (turn+1)%2;
-					sc.nextLine();
+				
 			}
+			if(!win) turn = (turn+1)%2;
+			sc.nextLine();
 			
 		} while(!win); // while the game is not won
 	}
