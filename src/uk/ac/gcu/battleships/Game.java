@@ -130,10 +130,10 @@ public class Game
 			x = Game.readXAxis();
 			g.set_X(x);
 		
-			y = sc.nextInt();
+			y = Game.readYAxis();
 			g.set_Y(y);
+			
 			win=player[turn].makeGuess(g);
-
 			if(!win) turn = (turn+1)%2;
 
 		}while(!win);
@@ -201,7 +201,10 @@ public class Game
 		return res;
 	}
 
-
+	/**
+	 * Method which enables to read the X axis.
+	 * @return the integer for the X axis.
+	 */
 	public static int readXAxis() {
 		Scanner sc = new Scanner(System.in);
 		String temp = sc.nextLine();
@@ -214,9 +217,24 @@ public class Game
 		}		
 		int x = Game.changeX(c);
 		return x;
-
 	}
-
+	
+	/**
+	 * Method which enables to read the Y axis.
+	 * @return the integer for the Y axis.
+	 */
+	public static int readYAxis() {
+		Scanner sc = new Scanner(System.in);
+		String temp;
+     	while (!sc.hasNextInt()) {
+     		System.out.println("invalid! You must enter an integer");
+     		sc.next();
+     	}
+         temp = sc.nextLine();
+         int y =  Integer.parseInt(temp)-1;
+         return y;
+	}
+	
 	private static int changeX(char c){ //The method changes any letter into a number
 		int i=0;
 		boolean enc=false;
@@ -228,6 +246,9 @@ public class Game
 		}
 		return i;
 	}
+	
+	
+	
 
 
 }
