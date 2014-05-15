@@ -11,7 +11,6 @@ public class Player  {
 	public Player(){
 		Scanner sc = new Scanner(System.in);
 		name = sc.nextLine();
-
 		myGrid = new Grid();
 	}
  
