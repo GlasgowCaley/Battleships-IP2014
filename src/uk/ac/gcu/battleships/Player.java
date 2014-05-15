@@ -29,6 +29,7 @@ public class Player  {
     			else if (i==3)  System.out.println("SUBMARINE: " );
     				else System.out.println("BATTLESHIP: " );
     		this.addBoat(i);
+    		System.out.println(this.myGrid);
     	}
     	
     	
@@ -59,7 +60,7 @@ public class Player  {
      		input.next();
      	}
          temp = input.nextLine();
-         int vert =  Integer.parseInt(temp);
+         int vert =  Integer.parseInt(temp)-1;
          
      	//get orientation of ship -- presumably v h
         System.out.println("Please enter the Orientation(v or h) coordinate of ship " ); //+ count
@@ -84,8 +85,10 @@ public class Player  {
     	int i=0;
     	boolean enc=false;
     	while(i<=27 && !enc){
-    		if(c-'a'==i||c-'A'==i) enc=true;
-    		i++;
+    		if(c-'a'==i||c-'A'==i) 
+    			enc=true;
+    		else
+    			i++;
     	}
     	return i;
     }
