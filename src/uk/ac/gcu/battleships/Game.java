@@ -13,15 +13,15 @@ import java.util.Scanner;
 
 public class Game
 {
-	
-	
+
+
 	/**
 	 * Creates an object of type Game
 	 * Calls method showMenu
 	 */
 	private Player []player=new Player[2];
-	
-	
+
+
 	private Guess g;
 
 	public Game() 
@@ -97,7 +97,7 @@ public class Game
 		// Confirmation message
 		System.out.println("New game created");
 
-		
+
 		// Instantiate 2 Players and Create ships for both players
 		for (int i = 0; i<2; i++){
 			Game.clearConsole();
@@ -135,21 +135,32 @@ public class Game
 			System.out.println(display(player[turn].myGrid.displayOwnGrid()));
 			System.out.println(display(player[turn].opponentGrid.displayEnnemyGrid()));
 			System.out.println("Enter your guess:  ");
+			boolean same = false;
 			// Read the guess
-			System.out.println("Enter X coordinate :");
-			x = Game.readXAxis();
-			this.g.set_X(x);
-		
-			System.out.println("Enter Y coordinate :");
-			y = Game.readYAxis();
-			this.g.set_Y(y);
-			
-			win=player[turn].makeGuess(g);
+			while(!same) {
+				
+				System.out.println("Enter X coordinate :");
+				x = Game.readXAxis();
+				this.g.set_X(x);
+
+				System.out.println("Enter Y coordinate :");
+				y = Game.readYAxis();
+				this.g.set_Y(y);
+				char c = player[turn].opponentGrid.returnCharacter(y, x); 
+				if(c == Grid.HIT_MISSED || c == Grid.HIT) {
+					same = false;
+					System.out.println("You have already hit this position, Enter an other position.");
+				}
+				else  {
+					same = true;
+					win=player[turn].makeGuess(g);
+				}
+			}
 			if(!win) turn = (turn+1)%2;
 			sc.nextLine();
-			
+
 		}while(!win);
-		
+
 		System.out.println(player[turn].name+" wins the game !");
 	}
 
@@ -221,18 +232,18 @@ public class Game
 	 */
 	public static int readXAxis() {
 		Scanner sc = new Scanner(System.in);
-		String temp = sc.nextLine();
+		String temp = sc.next();
 		char c = temp.charAt(0);
 
 		while ((int)c < 65 || (int)c > 74 && (int)c < 97 || (int)c > 106 || temp.length() != 1){
 			System.out.println("This is not a valid character");
-			temp = sc.nextLine();
+			temp = sc.next();
 			c = temp.charAt(0);
 		}		
 		int x = Game.changeX(c);
 		return x;
 	}
-	
+
 	/**
 	 * Method which enables to read the Y axis.
 	 * @return the integer for the Y axis.
@@ -240,15 +251,15 @@ public class Game
 	public static int readYAxis() {
 		Scanner sc = new Scanner(System.in);
 		String temp;
-     	while (!sc.hasNextInt()) {
-     		System.out.println("invalid! You must enter an integer");
-     		sc.nextLine();
-     	}
-         temp = sc.nextLine();
-         int y =  Integer.parseInt(temp)-1;
-         return y;
+		while (!sc.hasNextInt()) {
+			System.out.println("invalid! You must enter an integer");
+			sc.next();
+		}
+		temp = sc.next();
+		int y =  Integer.parseInt(temp)-1;
+		return y;
 	}
-	
+
 	private static int changeX(char c){ //The method changes any letter into a number
 		int i=0;
 		boolean enc=false;
@@ -260,14 +271,14 @@ public class Game
 		}
 		return i;
 	}
-	
+
 	//public void setGuess() {}
-	
+
 	public static void clearConsole() {
 		for(int i = 0; i <25;i++) {
 			System.out.println(System.getProperty("line.separator"));
 		}
 	}
-	
+
 
 }
