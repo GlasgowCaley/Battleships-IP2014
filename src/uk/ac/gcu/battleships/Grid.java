@@ -146,7 +146,7 @@ public class Grid {
 	 * @param s Ship to add.
 	 */
 	private void addShipIntoGrid(Ship s) {
-		boolean horizon = s.shipOrientation == 'h';
+		boolean horizon = Character.toUpperCase(s.shipOrientation) == 'H';
 
 		if(horizon) {
 			for(int i =s.shipPosition_x; i <s.shipPosition_x+s.shipSize;i++) {
@@ -167,7 +167,7 @@ public class Grid {
 	 */
 	private boolean checkPosition(Ship s) {
 		boolean add = true;
-		boolean horizon = s.shipOrientation == 'h';
+		boolean horizon = Character.toUpperCase(s.shipOrientation) == 'H';
 		// Horizontal ship
 		if(horizon) {
 			int i = s.shipPosition_x;
