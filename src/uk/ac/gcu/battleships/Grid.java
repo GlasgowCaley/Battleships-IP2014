@@ -13,16 +13,16 @@ import java.util.List;
  * @version 1.0
  */
 public class Grid {
-	
+
 	/** Two-dimensional array which represents the grid. */
 	private char[][] board;
 
 	/** Default character used in the Grid. */
 	public static final char DEFAULT_CHAR = '-';
-	
+
 	/** Character used for a Ship which is hit. */
 	public static final char HIT = 'x';
-	
+
 	/** Character used for a hit missed. */
 	public static final char HIT_MISSED = 'o';
 
@@ -39,7 +39,7 @@ public class Grid {
 		Grid.initArray(this.board);
 		this.ships = new ArrayList <Ship>();
 	}
-	
+
 	/**
 	 * Constructor which creates the square array which represents the game board.
 	 * @param size Array's size.
@@ -49,7 +49,7 @@ public class Grid {
 		Grid.initArray(this.board);
 		this.ships = new ArrayList <Ship>();
 	}
-	
+
 	/**
 	 * Method returning the character at a specified position.
 	 * @param line Integer corresponding at the number of the line.
@@ -66,7 +66,7 @@ public class Grid {
 		}
 		return res;
 	}
-	
+
 	/**
 	 * Method filling the two dimensional array with dash.
 	 */
@@ -98,12 +98,12 @@ public class Grid {
 		}
 		res+= System.getProperty("line.separator");
 		res+= limit;
-	
+
 		//loop to display line number and each character
 		for(int i = 0; i<this.board.length;i++){
 			res+= System.getProperty("line.separator");
 			res += " "+String.format(format, line);
-			
+
 			for(int j = 0; j<this.board[i].length;j++) {
 				res+= "| ";
 				res += this.board[i][j]+" ";
@@ -119,7 +119,7 @@ public class Grid {
 
 		return res;
 	}
-	
+
 	/**
 	 * Method adding a Ship in this Grid and in the list. 
 	 * @param s Ship to add.
@@ -150,16 +150,16 @@ public class Grid {
 
 		if(horizon) {
 			for(int i =s.shipPosition_x; i <s.shipPosition_x+s.shipSize;i++) {
-				this.board[s.shipPosition_y][i] = 's';	
+				this.board[s.shipPosition_y][i] = s.character;	
 			}
 		}
 		else {
 			for(int i =s.shipPosition_y; i <s.shipPosition_y+s.shipSize;i++) {
-				this.board[i][s.shipPosition_x] = 's';
+				this.board[i][s.shipPosition_x] = s.character;
 			}
 		}
 	}
-	
+
 	/**
 	 * Method enables to check if the Ship can be added in the Grid
 	 * @param s Ship to add
@@ -172,7 +172,7 @@ public class Grid {
 		if(horizon) {
 			int i = s.shipPosition_x;
 			while(i <s.shipPosition_x + s.shipSize && add) {
-				
+
 				char res = this.returnCharacter(s.shipPosition_y,i);
 				if(res != Grid.DEFAULT_CHAR || res == 0) {
 					add = false;	
@@ -193,7 +193,7 @@ public class Grid {
 		}
 		return add;
 	}
-	
+
 	/**
 	 * Method enables to know if the player's guess
 	 * hit a Ship in this Grid.   
@@ -205,32 +205,37 @@ public class Grid {
 		int y = g.get_Y();
 		int l = this.ships.size();
 		boolean hit = false;
+		boolean miss = false;
 		boolean sunk = true;
 		int i = 0;
-		
+
 		while(!hit && i<l){
 			hit = this.ships.get(i).testHit(x, y);
-			
+
 			if(hit || this.returnCharacter(y, x) == Grid.HIT) { 
 				this.board[y][x] = Grid.HIT;
 				System.out.println("Hit!");
 				if(this.ships.get(i).isSunk()) 
 					System.out.println("Sunk!");
 			}
-			else
-				System.out.println("Miss!");
+			else {
+				miss = true;
 				this.board[y][x] = Grid.HIT_MISSED;
+			}
+			
 			i++;
 		}
-		
+		if(miss) 
+			System.out.println("Miss!");
+
 		for(int j = 0;j<l;j++) {
 			if(!this.ships.get(j).isSunk())
 				sunk = false;
 		}
-		
+
 		return sunk;		
 	}
-	
+
 	/**
 	 * Method displaying the Grid player into the console.	
 	 * @return The array for the own player.
@@ -243,13 +248,13 @@ public class Grid {
 		for(int i = 0; i<this.board.length;i++){
 			for(int j = 0; j<this.board[i].length;j++){
 				char tmp = this.returnCharacter(i, j);			
-				if(tmp == Grid.HIT || tmp == 's')
+				if(tmp == Grid.HIT || tmp == 'S' || tmp == 'D' || tmp == 'B')
 					array[i][j] = tmp;
 			}
 		}
 		return array;
 	}
-	
+
 	/**
 	 * Method displaying the ennemy grid into the console.
 	 * @return : 2D Array which represents the Opponent's grid, with hit and misses
@@ -280,7 +285,7 @@ public class Grid {
 	public char[][] getBoard() {
 		return this.board;
 	}
-	
+
 	/**
 	 * Getter for the List of Ships which are on the Grid.
 	 * @return The list of Ships. 
@@ -288,5 +293,5 @@ public class Grid {
 	public List<Ship> getShips() {
 		return this.ships;
 	}
-	
+
 }
