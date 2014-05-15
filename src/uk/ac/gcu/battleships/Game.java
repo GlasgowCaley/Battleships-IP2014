@@ -115,7 +115,9 @@ public class Game
 			Game.clearConsole(); // Empty the screen		
 			System.out.println("Captain " +player[turn].name); // Display name of player whose turn it is
 			sc.nextLine();
+			System.out.println("Your Fleet");
 			System.out.println(display(player[turn].myGrid.displayOwnGrid())); // Show own grid
+			System.out.println("Your guesses");
 			System.out.println(display(player[turn].opponentGrid.displayEnnemyGrid())); // Show enemy grid
 			System.out.println("Enter your guess:  "); // Ask for guess
 			boolean same = false;
