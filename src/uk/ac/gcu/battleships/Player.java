@@ -27,7 +27,7 @@ public class Player  {
     public void addFleet(){ // Creates a fleet of boats
     	
     	String name = "";
-    	for(int i=2; i<=2; i++){ 
+    	for(int i=2; i<=4; i++){ 
     		boolean add = false;
     		switch(i) {
     		case 2:
