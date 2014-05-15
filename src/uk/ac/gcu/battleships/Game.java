@@ -129,8 +129,9 @@ public class Game
 		int y;
 
 		do{
-			Game.clearConsole();
-			System.out.println("Captain " +player[turn].name);        	
+			Game.clearConsole();			
+			System.out.println("Captain " +player[turn].name);
+			sc.nextLine();
 			System.out.println(display(player[turn].myGrid.displayOwnGrid()));
 			System.out.println(display(player[turn].opponentGrid.displayEnnemyGrid()));
 			System.out.println("Enter your guess:  ");
