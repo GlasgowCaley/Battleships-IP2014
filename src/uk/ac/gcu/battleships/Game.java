@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package uk.ac.gcu.battleships;
 
 import java.util.Scanner;
@@ -212,12 +211,12 @@ public class Game
 	 */
 	public static int readXAxis() {
 		Scanner sc = new Scanner(System.in);
-		String temp = sc.next();
+		String temp = sc.nextLine();
 		char c = temp.charAt(0);
-
-		while ((int)c < 65 || (int)c > 74 && (int)c < 97 || (int)c > 106 || temp.length() != 1){
+		
+		while ((int)c < 65 || (int)c > 74 && (int)c < 97 || (int)c > 106 || temp.length() != 1 || temp.equals("")){
 			System.out.println("This is not a valid character");
-			temp = sc.nextLine();
+			temp = sc.next();
 			c = temp.charAt(0);
 		}		
 		int x = Game.changeX(c);
