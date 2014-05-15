@@ -9,9 +9,18 @@ public class Player  {
 	public Grid opponentGrid;
 
 	public Player(){
+		this.inputName();
+		myGrid = new Grid();
+	}
+	
+	public void inputName() {
 		Scanner sc = new Scanner(System.in);
 		name = sc.next(); // Save name of the player
-		myGrid = new Grid();
+		while(name.length() ==0) {
+			name = sc.next(); // Save name of the player			
+		}
+		
+		
 	}
  
     public boolean createShip(int size, int x, int y, char orientation){
