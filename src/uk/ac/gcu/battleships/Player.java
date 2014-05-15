@@ -10,12 +10,12 @@ public class Player  {
 
 	public Player(){
 		Scanner sc = new Scanner(System.in);
-		name = sc.nextLine();
+		name = sc.nextLine(); // Save name of the player
 		myGrid = new Grid();
 	}
  
     public boolean createShip(int size, int x, int y, char orientation){
-        Ship S = new Ship(size, x, y, orientation);
+        Ship S = new Ship(size, x, y, orientation); // Create new Ship S
         return myGrid.addShip(S);
     }
  
@@ -24,10 +24,10 @@ public class Player  {
         return opponentGrid.checkGuess(G);
     }
     
-    public void addFleet(){
+    public void addFleet(){ // Creates a fleet of boats
     	
     	String name = "";
-    	for(int i=2; i<=4; i++){
+    	for(int i=2; i<=4; i++){ 
     		boolean add = false;
     		switch(i) {
     		case 2:
@@ -54,18 +54,18 @@ public class Player  {
          String temp;
          boolean add = false;
     
-     	//get position of ship
+     	// Get starting position of ship
         char c = 0 ;
-        System.out.println("Please enter the horizontal(A to E) coordinate of ship " ); //+ count
-     	int x = Game.readXAxis();
+        System.out.println("Please enter the horizontal (A to E) coordinate of ship " ); //+ count
+     	int x = Game.readXAxis(); // Get X Axis value, save to x
      		
-     	System.out.println("Please enter the vertical(1 to 5) coordinate of ship " ); //+ count
-     	int y = Game.readYAxis();
+     	System.out.println("Please enter the vertical (1 to 5) coordinate of ship " ); //+ count
+     	int y = Game.readYAxis(); // Get Y Axis value, save to y
          
-     	//get orientation of ship -- presumably v h
-        System.out.println("Please enter the Orientation(v or h) coordinate of ship " ); //+ count
+     	// Get orientation of ship - Horizontal or Vertical
+        System.out.println("Please enter the orientation of the ship (H or V)" ); //+ count
      	input = new Scanner(System.in);
-        temp = input.nextLine();
+        temp = input.nextLine(); // 
         char orient = temp.toUpperCase().charAt(0);
         System.out.println(orient);
         
@@ -73,9 +73,9 @@ public class Player  {
 
         while((orient != 'H' && orient != 'V') || (temp.length() != 1)) {
         	System.out.println("That is not a valid orientation ");
-        	System.out.println("Please enter the Orientation(v or h) coordinate of ship " ); //+ count
+        	System.out.println("Please enter the orientation of the ship (H or V)" ); //+ count
         	temp = input.nextLine();
-        	orient = temp.toUpperCase().charAt(0);
+        	orient = temp.toUpperCase().charAt(0); // change lower case v/h to upper case V/H
         }
          
      	//call player.createShip method

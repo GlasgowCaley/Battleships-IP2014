@@ -40,11 +40,11 @@ public class Game
 	private void showMenu()
 	{
 		// Display a numbered list of the user's options
+		System.out.println("Welcome to Battleships! Please type your choice (1-4)");
 		System.out.println("1. New Game");
 		System.out.println("2. Play Game");
 		System.out.println("3. View Results");
 		System.out.println("4. Quit");
-		System.out.println("Please indicate your choice by typing the appropriate number");
 
 		// Get the user's choice
 		Scanner choice = new Scanner(System.in);
@@ -102,7 +102,7 @@ public class Game
 
 			System.out.println("PLAYER "+(i+1)+" enter your name: ");
 			player[i]= new Player();
-			System.out.println("Captain " +player[i].name+" Deploy your fleet:");
+			System.out.println("Captain " +player[i].name+", it is time to deploy your fleet");
 			player[i].addFleet();
 		}
 
@@ -120,7 +120,7 @@ public class Game
 	 */
 	private void playGame()
 	{
-		System.out.println("You are playing the game. Honestly.");
+		System.out.println("The game has begun! Good luck!");
 		Scanner sc = new Scanner(System.in);  
 		int turn=0;
 		boolean win=false;
