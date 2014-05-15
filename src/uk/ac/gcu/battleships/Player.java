@@ -31,13 +31,13 @@ public class Player  {
     		boolean add = false;
     		switch(i) {
     		case 2:
-    			name = "Place your Destroyer (Size 2)";
+    			name = "Get ready to place your Destroyer (Size 2)";
     			break;
     		case 3:
-    			name = "Place your Submarine (Size 3)";
+    			name = "Get ready to place your Submarine (Size 3)";
     			break;
     		case 4:
-    			name = "Place your Battleship (Size 4)";
+    			name = "Get ready to place your Battleship (Size 4)";
     			break;
     		}
     		
