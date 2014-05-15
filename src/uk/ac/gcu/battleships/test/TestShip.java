@@ -26,8 +26,25 @@ public class TestShip {
 		assertEquals("The x axis should be 0",0,x);
 		assertEquals("The y axis should be 0",0,y);
 		assertEquals("The orientation should be horizontal",'h',orient );
-
+	}
+	
+	@Test
+	public void test_2_shipHit(){
+		Ship s = new Ship(2, 0 ,0 ,'v');
+		assertTrue("This should be true", s.testHit(0, 0));
+		assertTrue("This should be true", s.testHit(0, 1));
+		assertFalse("This should be false", s.testHit(3, 4));
+		assertFalse("This should be false", s.testHit(1, 0));
 	}
 
-	
+	@Test
+	public void test_3_sinking(){
+		Ship s = new Ship(3,0,0,'h');
+		assertTrue("This should be true", s.testHit(0, 0));
+		assertFalse("This should be false", s.isSunk());
+		assertTrue("This should be true", s.testHit(1, 0));
+		assertTrue("This should be true", s.testHit(2, 0));
+		assertTrue("This should be true", s.isSunk());
+		
+	}
 }
