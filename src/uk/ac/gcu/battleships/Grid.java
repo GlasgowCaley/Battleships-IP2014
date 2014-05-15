@@ -218,6 +218,7 @@ public class Grid {
 					System.out.println("Sunk!");
 			}
 			else
+				System.out.println("Miss!");
 				this.board[y][x] = Grid.HIT_MISSED;
 			i++;
 		}
