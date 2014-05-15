@@ -36,7 +36,7 @@ public class Ship {
 	}
 
 	//Tells whether the ship has been sunk
-	boolean isSunk(){
+	public boolean isSunk(){
 		//The ship has been sunk if no '+' is found in shipHealth
 		for(byte i = 0; i < this.shipSize; i++){
 			if(this.shipHealth[i] == '+')
