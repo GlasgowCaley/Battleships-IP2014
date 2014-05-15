@@ -236,7 +236,7 @@ public class Game
 		String temp;
      	while (!sc.hasNextInt()) {
      		System.out.println("invalid! You must enter an integer");
-     		sc.next();
+     		sc.nextLine();
      	}
          temp = sc.nextLine();
          int y =  Integer.parseInt(temp)-1;
