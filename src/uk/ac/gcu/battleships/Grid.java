@@ -219,13 +219,12 @@ public class Grid {
 					System.out.println("Sunk!");
 			}
 			else {
-				miss = true;
 				this.board[y][x] = Grid.HIT_MISSED;
 			}
 			
 			i++;
 		}
-		if(miss) 
+		if(this.returnCharacter(y, x) == Grid.HIT_MISSED) 
 			System.out.println("Miss!");
 
 		for(int j = 0;j<l;j++) {
