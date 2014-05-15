@@ -212,7 +212,7 @@ public class Grid {
 		while(!hit && i<l){
 			hit = this.ships.get(i).testHit(x, y);
 
-			if(hit || this.returnCharacter(y, x) == Grid.HIT) { 
+			if(hit ^ (this.returnCharacter(y, x) == Grid.HIT)) { 
 				this.board[y][x] = Grid.HIT;
 				System.out.println("Hit!");
 				if(this.ships.get(i).isSunk()) 
