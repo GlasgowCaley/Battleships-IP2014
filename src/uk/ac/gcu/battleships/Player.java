@@ -74,18 +74,36 @@ public class Player  {
         System.out.println("Please enter the Orientation(v or h) coordinate of ship " ); //+ count
      	input = new Scanner(System.in);
         temp = input.nextLine();
-        char orient = temp.charAt(0);
+        char orient = temp.toUpperCase().charAt(0);
+        System.out.println(orient);
         
         //Not proud of this while loop... Fix into test methods!
-        while(temp.length() != 1){
+
+        while((orient != 'H' && orient != 'V') || (temp.length() != 1)) {
         	System.out.println("That is not a valid orientation ");
+        	System.out.println("Please enter the Orientation(v or h) coordinate of ship " ); //+ count
         	temp = input.nextLine();
-        	orient = temp.charAt(0);
+        	orient = temp.toUpperCase().charAt(0);
         }
          
      	//call player.createShip method
         add  = this.createShip(b,x,vert,orient);
-        return add;         
+        return add;
     }
-    
+   
+   
+
+    public int changeX(char c){ //The method changes any letter into a number
+    	int i=0;
+    	boolean enc=false;
+    	while(i<=27 && !enc){
+    		if(c-'a'==i||c-'A'==i) 
+    			enc=true;
+    		else
+    			i++;
+    	}
+    	return i;
+    }
+
 }
+
