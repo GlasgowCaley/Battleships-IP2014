@@ -10,7 +10,7 @@ public class Player  {
 
 	public Player(){
 		Scanner sc = new Scanner(System.in);
-		name = sc.nextLine(); // Save name of the player
+		name = sc.next(); // Save name of the player
 		myGrid = new Grid();
 	}
  
@@ -65,16 +65,15 @@ public class Player  {
      	// Get orientation of ship - Horizontal or Vertical
         System.out.println("Please enter the orientation of the ship (H or V)" ); //+ count
      	input = new Scanner(System.in);
-        temp = input.nextLine(); // 
+        temp = input.next(); // 
         char orient = temp.toUpperCase().charAt(0);
-        System.out.println(orient);
         
         //Not proud of this while loop... Fix into test methods!
 
         while((orient != 'H' && orient != 'V') || (temp.length() != 1)) {
         	System.out.println("That is not a valid orientation ");
         	System.out.println("Please enter the orientation of the ship (H or V)" ); //+ count
-        	temp = input.nextLine();
+        	temp = input.next();
         	orient = temp.toUpperCase().charAt(0); // change lower case v/h to upper case V/H
         }
          
