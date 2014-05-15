@@ -77,19 +77,31 @@ public class Game
 	// Start a new game
 	private void newGame()
 	{
-		// AI or Player?
+		/* AI or Player?
+		System.out.println("Press Y if you would like to play against the AI. Otherwise press any character");
+		Scanner h = new Scanner(System.in);
+		String yn = h.next();
 		
-		// Confirmation message
-		System.out.println("New game created!");
+		if (yn == "Y") { */
+			player[0]=new Player();
+			// player[1]=new ArtificialPlayer(); }
+		 
+		
+		/*else { */
+			// Confirmation message
+			System.out.println("New game created!"); 
 
-		// Instantiate 2 Players and Create ships for both players
-		for (int i = 0; i<2; i++){
-			Game.clearConsole(); // Clear the screen
-			System.out.println("PLAYER "+(i+1)+" enter your name: "); // Player 1/2 - enter your name
-			player[i]= new Player();
-			System.out.println("Captain " +player[i].name+", it is time to deploy your fleet");
-			player[i].addFleet(); // Call addFleet to start placing boats
-		}
+			// Instantiate 2 Players and Create ships for both players
+			for (int i = 0; i<2; i++){
+				Game.clearConsole(); // Clear the screen
+				System.out.println("PLAYER "+(i+1)+" enter your name: "); // Player 1/2 - enter your name
+				player[i]= new Player();
+				System.out.println("Captain " +player[i].name+", it is time to deploy your fleet");
+				player[i].addFleet(); // Call addFleet to start placing boats
+			}
+		
+		
+		
 
 		// Create opponent grids
 		player[0].opponentGrid=player[1].myGrid;
@@ -152,8 +164,7 @@ public class Game
 	// View Results
 	private void viewResults()
 	{
-		private void viewResults()
-		{
+		
 			char[][] firstPlayerArray = this.player[1].myGrid.displayOwnGrid();
 			char[][] secondPlayerArray = this.player[2].myGrid.displayOwnGrid();
 			char[][] firstPlayerOpponentArray = this.player[1].myGrid.displayEnnemyGrid();
@@ -230,7 +241,7 @@ public class Game
 			System.out.println(res);
 		}
 
-	}
+	
 
 	// Quit the Game
 	private void quitGame()
