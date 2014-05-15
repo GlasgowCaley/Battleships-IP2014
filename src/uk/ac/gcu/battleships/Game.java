@@ -168,7 +168,7 @@ public class Game
 
 
 	/**
-	 * Method displaying a two dimensionnal array into the console.
+	 * Method displaying a two dimensional array into the console.
 	 */
 	public String display(char[][] array){
 		int k = 4;
