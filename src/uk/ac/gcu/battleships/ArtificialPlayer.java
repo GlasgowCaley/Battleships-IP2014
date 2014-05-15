@@ -5,16 +5,22 @@ import java.util.Scanner;
 
 public class ArtificialPlayer extends Player{
 
-	//private boolean hitBefore, hitLine, hitRow;
-	//private Guess lastHit;
+	private boolean hitBefore, hitLine, hitRow, back;
+	private Guess lastHit;
+	private int r,l,rl;
 
 
 	public ArtificialPlayer(){
 
-		/*hitBefore=false;
+		myGrid = new Grid();
+		hitBefore=false;
 		hitLine=false;
 		hitRow=false;
-		lastHit = new Guess(0,0);*/		
+		back = false;
+		lastHit = new Guess(0,0);
+		r=(int) Math.floor(Math.random()*2);
+		l=(int) Math.floor(Math.random()*2);
+		rl=(int) Math.floor(Math.random()*4);		
 	}
 
 	public void inputName() 
@@ -22,71 +28,152 @@ public class ArtificialPlayer extends Player{
 		this.name = "Computer";
 	}
 
+	public boolean makeGuess(Guess G){
+		char resul;
+		do{
+			if(!hitBefore){
+				G.set_X((int)(Math.random()*5));
+				G.set_Y((int)(Math.random()*5));
+			}
 
-	public boolean makeGuess(Guess g){  	
-		boolean resul;
+			else if(hitLine)
+			{
+				switch(l){
+				case 0:
+					G.set_Y(lastHit.get_Y()-1);
+					G.set_X(lastHit.get_X());
+					break;
+				case 1:
+					G.set_Y(lastHit.get_Y()+1);
+					G.set_X(lastHit.get_X());
+					break;
+				}
+			}
+			else if(hitRow)
+			{
+				switch(r){
+				case 0:
+					G.set_X(lastHit.get_X()-1);
+					G.set_Y(lastHit.get_Y());
+					break;
+				case 1:
 
-		/*if(!hitBefore){
-    			G.set_X((int)Math.random()*5);
-    			G.set_Y((int)Math.random()*5);
+					G.set_X(lastHit.get_X()+1);
+					G.set_Y(lastHit.get_Y());
+					break;
+				}
+			}
 
-    		}
-    		else if (hitLine){
+			else
+			{
+				switch(rl){
+				case 0:
+					G.set_Y(lastHit.get_Y()-1);
+					G.set_X(lastHit.get_X());
+					break;
 
-    		}
-    		else if(hitRow){
+				case 1:
+					G.set_X(lastHit.get_X()+1);
+					G.set_Y(lastHit.get_Y());
+					break;
 
-    		}
-    		else {
-    			G.set_X((int)Math.random()*5);
-    			G.set_Y((int)Math.random()*5);//Math.random()*(N-M+1)+M
-    										//N=lasHit.get_X-1
+				case 2:
+					G.set_Y(lastHit.get_Y()+1);
+					G.set_X(lastHit.get_X());
+					break;
 
-    		}
-		 */
-		//By now the computer only do randomly movements. We improve that
-		int x = (int)(Math.random()*5);
-		int y = (int)(Math.random()*5);
-		g.set_X(x);
-		g.set_Y(y);
+				case 3:
+					G.set_X(lastHit.get_X()-1);
+					G.set_Y(lastHit.get_Y());
+					break;
+				}
+				rl = (rl+1)%4;
+			}
+			//By now the computer only do randomly movements. We improve that
+			G.set_X((int)Math.random()*5);
+			G.set_Y((int)Math.random()*5);
+		}while(!(this.opponentGrid.returnCharacter(G.get_X(), G.get_Y()) == Grid.DEFAULT_CHAR));
 
+		resul=opponentGrid.checkGuessAI(G);
 
-		resul=opponentGrid.checkGuess(g);
+		switch(resul){
+		case 'h':
+			if(hitBefore)
+			{
+				if(rl == 1 || rl == 3)
+					hitRow = true;
+				else
+					hitLine = true;
+			}
+			else 
+				hitBefore = true;
+			break;
 
+		case 's':
+			hitBefore = false;
+			hitLine = false;
+			hitRow = false;
+			back = false;
+			break;
+		case 'm':
+			if (hitLine){
+				if (back){
+					hitBefore = false;
+					hitLine = false;
+					hitRow = false;
+					back = false;
+				}
+				else{
+					l=(l+1)%2;
+					back = true;
+				}
+			}
+			if (hitRow){
+				if (back){
+					hitBefore = false;
+					hitLine = false;
+					hitRow = false;
+					back = false;
+				}
+				else{
+					r = (r+1)%2;
+					back = true;
+				}
+			}
+		case 'w':
+			return true;    		
+		}
+
+		lastHit = G;
 		//hitBefore = (this.opponentGrid.returnCharacter(G.get_X(), G.get_Y()) == Grid.HIT);
 		//if (hitBefore) lastHit=G;
 
-		return resul;
+		return false;
 	}
 
-	public void addFleet(){ // Creates a fleet of boats  
+	public void addFleet(){ // Creates a fleet of boats
+
 		boolean add=false;
-		for(int i=2; i<=4; i++){    		
+
+		for(int i=2; i<=4; i++){
+
 			while(!add) {
 				add = this.addBoat(i);
 			}
-			add = false;
 		}
 	}
 
 	public boolean addBoat(int b){
 		boolean add= false;
-		int x = (int) (Math.random()*5);
-		int y = (int) (Math.random()*5);
+		int x = (int) Math.random()*4;
+		int y = (int) Math.random()*4;
 		char orient;
-		boolean orien = new Random().nextBoolean();
-		if (orien) 
-			orient='h';
-		else 
-			orient='v';
+		int orien = (int) Math.random();
+		if (orien==0) orient='h';
+		else orient='v';
 		add  = this.createShip(b,x,y,orient);
 		return add;
 	}
-
-	public boolean enterGuess(Guess g) {
-		return this.makeGuess(g);
-	}
-
 
 
 }
