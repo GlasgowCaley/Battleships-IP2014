@@ -10,7 +10,7 @@ public class Ship {
 	public char character;					//Type of ship (s,d or b)
 
 	//Used by crew to ponder if their ship has been hit.
-	boolean testHit(int x_guess, int y_guess){
+	public boolean testHit(int x_guess, int y_guess){
 		for(byte i = 0; i < this.shipSize; i++){
 			if(this.shipCoordinates[i][0] == x_guess && this.shipCoordinates[i][1] == y_guess){
 				this.markHit(i);
