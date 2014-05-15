@@ -17,6 +17,8 @@ public class Game
     * Creates an object of type Game
     * Calls method showMenu
     */
+	private Player []player=new Player[2];
+	
     public Game() 
     {
         showMenu();
@@ -89,19 +91,19 @@ public class Game
     	// Confirmation message
         System.out.println("New game created");
         
-        // Instantiate 2 Players
-        Player player1 = new Player();
-        Player player2 = new Player();
-        
-        // Create ships for both players
-        System.out.println("Player 1 please place your ships");
-        player1.addFleet();
-        System.out.println("Player 2 please place your ships");
-        player2.addFleet();
+        // Instantiate 2 Players and Create ships for both players
+        for (int i = 0; i<2; i++){
+            System.out.println("PLAYER "+i+" enter your name: ");
+        	player[i]= new Player();
+            System.out.println("Captain " +player[i].name+" Deploy your fleet:");
+        	player[i].addFleet();
+        }
         
         // Create opponent grids
-        player1.opponentGrid=player2.myGrid;
-        player2.opponentGrid=player1.myGrid;
+        player[0].opponentGrid=player[1].myGrid;
+        player[1].opponentGrid=player[0].myGrid;
+        
+        this.playGame();
         		
     }
 
@@ -112,6 +114,38 @@ public class Game
     private void playGame()
     {
         System.out.println("You are playing the game. Honestly.");
+        Scanner sc = new Scanner(System.in);  
+        int turn=0;
+        Guess g= new Guess(0,0);
+        boolean win=false;
+        String x;
+        int y;
+        
+        do{
+        	System.out.println("Captain " +player[turn].name);        	
+        	display(player[turn].myGrid.displayOwnGrid());
+        	display(player[turn].opponentGrid.displayEnnemyGrid());
+            System.out.println("Enter your guess:  ");
+            //Read the guess
+            x = sc.next();
+            y = sc.nextInt();
+            g.set_X(x.charAt(0));
+            g.set_Y(y);
+            win=player[turn].makeGuess(g);
+            
+            if(!win) turn = (turn+1)%2;
+
+        }while(!win);
+        //loop for sunk!=3
+        //turn = 0
+        //display grids
+        //Player1 make a guess : read the guess and calls makeGuess
+        //display result of guess
+        //turn = (turn+1)%2
+        //display player 2 grid
+        //player2 guess
+        //display result turn%2
+
     }
 
     /**
@@ -133,5 +167,48 @@ public class Game
     }
 
     
+
+/**
+ * Method displaying a two dimensionnal array into the console.
+ */
+public String display(char[][] array){
+	int k = 4;
+	String format = "%-3s";
+	String limit = "    +"+new String(new char[array.length]).replace("\0","---+");
+	//StringBuffer r =new StringBuffer("    ");
+	String deca = new String(new char[k]).replace("\0"," ");
+	String res = deca;
+	char row = 'A';
+	int line = 1;
+
+	//loop to display row letter
+	for(int i = 0; i<array.length;i++){
+		res+= "  "+row+" ";	 	 
+		row++;
+	}
+	res+= System.getProperty("line.separator");
+	res+= limit;
+
+	//loop to display line number and each character
+	for(int i = 0; i<array.length;i++){
+		res+= System.getProperty("line.separator");
+		res += " "+String.format(format, line);
+		
+		for(int j = 0; j<array[i].length;j++) {
+			res+= "| ";
+			res += array[i][j]+" ";
+		}
+		res+= "|";
+		res+= System.getProperty("line.separator");
+		res+= limit;
+		line++;
+	}
+
+	// Word wrap
+	res+= System.getProperty("line.separator");
+
+	return res;
 }
 
+
+}
