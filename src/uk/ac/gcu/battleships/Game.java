@@ -13,14 +13,20 @@ import java.util.Scanner;
 
 public class Game
 {
+	
+	
 	/**
 	 * Creates an object of type Game
 	 * Calls method showMenu
 	 */
 	private Player []player=new Player[2];
+	
+	
+	private Guess g;
 
 	public Game() 
 	{
+		this.g= new Guess(0,0);
 		showMenu();
 	}
 
@@ -93,7 +99,7 @@ public class Game
 
 		// Instantiate 2 Players and Create ships for both players
 		for (int i = 0; i<2; i++){
-			System.out.println("PLAYER "+i+" enter your name: ");
+			System.out.println("PLAYER "+(i+1)+" enter your name: ");
 			player[i]= new Player();
 			System.out.println("Captain " +player[i].name+" Deploy your fleet:");
 			player[i].addFleet();
@@ -116,22 +122,23 @@ public class Game
 		System.out.println("You are playing the game. Honestly.");
 		Scanner sc = new Scanner(System.in);  
 		int turn=0;
-		Guess g= new Guess(0,0);
 		boolean win=false;
 		int x;
 		int y;
 
 		do{
 			System.out.println("Captain " +player[turn].name);        	
-			display(player[turn].myGrid.displayOwnGrid());
-			display(player[turn].opponentGrid.displayEnnemyGrid());
+			System.out.println(display(player[turn].myGrid.displayOwnGrid()));
+			System.out.println(display(player[turn].opponentGrid.displayEnnemyGrid()));
 			System.out.println("Enter your guess:  ");
 			// Read the guess
+			System.out.println("Enter X coordinate :");
 			x = Game.readXAxis();
-			g.set_X(x);
+			this.g.set_X(x);
 		
+			System.out.println("Enter Y coordinate :");
 			y = Game.readYAxis();
-			g.set_Y(y);
+			this.g.set_Y(y);
 			
 			win=player[turn].makeGuess(g);
 			if(!win) turn = (turn+1)%2;
@@ -247,8 +254,6 @@ public class Game
 		return i;
 	}
 	
+	//public void setGuess() {} 
 	
-	
-
-
 }
