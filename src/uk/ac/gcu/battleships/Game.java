@@ -29,10 +29,9 @@ public class Game
 	// Draw menu
 	private void showMenu()
 	{	
-		System.out.println("\n\tBATTLESHIPS");
-		System.out.println("\t-----------\n");
-									                                                                                     
-		// Display a numbered list of the user's options
+		// Awesome ASCII Art
+		System.out.println("  ____       _______ _______ _      ______  _____ _    _ _____ _____   _____ _ \r\n |  _ \\   /\\|__   __|__   __| |    |  ____|/ ____| |  | |_   _|  __ \\ / ____| |\r\n | |_) | /  \\  | |     | |  | |    | |__  | (___ | |__| | | | | |__) | (___ | |\r\n |  _ < / /\\ \\ | |     | |  | |    |  __|  \\___ \\|  __  | | | |  ___/ \\___ \\| |\r\n | |_) / ____ \\| |     | |  | |____| |____ ____) | |  | |_| |_| |     ____) |_|\r\n |____/_/    \\_\\_|     |_|  |______|______|_____/|_|  |_|_____|_|    |_____/(_)\r\n                                                                               \r\n                                                                               ");
+		// Display menu
 		System.out.println("Please type your choice (1-3)");
 		System.out.println("\t1. Start a New Game");
 		System.out.println("\t2. View Results");
