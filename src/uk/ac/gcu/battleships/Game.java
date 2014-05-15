@@ -28,12 +28,15 @@ public class Game
 
 	// Draw menu
 	private void showMenu()
-	{
+	{	
+		System.out.println("\n\tBATTLESHIPS");
+		System.out.println("\t-----------\n");
+									                                                                                     
 		// Display a numbered list of the user's options
-		System.out.println("Welcome to Battleships! Please type your choice (1-3)");
-		System.out.println("1. Start a New Game");
-		System.out.println("2. View Results");
-		System.out.println("3. Exit the Game");
+		System.out.println("Please type your choice (1-3)");
+		System.out.println("\t1. Start a New Game");
+		System.out.println("\t2. View Results");
+		System.out.println("\t3. Exit the Game");
 
 		// Get the user's choice
 		Scanner choice = new Scanner(System.in);
