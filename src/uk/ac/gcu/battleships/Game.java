@@ -148,6 +148,8 @@ public class Game
 			sc.nextLine();
 			
 		}while(!win);
+		
+		System.out.println(player[turn].name);
 	}
 
 	/**
