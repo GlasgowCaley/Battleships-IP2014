@@ -17,4 +17,10 @@ public class Guess {
 	public int get_Y(){
 		return y_coord;
 	}
+	public void set_X(int x){
+		x_coord=x;
+	}
+	public void set_Y(int y){
+		y_coord=y;
+	}
 }
