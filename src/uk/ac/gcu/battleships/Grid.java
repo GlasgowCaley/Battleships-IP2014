@@ -213,9 +213,10 @@ public class Grid {
 			hit = this.ships.get(i).testHit(x, y);
 			if(hit && (this.returnCharacter(y, x) != Grid.HIT)) { 
 				this.board[y][x] = Grid.HIT;
-				System.out.println("You have hit a Ship!");
 				if(this.ships.get(i).isSunk()) 
-					System.out.println("Sunk!");
+					System.out.println("You have hit and sunk a Ship!");
+				else
+					System.out.println("You have hit a Ship!");
 			}
 			else {
 				this.board[y][x] = Grid.HIT_MISSED;

@@ -117,7 +117,7 @@ public class Game
 				sc.nextLine();
 		}
 			while(!win); // while the game is not won
-		
+			System.out.println(player[turn].name+" wins the game!");
 			this.viewResults();		
 		
 	}
@@ -185,7 +185,7 @@ public class Game
 		}
 
 
-		String res = " Results\n" ;
+		String res = "\tResults\n" ;
 		res += "\nThe previous game was won by: "+ winner+"\n"; // Should probably use the code above to display winner
 		res+= "And the looser is" + looser +"\n";
 
