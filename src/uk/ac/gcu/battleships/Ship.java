@@ -1,12 +1,12 @@
 package uk.ac.gcu.battleships;
 
 	public class Ship {
-		int shipSize;				//Size of the ship 2, 3 or 4
-		int shipPosition_x;			//Ship start position on board; x, y
-		int shipPosition_y;
-		char[] shipHealth;			//Ship health. bow, rear, stern
-		int[][] shipCoordinates;		//Every coordinate in which the ship exists. X,Y
-		char shipOrientation;			//Input orientation on creation Note to self: catch exceptions
+		public int shipSize;				//Size of the ship 2, 3 or 4
+		public int shipPosition_x;			//Ship start position on board; x, y
+		public int shipPosition_y;
+		public char[] shipHealth;			//Ship health. bow, rear, stern
+		public int[][] shipCoordinates;		//Every coordinate in which the ship exists. X,Y
+		public char shipOrientation;			//Input orientation on creation Note to self: catch exceptions
 		
 		//Used by crew to ponder if their ship has been hit.
 		boolean testHit(int x_guess, int y_guess){
