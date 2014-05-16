@@ -207,32 +207,32 @@ public class Game
 
 
 
-		String res = "\tResults\n" ;
+		String res = "\n --- Results ---\n" ;
 		res += "\nThe previous game was won by: "+ winner+"\n"; // Should probably use the code above to display winner
-		res+= "And the looser is" + looser +"\n";
+		res+= "And the looser is: " + looser +"\n\n";
 
 		if(!winnerOrLooser){
 			res += winner +"\n\n"; 
-			res += " Numbers of your shot which hit the opponent : " + nbHitByPlayerOne ;
-			res += " \nNumbers of your shot which missed the opponent : " + nbMissByPlayerOne ;
-			res += " \nNumbers of your ships which sunk : " + nbShipSunkPlayerOne;
+			res += "Numbers of your shot which hit the opponent: " + nbHitByPlayerOne ;
+			res += "nNumbers of your shot which missed the opponent: " + nbMissByPlayerOne ;
+			res += "\nNumbers of your ships which sunk: " + nbShipSunkPlayerOne;
 
 
 			res += looser+"\n\n"; 
-			res += " \nNumbers of your shot which hit the opponent : " + nbHitByPlayerTwo ;
-			res += " \nNumbers of your shot which missed the opponent : " + nbMissByPlayerTwo ;
-			res += " \nNumbers of your ships which sunk : " + nbShipSunkPlayerTwo;
+			res += "Numbers of your shot which hit the opponent: " + nbHitByPlayerTwo ;
+			res += "\nNumbers of your shot which missed the opponent: " + nbMissByPlayerTwo ;
+			res += "\nNumbers of your ships which sunk: " + nbShipSunkPlayerTwo;
 		}else{
 			res += winner+"\n\n"; 
-			res += " Numbers of your shot which hit the opponent : " + nbHitByPlayerTwo ;
-			res += " \nNumbers of your shot which missed the opponent : " + nbMissByPlayerTwo ;
-			res += " \nNumbers of your ships which sunk : " + nbShipSunkPlayerTwo;
+			res += "Numbers of your shot which hit the opponent: " + nbHitByPlayerTwo ;
+			res += "\nNumbers of your shot which missed the opponent: " + nbMissByPlayerTwo ;
+			res += "\nNumbers of your ships which sunk: " + nbShipSunkPlayerTwo;
 
 
 			res += looser+"\n\n"; 
-			res += " \nNumbers of your shot which hit the opponent : " + nbHitByPlayerOne ;
-			res += " \nNumbers of your shot which missed the opponent : " + nbMissByPlayerOne ;
-			res += " \nNumbers of your ships which sunk : " + nbShipSunkPlayerOne;
+			res += " \nNumbers of your shot which hit the opponent: " + nbHitByPlayerOne ;
+			res += " \nNumbers of your shot which missed the opponent: " + nbMissByPlayerOne ;
+			res += " \nNumbers of your ships which sunk: " + nbShipSunkPlayerOne;
 		}
 
 		System.out.println(res);
