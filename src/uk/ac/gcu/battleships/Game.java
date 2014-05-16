@@ -81,12 +81,12 @@ public class Game
 		System.out.println("Press Y if you would like to play against the AI. Otherwise press any character");
 		Scanner h = new Scanner(System.in);
 		String yn = h.next();
-		
+
 		if (yn == "Y") { 
 			player[0]=new Player();
 			player[1]=new ArtificialPlayer(); }
-		 
-		
+
+
 		else { 
 			// Confirmation message
 			System.out.println("New game created!"); 
@@ -99,30 +99,30 @@ public class Game
 				System.out.println("Captain " +player[i].name+", it is time to deploy your fleet");
 				player[i].addFleet(); // Call addFleet to start placing boats
 			}
-		
-		
-		
 
-		// AI or Player?
 
-		// Confirmation message
-		System.out.println("New game created!");
 
-		// Instantiate 2 Players and Create ships for both players
-		for (int i = 0; i<2; i++){
-			Game.clearConsole(); // Clear the screen
-			System.out.print("Player "+(i+1)+": "); // Player 1/2 - enter your name
-			player[i]= new Player();
-			System.out.println("\nCaptain " +player[i].name+", it is time to deploy your fleet!\n");
-			player[i].addFleet(); // Call addFleet to start placing boats
-		}
 
-		// Create opponent grids
-		player[0].opponentGrid=player[1].myGrid;
-		player[1].opponentGrid=player[0].myGrid;
+			// AI or Player?
 
-		// Start to play the game
-		this.playGame();
+			// Confirmation message
+			System.out.println("New game created!");
+
+			// Instantiate 2 Players and Create ships for both players
+			for (int i = 0; i<2; i++){
+				Game.clearConsole(); // Clear the screen
+				System.out.print("Player "+(i+1)+": "); // Player 1/2 - enter your name
+				player[i]= new Player();
+				System.out.println("\nCaptain " +player[i].name+", it is time to deploy your fleet!\n");
+				player[i].addFleet(); // Call addFleet to start placing boats
+			}
+
+			// Create opponent grids
+			player[0].opponentGrid=player[1].myGrid;
+			player[1].opponentGrid=player[0].myGrid;
+
+			// Start to play the game
+			this.playGame();
 		}
 
 	}
@@ -139,14 +139,14 @@ public class Game
 
 		do {
 			win = player[turn].enterGuess(g);
-		
+
 			if(!win) turn = (turn+1)%2;
-				sc.nextLine();
+			sc.nextLine();
 		}
-			while(!win); // while the game is not won
-			System.out.println(player[turn].name+" wins the game!");
-			this.viewResults();		
-		
+		while(!win); // while the game is not won
+		System.out.println(player[turn].name+" wins the game!");
+		this.viewResults();		
+
 	}
 
 
@@ -154,10 +154,8 @@ public class Game
 
 	private void viewResults()
 	{
-		char[][] firstPlayerArray = this.player[0].myGrid.displayOwnGrid();
-		char[][] secondPlayerArray = this.player[1].myGrid.displayOwnGrid();
-		char[][] firstPlayerOpponentArray = this.player[0].myGrid.displayEnnemyGrid();
-		char[][] secondPlayerOpponentArray = this.player[1].myGrid.displayEnnemyGrid();
+		char[][] firstPlayerOpponentArray = this.player[1].myGrid.displayEnnemyGrid();
+		char[][] secondPlayerOpponentArray = this.player[0].myGrid.displayEnnemyGrid();
 		int nbHitByPlayerOne = 0 ;
 		int nbHitByPlayerTwo = 0 ;
 		int nbMissByPlayerOne = 0 ;
@@ -166,19 +164,25 @@ public class Game
 		int nbShipSunkPlayerTwo = 0 ;
 
 		//first player stats
-		for ( int i = 0 ; i < firstPlayerArray.length;i++){
-			for ( int j = 0 ; j < firstPlayerArray[i].length;j++){
-				nbShipSunkPlayerOne = 3 - this.player[0].myGrid.getShips().size();
+		for( int k = 0 ;k < this.player[0].myGrid.getShips().size() ; k++){
+			if (this.player[0].myGrid.getShips().get(k).isSunk())
+				nbShipSunkPlayerOne ++;
+		}
 
+		for ( int i = 0 ; i < firstPlayerOpponentArray.length;i++){
+			for ( int j = 0 ; j < firstPlayerOpponentArray[i].length;j++){
+				if ( firstPlayerOpponentArray[i][j] == Grid.HIT)
+					nbHitByPlayerOne +=1;
+				else if ( firstPlayerOpponentArray[i][j] == Grid.HIT_MISSED)
+					nbMissByPlayerOne +=1;
 			}
-		} 
+		}
+
 
 		//second player stats
-		for ( int i = 0 ; i < secondPlayerArray.length;i++){
-			for ( int j = 0 ; j < firstPlayerArray[i].length;j++){
-				nbShipSunkPlayerTwo = 3 - this.player[1].myGrid.getShips().size();
-
-			}
+		for( int k = 0 ;k < this.player[1].myGrid.getShips().size() ; k++){
+			if (this.player[1].myGrid.getShips().get(k).isSunk())
+				nbShipSunkPlayerTwo ++;
 		}
 
 		for ( int i = 0 ; i < secondPlayerOpponentArray.length;i++){
@@ -202,24 +206,38 @@ public class Game
 		}
 
 
+
 		String res = "\tResults\n" ;
 		res += "\nThe previous game was won by: "+ winner+"\n"; // Should probably use the code above to display winner
 		res+= "And the looser is" + looser +"\n";
 
-		res += "Stats Player 1\n\n"; 
-		res += " Numbers of your shot which hit the opponent : " + nbHitByPlayerOne ;
-		res += " \nNumbers of your shot which missed the opponent : " + nbMissByPlayerOne ;
-		res += " \nNumbers of your ships which sunk : " + nbShipSunkPlayerOne;
+		if(!winnerOrLooser){
+			res += winner +"\n\n"; 
+			res += " Numbers of your shot which hit the opponent : " + nbHitByPlayerOne ;
+			res += " \nNumbers of your shot which missed the opponent : " + nbMissByPlayerOne ;
+			res += " \nNumbers of your ships which sunk : " + nbShipSunkPlayerOne;
 
 
-		res += "Stats Player 1\n\n"; 
-		res += " \nNumbers of your shot which hit the opponent : " + nbHitByPlayerTwo ;
-		res += " \nNumbers of your shot which missed the opponent : " + nbMissByPlayerTwo ;
-		res += " \nNumbers of your ships which sunk : " + nbShipSunkPlayerTwo;
+			res += looser+"\n\n"; 
+			res += " \nNumbers of your shot which hit the opponent : " + nbHitByPlayerTwo ;
+			res += " \nNumbers of your shot which missed the opponent : " + nbMissByPlayerTwo ;
+			res += " \nNumbers of your ships which sunk : " + nbShipSunkPlayerTwo;
+		}else{
+			res += winner+"\n\n"; 
+			res += " Numbers of your shot which hit the opponent : " + nbHitByPlayerTwo ;
+			res += " \nNumbers of your shot which missed the opponent : " + nbMissByPlayerTwo ;
+			res += " \nNumbers of your ships which sunk : " + nbShipSunkPlayerTwo;
+
+
+			res += looser+"\n\n"; 
+			res += " \nNumbers of your shot which hit the opponent : " + nbHitByPlayerOne ;
+			res += " \nNumbers of your shot which missed the opponent : " + nbMissByPlayerOne ;
+			res += " \nNumbers of your ships which sunk : " + nbShipSunkPlayerOne;
+		}
 
 		System.out.println(res);
-			}
-	
+	}
+
 
 	// Quit the Game
 	private void quitGame()
