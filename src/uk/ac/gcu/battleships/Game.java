@@ -77,17 +77,17 @@ public class Game
 	// Start a new game
 	private void newGame()
 	{
-		/* AI or Player?
+		// AI or Player?
 		System.out.println("Press Y if you would like to play against the AI. Otherwise press any character");
 		Scanner h = new Scanner(System.in);
 		String yn = h.next();
 		
-		if (yn == "Y") { */
+		if (yn == "Y") { 
 			player[0]=new Player();
-			// player[1]=new ArtificialPlayer(); }
+			player[1]=new ArtificialPlayer(); }
 		 
 		
-		/*else { */
+		else { 
 			// Confirmation message
 			System.out.println("New game created!"); 
 
@@ -123,6 +123,7 @@ public class Game
 
 		// Start to play the game
 		this.playGame();
+		}
 
 	}
 
