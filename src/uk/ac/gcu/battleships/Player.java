@@ -30,6 +30,7 @@ public class Player  {
 
 
 	public boolean makeGuess(Guess G){
+		this.enterGuess(G);
 		return opponentGrid.checkGuess(G);
 	}
 
@@ -92,7 +93,7 @@ public class Player  {
 	}
 
 
-	public boolean enterGuess(Guess g) {
+	public void enterGuess(Guess g) {
 		String dec = "      ";
 		Scanner sc = new Scanner(System.in);
 		Game.clearConsole(); // Empty the screen		
@@ -125,7 +126,7 @@ public class Player  {
 
 			}
 		}
-		return this.makeGuess(g);
+		
 	}
 
 }
