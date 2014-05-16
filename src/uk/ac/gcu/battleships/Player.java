@@ -66,11 +66,11 @@ public class Player  {
 
 		// Get starting position of ship
 		char c = 0 ;		
-		System.out.println("Please enter the horizontal (A to E) coordinate of ship " ); //+ count
-		int x = Game.readXAxis(); // Get X Axis value, save to x
-
-		System.out.println("Please enter the vertical (1 to 5) coordinate of ship " ); //+ count
-		int y = Game.readYAxis(); // Get Y Axis value, save to y
+		String letter = "Please enter the horizontal (A to E) coordinate of ship"; //+ count
+		String number = "Please enter the vertical (1 to 5) coordinate of ship";
+		
+		int x = Game.readXAxis(letter); // Get X Axis value, save to x
+		int y = Game.readYAxis(number); // Get Y Axis value, save to y
 
 		// Get orientation of ship - Horizontal or Vertical
 		System.out.println("Please enter the orientation of the ship (H or V)" ); //+ count
@@ -80,7 +80,7 @@ public class Player  {
 
 		//Not proud of this while loop... Fix into test methods!
 
-		while((orient != 'H' && orient != 'V') || (temp.length() != 1)) {
+		while((orient != 'H' && orient != 'V') && (temp.length() != 1)) {
 			System.out.println("That is not a valid orientation ");
 			System.out.println("Please enter the orientation of the ship (H or V)" ); //+ count
 			temp = input.next();
@@ -108,12 +108,12 @@ public class Player  {
 
 		while(!same) {
 			// 	Read the guess
-			System.out.print("Enter the letter coordinate : ");
-			int x = Game.readXAxis(); // Call readXAxis
+			String letter = "Enter the letter coordinate : ";
+			String number = "Enter the number coordinate : ";			
+			int x = Game.readXAxis(letter); // Call readXAxis
 			g.set_X(x);
 
-			System.out.print("Enter the number coordinate : ");
-			int y = Game.readYAxis(); // Call readYAxis
+			int y = Game.readYAxis(number); // Call readYAxis
 			g.set_Y(y);
 			char c = this.opponentGrid.returnCharacter(y, x);
 
