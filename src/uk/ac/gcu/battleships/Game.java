@@ -205,18 +205,18 @@ public class Game
 
 		if(!winnerOrLooser){
 			res += winner +"\n\n"; 
-			res += "Numbers of your shot which hit the opponent: " + nbHitByPlayerOne ;
-			res += "nNumbers of your shot which missed the opponent: " + nbMissByPlayerOne ;
+			res += "\nNumbers of your shot which hit the opponent: " + nbHitByPlayerOne ;
+			res += "\nNumbers of your shot which missed the opponent: " + nbMissByPlayerOne ;
 			res += "\nNumbers of your ships which sunk: " + nbShipSunkPlayerOne;
 
 
 			res += looser+"\n\n"; 
-			res += "Numbers of your shot which hit the opponent: " + nbHitByPlayerTwo ;
+			res += "\nNumbers of your shot which hit the opponent: " + nbHitByPlayerTwo ;
 			res += "\nNumbers of your shot which missed the opponent: " + nbMissByPlayerTwo ;
 			res += "\nNumbers of your ships which sunk: " + nbShipSunkPlayerTwo;
 		}else{
 			res += winner+"\n\n"; 
-			res += "Numbers of your shot which hit the opponent: " + nbHitByPlayerTwo ;
+			res += "\nNumbers of your shot which hit the opponent: " + nbHitByPlayerTwo ;
 			res += "\nNumbers of your shot which missed the opponent: " + nbMissByPlayerTwo ;
 			res += "\nNumbers of your ships which sunk: " + nbShipSunkPlayerTwo;
 
