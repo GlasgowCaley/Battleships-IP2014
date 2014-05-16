@@ -78,54 +78,44 @@ public class Game
 	private void newGame()
 	{
 		// AI or Player?
-		System.out.println("Press Y if you would like to play against the AI. Otherwise press any character");
-		Scanner h = new Scanner(System.in);
-		String yn = h.next();
-		
-		if (yn == "Y") { 
-			player[0]=new Player();
-			player[1]=new ArtificialPlayer(); }
-		 
-		
-		else { 
-			// Confirmation message
-			System.out.println("New game created!"); 
+		System.out.println("Press Y if you would like to play against the AI. Otherwise press any character");		
+		Scanner sc = new Scanner(System.in);
+		String yn = sc.next();
+		char c = yn.toUpperCase().charAt(0);
+		int nb = 2;
 
-			// Instantiate 2 Players and Create ships for both players
-			for (int i = 0; i<2; i++){
-				Game.clearConsole(); // Clear the screen
-				System.out.println("PLAYER "+(i+1)+" enter your name: "); // Player 1/2 - enter your name
-				player[i]= new Player();
-				System.out.println("Captain " +player[i].name+", it is time to deploy your fleet");
-				player[i].addFleet(); // Call addFleet to start placing boats
-			}
-		
-		
-		
-
-		// AI or Player?
-
-		// Confirmation message
-		System.out.println("New game created!");
-
-		// Instantiate 2 Players and Create ships for both players
-		for (int i = 0; i<2; i++){
-			Game.clearConsole(); // Clear the screen
-			System.out.print("Player "+(i+1)+": "); // Player 1/2 - enter your name
-			player[i]= new Player();
-			System.out.println("\nCaptain " +player[i].name+", it is time to deploy your fleet!\n");
-			player[i].addFleet(); // Call addFleet to start placing boats
+		switch(c) {
+		case 'Y' :
+			//player[0] = new Player();
+			player[1] = new ArtificialPlayer();
+			player[1].addFleet();
+			nb = 1;
+			break;
 		}
 
+		// Confirmation message
+		System.out.println("New game created!"); 
+
+		// Instantiate 2 Players and Create ships for both players
+		for (int i = 0; i<nb; i++){
+			Game.clearConsole(); // Clear the screen
+			System.out.print("Player "+(i+1)+", enter your name: "); // Player 1/2 - enter your name
+			player[i]= new Player();
+			
+			if(nb == 2) // if 2 players
+					System.out.println("Captain " +player[i].name+", it is time to deploy your fleet");
+			
+			player[i].addFleet(); // Call addFleet to start placing boats
+		}
+		System.out.println(player[1].myGrid);
 		// Create opponent grids
 		player[0].opponentGrid=player[1].myGrid;
 		player[1].opponentGrid=player[0].myGrid;
 
 		// Start to play the game
 		this.playGame();
-		}
-
 	}
+
 
 	// Play Game
 	private void playGame()
@@ -138,15 +128,15 @@ public class Game
 		int y; // y coordinate
 
 		do {
-			win = player[turn].enterGuess(g);
-		
+			win = player[turn].makeGuess(g);
+
 			if(!win) turn = (turn+1)%2;
-				sc.nextLine();
+			sc.nextLine();
 		}
-			while(!win); // while the game is not won
-			System.out.println(player[turn].name+" wins the game!");
-			this.viewResults();		
-		
+		while(!win); // while the game is not won
+		System.out.println(player[turn].name+" wins the game!");
+		this.viewResults();		
+
 	}
 
 
@@ -218,8 +208,8 @@ public class Game
 		res += " \nNumbers of your ships which sunk : " + nbShipSunkPlayerTwo;
 
 		System.out.println(res);
-			}
-	
+	}
+
 
 	// Quit the Game
 	private void quitGame()
@@ -227,8 +217,6 @@ public class Game
 		System.out.println("Thanks for playing!");
 		System.exit(0);
 	}
-
-
 
 	/**
 	 * Method displaying a two dimensional array into the console.
@@ -279,12 +267,12 @@ public class Game
 	public static int readXAxis() {
 		Scanner sc = new Scanner(System.in);
 		String temp = sc.next();
-		char c = temp.charAt(0);
+		char c = temp.toUpperCase().charAt(0);
 
-		while ((int)c < 65 || (int)c > 74 && (int)c < 97 || (int)c > 106 || temp.length() != 1 || temp.equals("")){
+		while ((int)c < 65 || (int)c > 74 &&  (temp.length() != 1 || temp.equals(""))){
 			System.out.println("This is not a valid character");
 			temp = sc.next();
-			c = temp.charAt(0);
+			c = temp.toUpperCase().charAt(0);
 		}		
 		int x = Game.changeX(c);
 		return x;
