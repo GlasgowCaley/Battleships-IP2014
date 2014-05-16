@@ -78,16 +78,18 @@ public class Game
 	private void newGame()
 	{
 		// AI or Player?
-		System.out.println("IA in working !");
-		System.out.println("Press Y if you would like to play against the AI. Otherwise press any character");		
+		System.out.print("\nIA in working !");
+		System.out.println(" You want play :");		
+		System.out.println("\t1. Against a player (default)");
+		System.out.println("\t2. Against the computer");
 		Scanner sc = new Scanner(System.in);
-		String yn = sc.next();
+		String yn = sc.nextLine();
 		char c = yn.toUpperCase().charAt(0);
 		int nb = 2;
 
 		switch(c) {
-		case 'Y' :
-			
+		case '2':
+
 			//player[0] = new Player();
 			player[1] = new ArtificialPlayer();
 			player[1].addFleet();
@@ -103,10 +105,10 @@ public class Game
 			Game.clearConsole(); // Clear the screen
 			System.out.print("Player "+(i+1)+", enter your name: "); // Player 1/2 - enter your name
 			player[i]= new Player();
-			
+
 			if(nb == 2) // if 2 players
-					System.out.println("Captain " +player[i].name+", it is time to deploy your fleet\n");
-			
+				System.out.println("Captain " +player[i].name+", it is time to deploy your fleet\n");
+
 			player[i].addFleet(); // Call addFleet to start placing boats
 		}
 		System.out.println(player[1].myGrid);
@@ -284,15 +286,21 @@ public class Game
 	 * Method which enables to read the X axis.
 	 * @return the integer for the X axis.
 	 */
-	public static int readXAxis() {
+	public static int readXAxis(String msg) {
+		System.out.println(msg);
 		Scanner sc = new Scanner(System.in);
 		String temp = sc.next();
 		char c = temp.toUpperCase().charAt(0);
 
-		while ((int)c < 65 || (int)c > 74 &&  (temp.length() != 1 || temp.equals(""))){
-			System.out.println("This is not a valid character");
+		boolean nLetter = ((int)c < 65) || ((int)c > 74);
+		boolean other = temp.length() > 1 || temp.equals("");
+
+		while (nLetter || other){			
+			System.out.println("This is not a valid input :");
 			temp = sc.next();
 			c = temp.toUpperCase().charAt(0);
+			nLetter = ((int)c < 65) || ((int)c > 74);
+			other = temp.length() > 1 || temp.equals("");
 		}		
 		int x = Game.changeX(c);
 		return x;
@@ -302,7 +310,8 @@ public class Game
 	 * Method which enables to read the Y axis.
 	 * @return the integer for the Y axis.
 	 */
-	public static int readYAxis() {
+	public static int readYAxis(String msg) {
+		System.out.println(msg);
 		Scanner sc = new Scanner(System.in);
 		String temp;
 		while (!sc.hasNextInt()) {
@@ -333,5 +342,35 @@ public class Game
 			System.out.println(System.getProperty("line.separator"));
 		}
 	}
+	
+	
+	public static void enterGuess() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the couple of coordinate (like 'A1'): ");
+		String s = sc.nextLine().toUpperCase();
+		int first = 0,two = 0;
+		
+		if(s.length() == 2) {
+			first = (int)s.charAt(0);
+			two = (int)s.charAt(1);
+		}
+		
+		boolean ok = (first < 65) || (first > 74) && (two <49 || two >57); 
+		
+
+		while(s.length() != 2 || ok) {
+			System.out.println("Incorrect input. Retry (like 'A1'): ");
+			s = sc.nextLine().toUpperCase();
+			if(s.length() == 2) {
+				first = (int)s.charAt(0);
+				two = (int)s.charAt(1);
+			}
+			ok = (first < 65) || (first > 74) && (two <49 || two >57);			
+		}
+		System.out.println((char)first);
+		System.out.println((char)two);
+	}
+	
+	
 
 }
