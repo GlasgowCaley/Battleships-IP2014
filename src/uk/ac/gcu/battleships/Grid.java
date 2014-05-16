@@ -135,7 +135,7 @@ public class Grid {
 			this.addShipIntoGrid(s);
 		}
 		else {
-			System.out.println("***** YOU CAN'T ADD THIS SHIP AT THE DEFINED POSITION *****");
+			System.out.println(" /!\\You can't addd this ship at the defined position.\n");
 		}
 		return add ;
 	}
