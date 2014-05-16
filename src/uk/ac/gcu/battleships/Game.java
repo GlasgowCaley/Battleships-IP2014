@@ -78,6 +78,7 @@ public class Game
 	private void newGame()
 	{
 		// AI or Player?
+		System.out.println("IA in working !");
 		System.out.println("Press Y if you would like to play against the AI. Otherwise press any character");		
 		Scanner sc = new Scanner(System.in);
 		String yn = sc.next();
@@ -86,6 +87,7 @@ public class Game
 
 		switch(c) {
 		case 'Y' :
+			
 			//player[0] = new Player();
 			player[1] = new ArtificialPlayer();
 			player[1].addFleet();
@@ -103,7 +105,7 @@ public class Game
 			player[i]= new Player();
 			
 			if(nb == 2) // if 2 players
-					System.out.println("Captain " +player[i].name+", it is time to deploy your fleet");
+					System.out.println("Captain " +player[i].name+", it is time to deploy your fleet\n");
 			
 			player[i].addFleet(); // Call addFleet to start placing boats
 		}
