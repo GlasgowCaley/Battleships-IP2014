@@ -100,23 +100,6 @@ public class Game
 				player[i].addFleet(); // Call addFleet to start placing boats
 			}
 
-
-
-
-			// AI or Player?
-
-			// Confirmation message
-			System.out.println("New game created!");
-
-			// Instantiate 2 Players and Create ships for both players
-			for (int i = 0; i<2; i++){
-				Game.clearConsole(); // Clear the screen
-				System.out.print("Player "+(i+1)+": "); // Player 1/2 - enter your name
-				player[i]= new Player();
-				System.out.println("\nCaptain " +player[i].name+", it is time to deploy your fleet!\n");
-				player[i].addFleet(); // Call addFleet to start placing boats
-			}
-
 			// Create opponent grids
 			player[0].opponentGrid=player[1].myGrid;
 			player[1].opponentGrid=player[0].myGrid;
