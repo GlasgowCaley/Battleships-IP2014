@@ -77,7 +77,6 @@ public class Game
 	// Start a new game
 	private void newGame()
 	{
-<<<<<<< HEAD
 		/* AI or Player?
 		System.out.println("Press Y if you would like to play against the AI. Otherwise press any character");
 		Scanner h = new Scanner(System.in);
@@ -103,7 +102,7 @@ public class Game
 		
 		
 		
-=======
+
 		// AI or Player?
 
 		// Confirmation message
@@ -117,7 +116,6 @@ public class Game
 			System.out.println("\nCaptain " +player[i].name+", it is time to deploy your fleet!\n");
 			player[i].addFleet(); // Call addFleet to start placing boats
 		}
->>>>>>> 7fabdd2bf379cce06f88bc8a9435ce5efd90c1f5
 
 		// Create opponent grids
 		player[0].opponentGrid=player[1].myGrid;
@@ -155,26 +153,6 @@ public class Game
 
 	private void viewResults()
 	{
-<<<<<<< HEAD
-		
-			char[][] firstPlayerArray = this.player[1].myGrid.displayOwnGrid();
-			char[][] secondPlayerArray = this.player[2].myGrid.displayOwnGrid();
-			char[][] firstPlayerOpponentArray = this.player[1].myGrid.displayEnnemyGrid();
-			char[][] secondPlayerOpponentArray = this.player[2].myGrid.displayEnnemyGrid();
-			int nbHitByPlayerOne = 0 ;
-			int nbHitByPlayerTwo = 0 ;
-			int nbMissByPlayerOne = 0 ;
-			int nbMissByPlayerTwo = 0 ;
-			int nbShipSunkPlayerOne = 0 ;
-			int nbShipSunkPlayerTwo = 0 ;
-
-			//first player stats
-			for ( int i = 0 ; i < firstPlayerArray.length;i++){
-				for ( int j = 0 ; j < firstPlayerArray[i].length;j++){
-					nbShipSunkPlayerOne = 3 - this.player[1].myGrid.getShips().size();
-
-				}
-=======
 		char[][] firstPlayerArray = this.player[0].myGrid.displayOwnGrid();
 		char[][] secondPlayerArray = this.player[1].myGrid.displayOwnGrid();
 		char[][] firstPlayerOpponentArray = this.player[0].myGrid.displayEnnemyGrid();
@@ -191,19 +169,8 @@ public class Game
 			for ( int j = 0 ; j < firstPlayerArray[i].length;j++){
 				nbShipSunkPlayerOne = 3 - this.player[0].myGrid.getShips().size();
 
->>>>>>> 7fabdd2bf379cce06f88bc8a9435ce5efd90c1f5
 			}
-		}
-
-		for ( int i = 0 ; i < firstPlayerOpponentArray.length;i++){
-			for ( int j = 0 ; j < firstPlayerOpponentArray[i].length;j++){
-				if ( firstPlayerOpponentArray[i][j] == Grid.HIT)
-					nbHitByPlayerOne +=1;
-				else if ( firstPlayerOpponentArray[i][j] == Grid.HIT_MISSED)
-					nbMissByPlayerOne +=1;
-			}
-		}
-
+		} 
 
 		//second player stats
 		for ( int i = 0 ; i < secondPlayerArray.length;i++){
@@ -233,9 +200,6 @@ public class Game
 			looser = this.player[1].name; 
 		}
 
-<<<<<<< HEAD
-	
-=======
 
 		String res = "\tResults\n" ;
 		res += "\nThe previous game was won by: "+ winner+"\n"; // Should probably use the code above to display winner
@@ -253,8 +217,8 @@ public class Game
 		res += " \nNumbers of your ships which sunk : " + nbShipSunkPlayerTwo;
 
 		System.out.println(res);
-	}
->>>>>>> 7fabdd2bf379cce06f88bc8a9435ce5efd90c1f5
+			}
+	
 
 	// Quit the Game
 	private void quitGame()
