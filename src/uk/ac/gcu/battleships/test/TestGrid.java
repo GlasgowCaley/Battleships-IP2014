@@ -57,6 +57,46 @@ public class TestGrid {
 		assertEquals("the Grid should be a square",size,badSize);
 		assertEquals("the Grid should contain - in each case of the Grid ",'-',badChar);
 	}
+	
+	@Test
+	public void test_DefaultConstructor() {
+		Grid g = new Grid();
+
+		// TEST FOR SIZE (SQUARE)
+		boolean ok = true;
+		if(g.getBoard().length != 5) {
+			ok = false;
+		}
+		int badSize =5;
+		int i = 0;
+		while(ok && (i<g.getBoard().length)) {
+			if(g.getBoard()[i].length != 5) {
+				badSize = g.getBoard()[i].length;
+				ok = false;
+			}
+			i++;
+		}
+
+		// TEST FOR CONTENT OF GRID
+		i = 0;
+		boolean charac = true;
+		char badChar = '-';
+		int j  = 0;
+		while(charac && (i<g.getBoard().length)) {
+			while(charac && (j<g.getBoard()[i].length)) {
+				if(g.getBoard()[i][j] != Grid.DEFAULT_CHAR) {
+					badChar = g.getBoard()[i][j];
+					charac = false;
+				}
+				j++;
+			}
+			i++;
+		}
+
+		assertEquals("the Grid should be a square",5,badSize);
+		assertEquals("the Grid should contain - in each case of the Grid ",'-',badChar);
+		
+	}
 
 	/** 
 	 * Test the returnCharacter() method in normals conditions.
