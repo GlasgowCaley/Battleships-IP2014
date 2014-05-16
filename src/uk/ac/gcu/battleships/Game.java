@@ -114,6 +114,7 @@ public class Game
 
 		// Start to play the game
 		this.playGame();
+
 	}
 
 
@@ -129,7 +130,6 @@ public class Game
 
 		do {
 			win = player[turn].makeGuess(g);
-
 			if(!win) turn = (turn+1)%2;
 			sc.nextLine();
 		}
@@ -144,10 +144,8 @@ public class Game
 
 	private void viewResults()
 	{
-		char[][] firstPlayerArray = this.player[0].myGrid.displayOwnGrid();
-		char[][] secondPlayerArray = this.player[1].myGrid.displayOwnGrid();
-		char[][] firstPlayerOpponentArray = this.player[0].myGrid.displayEnnemyGrid();
-		char[][] secondPlayerOpponentArray = this.player[1].myGrid.displayEnnemyGrid();
+		char[][] firstPlayerOpponentArray = this.player[1].myGrid.displayEnnemyGrid();
+		char[][] secondPlayerOpponentArray = this.player[0].myGrid.displayEnnemyGrid();
 		int nbHitByPlayerOne = 0 ;
 		int nbHitByPlayerTwo = 0 ;
 		int nbMissByPlayerOne = 0 ;
@@ -156,19 +154,25 @@ public class Game
 		int nbShipSunkPlayerTwo = 0 ;
 
 		//first player stats
-		for ( int i = 0 ; i < firstPlayerArray.length;i++){
-			for ( int j = 0 ; j < firstPlayerArray[i].length;j++){
-				nbShipSunkPlayerOne = 3 - this.player[0].myGrid.getShips().size();
+		for( int k = 0 ;k < this.player[0].myGrid.getShips().size() ; k++){
+			if (this.player[0].myGrid.getShips().get(k).isSunk())
+				nbShipSunkPlayerOne ++;
+		}
 
+		for ( int i = 0 ; i < firstPlayerOpponentArray.length;i++){
+			for ( int j = 0 ; j < firstPlayerOpponentArray[i].length;j++){
+				if ( firstPlayerOpponentArray[i][j] == Grid.HIT)
+					nbHitByPlayerOne +=1;
+				else if ( firstPlayerOpponentArray[i][j] == Grid.HIT_MISSED)
+					nbMissByPlayerOne +=1;
 			}
-		} 
+		}
+
 
 		//second player stats
-		for ( int i = 0 ; i < secondPlayerArray.length;i++){
-			for ( int j = 0 ; j < firstPlayerArray[i].length;j++){
-				nbShipSunkPlayerTwo = 3 - this.player[1].myGrid.getShips().size();
-
-			}
+		for( int k = 0 ;k < this.player[1].myGrid.getShips().size() ; k++){
+			if (this.player[1].myGrid.getShips().get(k).isSunk())
+				nbShipSunkPlayerTwo ++;
 		}
 
 		for ( int i = 0 ; i < secondPlayerOpponentArray.length;i++){
@@ -192,20 +196,34 @@ public class Game
 		}
 
 
-		String res = "\tResults\n" ;
+
+		String res = "\n --- Results ---\n" ;
 		res += "\nThe previous game was won by: "+ winner+"\n"; // Should probably use the code above to display winner
-		res+= "And the looser is" + looser +"\n";
+		res+= "And the looser is: " + looser +"\n\n";
 
-		res += "Stats Player 1\n\n"; 
-		res += " Numbers of your shot which hit the opponent : " + nbHitByPlayerOne ;
-		res += " \nNumbers of your shot which missed the opponent : " + nbMissByPlayerOne ;
-		res += " \nNumbers of your ships which sunk : " + nbShipSunkPlayerOne;
+		if(!winnerOrLooser){
+			res += winner +"\n\n"; 
+			res += "Numbers of your shot which hit the opponent: " + nbHitByPlayerOne ;
+			res += "nNumbers of your shot which missed the opponent: " + nbMissByPlayerOne ;
+			res += "\nNumbers of your ships which sunk: " + nbShipSunkPlayerOne;
 
 
-		res += "Stats Player 1\n\n"; 
-		res += " \nNumbers of your shot which hit the opponent : " + nbHitByPlayerTwo ;
-		res += " \nNumbers of your shot which missed the opponent : " + nbMissByPlayerTwo ;
-		res += " \nNumbers of your ships which sunk : " + nbShipSunkPlayerTwo;
+			res += looser+"\n\n"; 
+			res += "Numbers of your shot which hit the opponent: " + nbHitByPlayerTwo ;
+			res += "\nNumbers of your shot which missed the opponent: " + nbMissByPlayerTwo ;
+			res += "\nNumbers of your ships which sunk: " + nbShipSunkPlayerTwo;
+		}else{
+			res += winner+"\n\n"; 
+			res += "Numbers of your shot which hit the opponent: " + nbHitByPlayerTwo ;
+			res += "\nNumbers of your shot which missed the opponent: " + nbMissByPlayerTwo ;
+			res += "\nNumbers of your ships which sunk: " + nbShipSunkPlayerTwo;
+
+
+			res += looser+"\n\n"; 
+			res += " \nNumbers of your shot which hit the opponent: " + nbHitByPlayerOne ;
+			res += " \nNumbers of your shot which missed the opponent: " + nbMissByPlayerOne ;
+			res += " \nNumbers of your ships which sunk: " + nbShipSunkPlayerOne;
+		}
 
 		System.out.println(res);
 	}
