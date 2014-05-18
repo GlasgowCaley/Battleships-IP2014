@@ -1,7 +1,6 @@
 package uk.ac.gcu.battleships;
 
 import java.util.Scanner;
-import java.io.*;
 
 public class Player  {
 	public String name;
@@ -16,9 +15,6 @@ public class Player  {
 	public void inputName() {
 		Scanner sc = new Scanner(System.in);
 		name = sc.next(); // Save name of the player
-		while(name.length() ==0) {
-			name = sc.next(); // Save name of the player			
-		}
 		char f = name.charAt(0);
 		name = Character.toUpperCase(f) + name.substring(1,name.length());
 	}
@@ -27,7 +23,6 @@ public class Player  {
 		Ship S = new Ship(size, x, y, orientation); // Create new Ship S
 		return myGrid.addShip(S);
 	}
-
 
 	public boolean makeGuess(Guess G){
 		this.enterGuess(G);
@@ -60,34 +55,17 @@ public class Player  {
 	}
 
 	public boolean addBoat(int b){
-		Scanner input = new Scanner(System.in);
-		String temp;
 		boolean add = false;
+		int l = this.myGrid.getBoard().length;
 
-		// Get starting position of ship
-		char c = 0 ;		
 		String letter = "Please enter the horizontal (A to E) coordinate of ship"; //+ count
 		String number = "Please enter the vertical (1 to 5) coordinate of ship";
+		String msgOrient = "Please enter the orientation of the ship (H or V)";
 		
-		int x = Game.readXAxis(letter); // Get X Axis value, save to x
-		int y = Game.readYAxis(number); // Get Y Axis value, save to y
-
-		// Get orientation of ship - Horizontal or Vertical
-		System.out.println("Please enter the orientation of the ship (H or V)" ); //+ count
-		input = new Scanner(System.in);
-		temp = input.next(); // 
-		char orient = temp.toUpperCase().charAt(0);
-
-		//Not proud of this while loop... Fix into test methods!
-
-		while((orient != 'H' && orient != 'V') && (temp.length() != 1)) {
-			System.out.println("That is not a valid orientation ");
-			System.out.println("Please enter the orientation of the ship (H or V)" ); //+ count
-			temp = input.next();
-			orient = temp.toUpperCase().charAt(0); // change lower case v/h to upper case V/H
-		}
-
-		//call player.createShip method
+		int x = Game.readXAxis(letter,l); // Get X Axis value, save to x
+		int y = Game.readYAxis(number,l); // Get Y Axis value, save to y
+		char orient = Game.readOrientation(msgOrient);
+		
 		add  = this.createShip(b,x,y,orient);
 		return add;
 	}
@@ -109,11 +87,12 @@ public class Player  {
 		while(!same) {
 			// 	Read the guess
 			String letter = "Enter the letter coordinate : ";
-			String number = "Enter the number coordinate : ";			
-			int x = Game.readXAxis(letter); // Call readXAxis
+			String number = "Enter the number coordinate : ";
+			int l = this.myGrid.getBoard().length;
+			int x = Game.readXAxis(letter,l); // Call readXAxis
 			g.set_X(x);
 
-			int y = Game.readYAxis(number); // Call readYAxis
+			int y = Game.readYAxis(number,l); // Call readYAxis
 			g.set_Y(y);
 			char c = this.opponentGrid.returnCharacter(y, x);
 
