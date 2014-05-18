@@ -84,14 +84,10 @@ public class Ship {
 		calculateShipPosition();
 		switch(size){
 		case 2: character = 'D';
-
 		break;
 		case 3: character = 'S';
-
 		break;
-
 		case 4: character = 'B';
-
 		break;
 		}
 	}
