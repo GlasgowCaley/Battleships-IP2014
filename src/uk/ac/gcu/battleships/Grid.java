@@ -68,7 +68,8 @@ public class Grid {
 	}
 
 	/**
-	 * Method filling the two dimensional array with dash.
+	 * Method filling the two dimensional array with the default character.
+	 * @param array Array to fill.
 	 */
 	private static void initArray(char[][] array) {
 		for(int i = 0; i<array.length;i++){
@@ -85,7 +86,6 @@ public class Grid {
 		int k = 4;
 		String format = "%-3s";
 		String limit = "    +"+new String(new char[this.board.length]).replace("\0","---+");
-		//StringBuffer r =new StringBuffer("    ");
 		String deca = new String(new char[k]).replace("\0"," ");
 		String res = deca;
 		char row = 'A';
@@ -141,7 +141,7 @@ public class Grid {
 	}
 
 	/**
-	 * Method which changes chars in the Grid with the position's Ship.
+	 * Method which changes characters in the Grid with the position's Ship.
 	 * This method is called only if the Ship can be added in the Grid. 
 	 * @param s Ship to add.
 	 */
@@ -205,7 +205,6 @@ public class Grid {
 		int y = g.get_Y();
 		int l = this.ships.size();
 		boolean hit = false;
-		boolean miss = false;
 		boolean sunk = true;
 		int i = 0;
 
@@ -221,10 +220,10 @@ public class Grid {
 			else {
 				this.board[y][x] = Grid.HIT_MISSED;
 			}
-			
+
 			i++;
 		}
-		if(this.returnCharacter(y, x) == Grid.HIT_MISSED) 
+		if(!hit) 
 			System.out.println("Miss!");
 
 		for(int j = 0;j<l;j++) {
@@ -276,7 +275,7 @@ public class Grid {
 		}
 		return array ;		
 	}
-	
+
 	public char checkGuessAI(Guess g) {
 		int x = g.get_X();
 		int y = g.get_Y();
@@ -301,7 +300,7 @@ public class Grid {
 			else {
 				this.board[y][x] = Grid.HIT_MISSED;
 			}
-			
+
 			i++;
 		}
 		if(this.returnCharacter(y, x) == Grid.HIT_MISSED){ 
@@ -319,7 +318,7 @@ public class Grid {
 		}
 		return charac;		
 	}
-	
+
 
 	/**
 	 * Getter for the Two-dimensional array
