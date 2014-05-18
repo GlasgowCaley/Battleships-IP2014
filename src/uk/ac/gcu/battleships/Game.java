@@ -78,8 +78,8 @@ public class Game
 	private void newGame()
 	{
 		// AI or Player?
-		System.out.print("\nIA in working !");
-		System.out.println(" You want play :");		
+		System.out.print("\nAI is working !");
+		System.out.println(" Do you want to play :");		
 		System.out.println("\t1. Against a player (default)");
 		System.out.println("\t2. Against the computer");
 		Scanner sc = new Scanner(System.in);
