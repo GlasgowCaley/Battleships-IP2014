@@ -57,7 +57,7 @@ public class TestGrid {
 		assertEquals("the Grid should be a square",size,badSize);
 		assertEquals("the Grid should contain - in each case of the Grid ",'-',badChar);
 	}
-	
+
 	@Test
 	public void test_DefaultConstructor() {
 		Grid g = new Grid();
@@ -95,7 +95,7 @@ public class TestGrid {
 
 		assertEquals("the Grid should be a square",5,badSize);
 		assertEquals("the Grid should contain - in each case of the Grid ",'-',badChar);
-		
+
 	}
 
 	/** 
@@ -370,14 +370,11 @@ public class TestGrid {
 	 */
 	public void test_14_AddShipIntoGrid(){
 		Grid g = new Grid(10);
-		System.out.println(g);
 		Ship s = new Ship(2,0,0,'h');
 		boolean ok = g.addShip(s);
-		System.out.println(g); 
 		char c1 = g.returnCharacter(0, 0);
 		char c2 = g.returnCharacter(0, 1);
 		char c3 = g.returnCharacter(3,3);
-		System.out.println(g);
 
 		//Test
 		assertTrue("It should be True",ok);
@@ -387,4 +384,99 @@ public class TestGrid {
 
 	}
 
+	@Test
+	/**
+	 * Test checkGuessAI
+	 */
+
+	public void test_15_checkGuessAI(){
+		// Initialisation
+
+		Grid g = new Grid(5);
+
+		Ship s = new Ship(2,2,0,'h');
+		g.addShip(s);
+
+		Guess gu = new Guess(2,0);
+		char a = g.checkGuessAI(gu);
+
+		char r = g.returnCharacter(0,2);
+
+		// TEST
+		assertEquals("The result should be h",'h',a);
+		assertEquals("The guess should hit the ship",Grid.HIT,r);
+	}
+
+	@Test
+	/**
+	 * Test checkGuessAI if the AI doesn't hit
+	 */
+
+	public void test_15_checkGuessAI_NoHit(){
+		// Initialisation
+		Grid g = new Grid();
+		Ship s = new Ship(2,0,0,'h');
+		g.addShip(s);
+
+		Guess gu = new Guess(2,2);
+		char a = g.checkGuessAI(gu);
+
+		char r = g.returnCharacter(2,2);
+
+		//Test
+		assertEquals("The result should be m",'m',a);
+		assertEquals("The guess shouldn't hit the ship",Grid.HIT_MISSED,r);
+
+	}
+
+	@Test
+	/**
+	 * Test checkGuessAI if the AI doesn't hit
+	 */
+
+	public void test_15_checkGuessAI_Ship_Sunk(){
+		// Initialisation
+		Grid g = new Grid();
+		Ship s1 = new Ship(2,0,0,'h');
+		Ship s2 = new Ship (2,3,3,'h');
+		boolean ok1 = g.addShip(s1);
+		boolean ok2 = g.addShip(s2);
+		
+		System.out.println(g);
+		Guess gu1 = new Guess(0,0);
+		Guess gu2 = new Guess(1,0);
+		Guess gu3 = new Guess(3,3);
+		Guess gu4 = new Guess(4,3);
+		
+		
+		
+		char a1 = g.checkGuessAI(gu1);
+		char a2 = g.checkGuessAI(gu2);
+		char a3 = g.checkGuessAI(gu3);
+		char a4 = g.checkGuessAI(gu4);
+
+		char r1 = g.returnCharacter(0,0);
+		char r2 = g.returnCharacter(0,1);
+		char r3 = g.returnCharacter(3,3);
+		char r4 = g.returnCharacter(3,4);
+		
+		assertEquals("The result should be h",'h',a1);		
+		assertEquals("The result should be s",'s',a2);
+		assertEquals("The result should be h",'h',a3);		
+		assertEquals("The result should be w",'w',a4);
+		assertEquals("The guess should hit the ship",Grid.HIT,r1);
+		assertEquals("The guess should hit the ship",Grid.HIT,r2);
+		assertEquals("The guess should hit the ship",Grid.HIT,r3);
+		assertEquals("The guess should hit the ship",Grid.HIT,r4);
+
+	}
 }
+
+
+
+
+
+
+
+
+
