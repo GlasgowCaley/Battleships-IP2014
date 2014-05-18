@@ -58,7 +58,7 @@ public class Player  {
 
 	public boolean addBoat(int b){
 		boolean add = false;
-		String msg = "Please enter the couple of coordinate of ship ('A1'): "; //+ count
+		String msg = "Please enter the couple of coordinate of ship (like 'A1'): "; //+ count
 		String msgOrient = "Please enter the orientation of the ship (H or V)";
 
 		int coord [] = Game.readCoordinate(msg, this.size);
@@ -78,8 +78,21 @@ public class Player  {
 		System.out.print(Game.display(this.myGrid.displayOwnGrid())); // Show own grid
 		System.out.println("\n"+dec+"State of the fight"); // Display name of player whose turn it is
 		System.out.println(Game.display(this.opponentGrid.displayEnnemyGrid())); // Show enemy grid
+		boolean same = false;
 		String msg = "Enter coordinates of you guess (like 'A1'): ";
-		int[] coord = Game.readCoordinate(msg, this.size);
+		int[] coord = new int[2];
+		while (!same) {
+			coord = Game.readCoordinate(msg, this.size);
+			char c = this.opponentGrid.returnCharacter(coord[1], coord[0]);
+			if(c == Grid.HIT_MISSED || c == Grid.HIT) {
+				same = false;
+				System.out.println("You have already hit this position, Enter an other position.");
+			}
+			else  {
+				same = true;
+
+			}
+		}
 		g.set_X(coord[0]);
 		g.set_Y(coord[1]);
 	}
