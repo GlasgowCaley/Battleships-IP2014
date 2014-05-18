@@ -7,128 +7,130 @@ import java.util.Scanner;
  * Accepts input from user
  * @author Robert Morrison
  * @author Fiona Harris
- * @version 1.0
+ * @version 1.x
  * 
  */
 
 public class Game
 {
-	// Instantiate 2 players
+	/** Instantiates 2 players */
 	private Player []player=new Player[2];
 
-	// Instantiate Guess
+	/** Instantiate Guess */
 	private Guess g;
 
-	// Game method, calls showMenu and kick-starts the game
+	/** 
+	 * Game Method
+	 * Shows the menu
+	 * Starts the game
+	 * Controls the flow of the game
+	 */
 	public Game() 
 	{
 		this.g= new Guess(0,0);
 		showMenu(); // call showMenu
 	}
 
-	// Draw menu
+	/**
+	 * showMenu method
+	 */
 	private void showMenu()
 	{	
-		// Awesome ASCII Art
+		/** Prints "Battleships" in Kick-Ass ASCII Art */
 		System.out.println("  ____       _______ _______ _      ______  _____ _    _ _____ _____   _____ _ \r\n |  _ \\   /\\|__   __|__   __| |    |  ____|/ ____| |  | |_   _|  __ \\ / ____| |\r\n | |_) | /  \\  | |     | |  | |    | |__  | (___ | |__| | | | | |__) | (___ | |\r\n |  _ < / /\\ \\ | |     | |  | |    |  __|  \\___ \\|  __  | | | |  ___/ \\___ \\| |\r\n | |_) / ____ \\| |     | |  | |____| |____ ____) | |  | |_| |_| |     ____) |_|\r\n |____/_/    \\_\\_|     |_|  |______|______|_____/|_|  |_|_____|_|    |_____/(_)\r\n                                                                               \r\n                                                                               ");
-		// Display menu
+		/** Displays the menu */
 		System.out.println("Please type your choice (1-3)");
-		System.out.println("\t1. Start a New Game");
-		System.out.println("\t2. View Results");
-		System.out.println("\t3. Exit the Game");
+		System.out.println("1. Start a New Game");
+		System.out.println("2. View Results");
+		System.out.println("3. Exit the Game");
 
-		// Get the user's choice
+		/** Get the user's choice */
 		Scanner choice = new Scanner(System.in);
 
-		// Carry out appropriate method relating to user choice
-		boolean done = false; // Loop is not finished
+		/** Take the user's choice, ensuring it is a valid integer */
+		boolean done = false; 								// Loop is not finished
 		while (!done) {
-			while(!choice.hasNextInt()) { // While user enters invalid input
+			while(!choice.hasNextInt()) { 					// While user enters invalid input
 				System.out.println("Invalid input");
 				choice.next();
 			}
-			int i = choice.nextInt(); // Save the user's choice as int i
+			int i = choice.nextInt(); 						// Save the user's choice as int i
 
-			// Call the appropriate method
-
+		/** Ensure that the integer is a valid option and call the correct method */
 			switch(i) {
 
 			default :
-				System.out.println("Invalid Input"); // Error - try again
+				System.out.println("Invalid Input"); 		// Error - try again
 				break;
 
 			case 1 :
-				newGame(); // Call newGame method
+				newGame(); 									// Call newGame method
 				break;
 
 			case 2 :
-				viewResults(); // Call viewResults method
+				viewResults(); 								// Call viewResults method
 				break;
 
 			case 3 :
-				done = true; // If user quits, the loop is done
-				quitGame(); // Call quitGame method
+				done = true; 								// If user quits, the loop is done
+				quitGame(); 								// Call quitGame method
 				break;
 			} 	
 		}
 	}   
 
-	// Start a new game
+	/** newGame method
+	 * Starts a new game
+	 * Player can choose between playing against another person or against the AI
+	 */
 	private void newGame()
 	{
-		// AI or Player?
-		System.out.print("\nAI is working !");
-		System.out.println(" Do you want to play :");		
-		System.out.println("\t1. Against a player (default)");
-		System.out.println("\t2. Against the computer");
+		/** Choose mode - Player vs Player or Player vs Computer */
+		System.out.println("Press Y to play against the AI or press any other key to play against a human");		
 		Scanner sc = new Scanner(System.in);
-		String yn = sc.nextLine();
-		char c = yn.toUpperCase().charAt(0);
-		int nb = 2;
+		String yn = sc.nextLine();							// Save entire input to String yn
+		char c = yn.toUpperCase().charAt(0);				// Convert string to upper-case Char
+		int nb = 2;											// nb stores the number of human players - 2 by default	
 
 		switch(c) {
-		case '2':
-
-			//player[0] = new Player();
-			player[1] = new ArtificialPlayer();
-			player[1].addFleet();
-			System.out.println(player[1].myGrid);
+		case 'Y':											// If user enters 'Y'
+			player[1] = new ArtificialPlayer();				// Create a new AI Player
+			player[1].addFleet();							// Add the AI's ships
+			System.out.println(player[1].myGrid);			// Display Grid
 			nb = 1;
 			break;
 		}
 
-		// Confirmation message
-		System.out.println("New game created!"); 
-
-		// Instantiate 2 Players and Create ships for both players
+		/** Instantiate 2 Players and their ships */
 		for (int i = 0; i<nb; i++){
-			Game.clearConsole(); // Clear the screen
-			System.out.print("Player "+(i+1)+", enter your name: "); // Player 1/2 - enter your name
+			Game.clearConsole(); 										// Clear the screen
+			System.out.print("Player "+(i+1)+", enter your name: "); 	// Player 1/2 - enter your name
 			player[i]= new Player();
 
-			if(nb == 2) // if 2 players
+			if(nb == 2) 												// If there are two human players
 				System.out.println("Captain " +player[i].name+", it is time to deploy your fleet\n");
 
-			player[i].addFleet(); // Call addFleet to start placing boats
+			player[i].addFleet(); 										// Call addFleet to start placing boats
 		}
 		System.out.println(player[1].myGrid);
-		// Create opponent grids
+		
+		/** Create "opponent" versions of each grid to display hits and misses only */
 		player[0].opponentGrid=player[1].myGrid;
 		player[1].opponentGrid=player[0].myGrid;
 
-		// Start to play the game
+		/** Start the game by calling the playGame method */
 		this.playGame();
 
 	}
 
 
-	// Play Game
+	/** Play the game */
 	private void playGame()
 	{
 		System.out.println("The game has begun! Good luck!");
 		Scanner sc = new Scanner(System.in);  
 		int turn=0;
-		boolean win=false; // Game is not won
+		boolean win=false; 									// Game is not won by default
 
 		do {
 			win = player[turn].makeGuess(g);
@@ -136,10 +138,10 @@ public class Game
 			if( res == Grid.HIT ) {
 				switch(player[turn].name) {
 				case "Computer" :
-					System.out.println("The computer has hit one of your ship");
+					System.out.println("One of your ships has been hit!");
 					break;
 				default :
-					System.out.println("You has hit a ship");
+					System.out.println("You have hit an enemy ship!");
 				}				
 			}
 			if(!win) turn = (turn+1)%2;
@@ -150,7 +152,7 @@ public class Game
 		this.viewResults();		
 	}
 
-	// View Results
+	/** View the results and stats of the previous game */
 
 	private void viewResults()
 	{
@@ -164,7 +166,7 @@ public class Game
 			int nbShipSunkPlayerOne = 0 ;
 			int nbShipSunkPlayerTwo = 0 ;
 
-			//first player stats
+			/** Calculate Player 1 stats */
 			for( int k = 0 ;k < this.player[0].myGrid.getShips().size() ; k++){
 				if (this.player[0].myGrid.getShips().get(k).isSunk())
 					nbShipSunkPlayerOne ++;
@@ -180,7 +182,7 @@ public class Game
 			}
 
 
-			//second player stats
+			/** Calculate Player 2 stats */
 			for( int k = 0 ;k < this.player[1].myGrid.getShips().size() ; k++){
 				if (this.player[1].myGrid.getShips().get(k).isSunk())
 					nbShipSunkPlayerTwo ++;
@@ -195,45 +197,43 @@ public class Game
 				}
 			}
 
-			boolean winnerOrLooser = (this.player[0].myGrid.getShips().size() == 0);
+			boolean winnerOrLoser = (this.player[0].myGrid.getShips().size() == 0);
 			String winner = "";
-			String looser = "";
-			if(winnerOrLooser){
+			String loser = "";
+			if(winnerOrLoser){
 				winner = this.player[1].name;
-				looser = this.player[0].name;
+				loser = this.player[0].name;
 			}else{			
 				winner = this.player[0].name;
-				looser = this.player[1].name; 
+				loser = this.player[1].name; 
 			}
-
-
 
 			String res = "\n --- Results ---\n" ;
 			res += "\nThe previous game was won by: "+ winner+"\n"; // Should probably use the code above to display winner
-			res+= "And the looser is: " + looser +"\n\n";
+			res+= "And the loser is: " + loser +"\n\n";
 
-			if(!winnerOrLooser){
+			if(!winnerOrLoser){
 				res += winner +"\n\n"; 
-				res += "\nNumbers of your shot which hit the opponent: " + nbHitByPlayerOne ;
-				res += "\nNumbers of your shot which missed the opponent: " + nbMissByPlayerOne ;
-				res += "\nNumbers of your ships which sunk: " + nbShipSunkPlayerOne+"\n\n";
+				res += "\nNumber of Hits: " + nbHitByPlayerOne ;
+				res += "\nNumber of Misses: " + nbMissByPlayerOne ;
+				res += "\nNumber of Ships Sunk: " + nbShipSunkPlayerOne+"\n\n";
 
 
-				res += looser+"\n\n"; 
-				res += "\nNumbers of your shot which hit the opponent: " + nbHitByPlayerTwo ;
-				res += "\nNumbers of your shot which missed the opponent: " + nbMissByPlayerTwo ;
-				res += "\nNumbers of your ships which sunk: " + nbShipSunkPlayerTwo;
+				res += loser+"\n\n"; 
+				res += "\nNumber of Hits: " + nbHitByPlayerTwo ;
+				res += "\nNumber of Misses: " + nbMissByPlayerTwo ;
+				res += "\nNumber of Ships Sunk: " + nbShipSunkPlayerTwo;
 			}else{
 				res += winner+"\n\n"; 
-				res += "\nNumbers of your shot which hit the opponent: " + nbHitByPlayerTwo ;
-				res += "\nNumbers of your shot which missed the opponent: " + nbMissByPlayerTwo ;
-				res += "\nNumbers of your ships which sunk: " + nbShipSunkPlayerTwo;
+				res += "\nNumber of Hits: " + nbHitByPlayerTwo ;
+				res += "\nNumber of Misses: " + nbMissByPlayerTwo ;
+				res += "\nNumber of Ships Sunk: " + nbShipSunkPlayerTwo;
 
 
-				res += looser+"\n\n"; 
-				res += " \nNumbers of your shot which hit the opponent: " + nbHitByPlayerOne ;
-				res += " \nNumbers of your shot which missed the opponent: " + nbMissByPlayerOne ;
-				res += " \nNumbers of your ships which sunk: " + nbShipSunkPlayerOne;
+				res += loser+"\n\n"; 
+				res += " \nNumber of Hits: " + nbHitByPlayerOne ;
+				res += " \nNumber of Misses: " + nbMissByPlayerOne ;
+				res += " \nNumber of Ships Sunk:  " + nbShipSunkPlayerOne;
 			}
 
 			System.out.println(res);
@@ -244,7 +244,7 @@ public class Game
 	}
 
 
-	// Quit the Game
+	/** Quit the game */
 	private void quitGame()
 	{
 		System.out.println("Thanks for playing!");
