@@ -130,8 +130,6 @@ public class Game
 		Scanner sc = new Scanner(System.in);  
 		int turn=0;
 		boolean win=false; // Game is not won
-		int x; // x coordinate
-		int y; // y coordinate
 
 		do {
 			win = player[turn].makeGuess(g);
@@ -141,96 +139,99 @@ public class Game
 		while(!win); // while the game is not won
 		System.out.println(player[turn].name+" wins the game!");
 		this.viewResults();		
-
 	}
-
 
 	// View Results
 
 	private void viewResults()
 	{
-		char[][] firstPlayerOpponentArray = this.player[1].myGrid.displayEnnemyGrid();
-		char[][] secondPlayerOpponentArray = this.player[0].myGrid.displayEnnemyGrid();
-		int nbHitByPlayerOne = 0 ;
-		int nbHitByPlayerTwo = 0 ;
-		int nbMissByPlayerOne = 0 ;
-		int nbMissByPlayerTwo = 0 ;
-		int nbShipSunkPlayerOne = 0 ;
-		int nbShipSunkPlayerTwo = 0 ;
+		try {
+			char[][] firstPlayerOpponentArray = this.player[1].myGrid.displayEnnemyGrid();
+			char[][] secondPlayerOpponentArray = this.player[0].myGrid.displayEnnemyGrid();
+			int nbHitByPlayerOne = 0 ;
+			int nbHitByPlayerTwo = 0 ;
+			int nbMissByPlayerOne = 0 ;
+			int nbMissByPlayerTwo = 0 ;
+			int nbShipSunkPlayerOne = 0 ;
+			int nbShipSunkPlayerTwo = 0 ;
 
-		//first player stats
-		for( int k = 0 ;k < this.player[0].myGrid.getShips().size() ; k++){
-			if (this.player[0].myGrid.getShips().get(k).isSunk())
-				nbShipSunkPlayerOne ++;
-		}
-
-		for ( int i = 0 ; i < firstPlayerOpponentArray.length;i++){
-			for ( int j = 0 ; j < firstPlayerOpponentArray[i].length;j++){
-				if ( firstPlayerOpponentArray[i][j] == Grid.HIT)
-					nbHitByPlayerOne +=1;
-				else if ( firstPlayerOpponentArray[i][j] == Grid.HIT_MISSED)
-					nbMissByPlayerOne +=1;
+			//first player stats
+			for( int k = 0 ;k < this.player[0].myGrid.getShips().size() ; k++){
+				if (this.player[0].myGrid.getShips().get(k).isSunk())
+					nbShipSunkPlayerOne ++;
 			}
-		}
 
-
-		//second player stats
-		for( int k = 0 ;k < this.player[1].myGrid.getShips().size() ; k++){
-			if (this.player[1].myGrid.getShips().get(k).isSunk())
-				nbShipSunkPlayerTwo ++;
-		}
-
-		for ( int i = 0 ; i < secondPlayerOpponentArray.length;i++){
-			for ( int j = 0 ; j < secondPlayerOpponentArray[i].length;j++){
-				if ( secondPlayerOpponentArray[i][j] == Grid.HIT)
-					nbHitByPlayerTwo +=1;
-				else if ( secondPlayerOpponentArray[i][j] == Grid.HIT_MISSED)
-					nbMissByPlayerTwo +=1;
+			for ( int i = 0 ; i < firstPlayerOpponentArray.length;i++){
+				for ( int j = 0 ; j < firstPlayerOpponentArray[i].length;j++){
+					if ( firstPlayerOpponentArray[i][j] == Grid.HIT)
+						nbHitByPlayerOne +=1;
+					else if ( firstPlayerOpponentArray[i][j] == Grid.HIT_MISSED)
+						nbMissByPlayerOne +=1;
+				}
 			}
+
+
+			//second player stats
+			for( int k = 0 ;k < this.player[1].myGrid.getShips().size() ; k++){
+				if (this.player[1].myGrid.getShips().get(k).isSunk())
+					nbShipSunkPlayerTwo ++;
+			}
+
+			for ( int i = 0 ; i < secondPlayerOpponentArray.length;i++){
+				for ( int j = 0 ; j < secondPlayerOpponentArray[i].length;j++){
+					if ( secondPlayerOpponentArray[i][j] == Grid.HIT)
+						nbHitByPlayerTwo +=1;
+					else if ( secondPlayerOpponentArray[i][j] == Grid.HIT_MISSED)
+						nbMissByPlayerTwo +=1;
+				}
+			}
+
+			boolean winnerOrLooser = (this.player[0].myGrid.getShips().size() == 0);
+			String winner = "";
+			String looser = "";
+			if(winnerOrLooser){
+				winner = this.player[1].name;
+				looser = this.player[0].name;
+			}else{			
+				winner = this.player[0].name;
+				looser = this.player[1].name; 
+			}
+
+
+
+			String res = "\n --- Results ---\n" ;
+			res += "\nThe previous game was won by: "+ winner+"\n"; // Should probably use the code above to display winner
+			res+= "And the looser is: " + looser +"\n\n";
+
+			if(!winnerOrLooser){
+				res += winner +"\n\n"; 
+				res += "\nNumbers of your shot which hit the opponent: " + nbHitByPlayerOne ;
+				res += "\nNumbers of your shot which missed the opponent: " + nbMissByPlayerOne ;
+				res += "\nNumbers of your ships which sunk: " + nbShipSunkPlayerOne;
+
+
+				res += looser+"\n\n"; 
+				res += "\nNumbers of your shot which hit the opponent: " + nbHitByPlayerTwo ;
+				res += "\nNumbers of your shot which missed the opponent: " + nbMissByPlayerTwo ;
+				res += "\nNumbers of your ships which sunk: " + nbShipSunkPlayerTwo;
+			}else{
+				res += winner+"\n\n"; 
+				res += "\nNumbers of your shot which hit the opponent: " + nbHitByPlayerTwo ;
+				res += "\nNumbers of your shot which missed the opponent: " + nbMissByPlayerTwo ;
+				res += "\nNumbers of your ships which sunk: " + nbShipSunkPlayerTwo;
+
+
+				res += looser+"\n\n"; 
+				res += " \nNumbers of your shot which hit the opponent: " + nbHitByPlayerOne ;
+				res += " \nNumbers of your shot which missed the opponent: " + nbMissByPlayerOne ;
+				res += " \nNumbers of your ships which sunk: " + nbShipSunkPlayerOne;
+			}
+
+			System.out.println(res);
 		}
-
-		boolean winnerOrLooser = (this.player[0].myGrid.getShips().size() == 0);
-		String winner = "";
-		String looser = "";
-		if(winnerOrLooser){
-			winner = this.player[1].name;
-			looser = this.player[0].name;
-		}else{			
-			winner = this.player[0].name;
-			looser = this.player[1].name; 
+		catch (NullPointerException e) {
+			System.out.println("You have to play before!");
 		}
-
-
-
-		String res = "\n --- Results ---\n" ;
-		res += "\nThe previous game was won by: "+ winner+"\n"; // Should probably use the code above to display winner
-		res+= "And the looser is: " + looser +"\n\n";
-
-		if(!winnerOrLooser){
-			res += winner +"\n\n"; 
-			res += "\nNumbers of your shot which hit the opponent: " + nbHitByPlayerOne ;
-			res += "\nNumbers of your shot which missed the opponent: " + nbMissByPlayerOne ;
-			res += "\nNumbers of your ships which sunk: " + nbShipSunkPlayerOne;
-
-
-			res += looser+"\n\n"; 
-			res += "\nNumbers of your shot which hit the opponent: " + nbHitByPlayerTwo ;
-			res += "\nNumbers of your shot which missed the opponent: " + nbMissByPlayerTwo ;
-			res += "\nNumbers of your ships which sunk: " + nbShipSunkPlayerTwo;
-		}else{
-			res += winner+"\n\n"; 
-			res += "\nNumbers of your shot which hit the opponent: " + nbHitByPlayerTwo ;
-			res += "\nNumbers of your shot which missed the opponent: " + nbMissByPlayerTwo ;
-			res += "\nNumbers of your ships which sunk: " + nbShipSunkPlayerTwo;
-
-
-			res += looser+"\n\n"; 
-			res += " \nNumbers of your shot which hit the opponent: " + nbHitByPlayerOne ;
-			res += " \nNumbers of your shot which missed the opponent: " + nbMissByPlayerOne ;
-			res += " \nNumbers of your ships which sunk: " + nbShipSunkPlayerOne;
-		}
-
-		System.out.println(res);
 	}
 
 
@@ -286,45 +287,29 @@ public class Game
 	 * Method which enables to read the X axis.
 	 * @return the integer for the X axis.
 	 */
-	public static int readXAxis(String msg,int max) {		
+	
+	public static int[] readCoordinate(String msg,int m) {
+		int[] coord = new int[2];
 		Scanner sc = new Scanner(System.in);
-		String temp = "";
-		char c =0;
-		max += 64;
-		boolean nLetter = true;
-		boolean other = true;
-
-		while (nLetter || other){			
+		String temp = "";		
+		char limit  = (char)(((int)'A')+m-1);
+		String regex = "[A-"+ limit +"][1-"+m+"]";
+		boolean respect = false;
+		char x = 0;
+		int y = 0;
+		while(!respect) {
 			System.out.println(msg);
 			temp = sc.next();
-			c = temp.toUpperCase().charAt(0);
-			nLetter = ((int)c < 65) || ((int)c > max);
-			other = temp.length() > 1 || temp.equals("");			
-		}		
-		
-		int x = Game.changeX(c);
-		return x;
-	}
-
-	/**
-	 * Method which enables to read the Y axis.
-	 * @return the integer for the Y axis.
-	 */
-	public static int readYAxis(String msg, int max) {
-		boolean ok = false;
-		Scanner sc = new Scanner(System.in);
-		int y = 0;
-		while(!ok) {
-			try {
-				System.out.println(msg);
-				y = sc.nextInt();
-				ok = (y <= max) && (y>0);
-			}
-			catch(InputMismatchException e) {
-				sc.next();
-			}
-		}
-		return (y-1);
+			temp = temp.toUpperCase();
+			respect = temp.matches(regex);
+			if(respect) {
+				x = temp.charAt(0);
+				y =Character.getNumericValue(temp.charAt(1));
+			} 
+		}				
+		coord[0] = Game.changeX(x);
+		coord[1] = y-1;
+		return coord;
 	}
 	
 	public static char readOrientation(String msg) {
@@ -341,7 +326,7 @@ public class Game
 		return c;		
 	}
 
-	private static int changeX(char c){ //The method changes any letter into a number
+	public static int changeX(char c){ //The method changes any letter into a number
 		int i=0;
 		boolean enc=false;
 		while(i<=27 && !enc){
@@ -358,35 +343,5 @@ public class Game
 			System.out.println(System.getProperty("line.separator"));
 		}
 	}
-
-
-	public static void enterGuess() {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter the couple of coordinate (like 'A1'): ");
-		String s = sc.nextLine().toUpperCase();
-		int first = 0,two = 0;
-
-		if(s.length() == 2) {
-			first = (int)s.charAt(0);
-			two = (int)s.charAt(1);
-		}
-
-		boolean ok = (first < 65) || (first > 74) && (two <49 || two >57); 
-
-
-		while(s.length() != 2 || ok) {
-			System.out.println("Incorrect input. Retry (like 'A1'): ");
-			s = sc.nextLine().toUpperCase();
-			if(s.length() == 2) {
-				first = (int)s.charAt(0);
-				two = (int)s.charAt(1);
-			}
-			ok = (first < 65) || (first > 74) && (two <49 || two >57);			
-		}
-		System.out.println((char)first);
-		System.out.println((char)two);
-	}
-
-
 
 }
