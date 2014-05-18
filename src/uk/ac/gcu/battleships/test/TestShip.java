@@ -1,13 +1,8 @@
 package uk.ac.gcu.battleships.test;
 
 import static org.junit.Assert.*;
-
 import org.junit.Test;
-
 import uk.ac.gcu.battleships.Ship;
-import uk.ac.gcu.battleships.Grid;
-import uk.ac.gcu.battleships.Guess;
-import uk.ac.gcu.battleships.Player;
 
 public class TestShip {
 
