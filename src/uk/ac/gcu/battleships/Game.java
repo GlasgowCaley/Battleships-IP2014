@@ -1,6 +1,7 @@
 
 package uk.ac.gcu.battleships;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 /**
  * Game Class
@@ -247,7 +248,6 @@ public class Game
 		int k = 4;
 		String format = "%-3s";
 		String limit = "    +"+new String(new char[array.length]).replace("\0","---+");
-		//StringBuffer r =new StringBuffer("    ");
 		String deca = new String(new char[k]).replace("\0"," ");
 		String res = deca;
 		char row = 'A';
@@ -286,22 +286,22 @@ public class Game
 	 * Method which enables to read the X axis.
 	 * @return the integer for the X axis.
 	 */
-	public static int readXAxis(String msg) {
-		System.out.println(msg);
+	public static int readXAxis(String msg,int max) {		
 		Scanner sc = new Scanner(System.in);
-		String temp = sc.next();
-		char c = temp.toUpperCase().charAt(0);
-
-		boolean nLetter = ((int)c < 65) || ((int)c > 74);
-		boolean other = temp.length() > 1 || temp.equals("");
+		String temp = "";
+		char c =0;
+		max += 64;
+		boolean nLetter = true;
+		boolean other = true;
 
 		while (nLetter || other){			
-			System.out.println("This is not a valid input :");
+			System.out.println(msg);
 			temp = sc.next();
 			c = temp.toUpperCase().charAt(0);
-			nLetter = ((int)c < 65) || ((int)c > 74);
-			other = temp.length() > 1 || temp.equals("");
+			nLetter = ((int)c < 65) || ((int)c > max);
+			other = temp.length() > 1 || temp.equals("");			
 		}		
+		
 		int x = Game.changeX(c);
 		return x;
 	}
@@ -310,17 +310,35 @@ public class Game
 	 * Method which enables to read the Y axis.
 	 * @return the integer for the Y axis.
 	 */
-	public static int readYAxis(String msg) {
-		System.out.println(msg);
+	public static int readYAxis(String msg, int max) {
+		boolean ok = false;
 		Scanner sc = new Scanner(System.in);
-		String temp;
-		while (!sc.hasNextInt()) {
-			System.out.println("invalid! You must enter an integer");
-			sc.next();
+		int y = 0;
+		while(!ok) {
+			try {
+				System.out.println(msg);
+				y = sc.nextInt();
+				ok = (y <= max) && (y>0);
+			}
+			catch(InputMismatchException e) {
+				sc.next();
+			}
 		}
-		temp = sc.next();
-		int y =  Integer.parseInt(temp)-1;
-		return y;
+		return (y-1);
+	}
+	
+	public static char readOrientation(String msg) {
+		Scanner sc = new Scanner(System.in);
+		String temp = "";
+		char c = 0;
+		boolean ok = false;
+		while (!ok){			
+			System.out.println(msg);
+			temp = sc.next();
+			c = temp.toUpperCase().charAt(0);
+			ok = (c == 'V' || c == 'H');			
+		}		
+		return c;		
 	}
 
 	private static int changeX(char c){ //The method changes any letter into a number
@@ -335,28 +353,26 @@ public class Game
 		return i;
 	}
 
-	//public void setGuess() {}
-
 	public static void clearConsole() {
 		for(int i = 0; i <25;i++) {
 			System.out.println(System.getProperty("line.separator"));
 		}
 	}
-	
-	
+
+
 	public static void enterGuess() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter the couple of coordinate (like 'A1'): ");
 		String s = sc.nextLine().toUpperCase();
 		int first = 0,two = 0;
-		
+
 		if(s.length() == 2) {
 			first = (int)s.charAt(0);
 			two = (int)s.charAt(1);
 		}
-		
+
 		boolean ok = (first < 65) || (first > 74) && (two <49 || two >57); 
-		
+
 
 		while(s.length() != 2 || ok) {
 			System.out.println("Incorrect input. Retry (like 'A1'): ");
@@ -370,7 +386,7 @@ public class Game
 		System.out.println((char)first);
 		System.out.println((char)two);
 	}
-	
-	
+
+
 
 }
