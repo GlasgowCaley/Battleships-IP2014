@@ -16,11 +16,13 @@ public class TestShip {
 		int x = s.shipPosition_x;
 		int y = s.shipPosition_y;
 		char orient = s.shipOrientation;
+		char c = s.character;
 
 		assertEquals("The size should be 2",2,size);
 		assertEquals("The x axis should be 0",0,x);
 		assertEquals("The y axis should be 0",0,y);
 		assertEquals("The orientation should be horizontal",'h',orient );
+		assertEquals("The character of the ship should be B",'D',c );
 	}
 	
 	@Test

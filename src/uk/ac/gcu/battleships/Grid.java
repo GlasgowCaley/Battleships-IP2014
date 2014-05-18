@@ -65,7 +65,7 @@ public class Grid {
 			res = 0;
 		}
 		return res;
-	}
+	}	
 
 	/**
 	 * Method filling the two dimensional array with the default character.
