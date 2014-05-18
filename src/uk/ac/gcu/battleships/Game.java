@@ -1,8 +1,6 @@
-
 package uk.ac.gcu.battleships;
-
-import java.util.InputMismatchException;
 import java.util.Scanner;
+
 /**
  * Game Class
  * Displays a menu
@@ -94,6 +92,7 @@ public class Game
 			//player[0] = new Player();
 			player[1] = new ArtificialPlayer();
 			player[1].addFleet();
+			System.out.println(player[1].myGrid);
 			nb = 1;
 			break;
 		}
@@ -133,6 +132,16 @@ public class Game
 
 		do {
 			win = player[turn].makeGuess(g);
+			char res  = player[turn].opponentGrid.returnCharacter(g.get_Y(), g.get_X());
+			if( res == Grid.HIT ) {
+				switch(player[turn].name) {
+				case "Computer" :
+					System.out.println("The computer has hit one of your ship");
+					break;
+				default :
+					System.out.println("You has hit a ship");
+				}				
+			}
 			if(!win) turn = (turn+1)%2;
 			sc.nextLine();
 		}
@@ -207,7 +216,7 @@ public class Game
 				res += winner +"\n\n"; 
 				res += "\nNumbers of your shot which hit the opponent: " + nbHitByPlayerOne ;
 				res += "\nNumbers of your shot which missed the opponent: " + nbMissByPlayerOne ;
-				res += "\nNumbers of your ships which sunk: " + nbShipSunkPlayerOne;
+				res += "\nNumbers of your ships which sunk: " + nbShipSunkPlayerOne+"\n\n";
 
 
 				res += looser+"\n\n"; 
