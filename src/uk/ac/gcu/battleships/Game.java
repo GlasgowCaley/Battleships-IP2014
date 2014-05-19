@@ -88,12 +88,12 @@ public class Game
 		/** Choose mode - Player vs Player or Player vs Computer */
 		System.out.println("Press Y to play against the AI or press any other key to play against a human");		
 		Scanner sc = new Scanner(System.in);
-		String yn = sc.nextLine();							// Save entire input to String yn
-		char c = yn.toUpperCase().charAt(0);				// Convert string to upper-case Char
+		String yn = sc.nextLine().toUpperCase();							// Save entire input to String yn
+		
 		int nb = 2;											// nb stores the number of human players - 2 by default	
 
-		switch(c) {
-		case 'Y':											// If user enters 'Y'
+		switch(yn) {
+		case "Y":											// If user enters 'Y'
 			player[1] = new ArtificialPlayer();				// Create a new AI Player
 			player[1].addFleet();							// Add the AI's ships
 			System.out.println(player[1].myGrid);			// Display Grid
@@ -303,6 +303,7 @@ public class Game
 		String temp = "";		
 		char limit  = (char)(((int)'A')+m-1);
 		String regex = "[A-"+ limit +"][1-"+m+"]";
+		String regexTwo = "[1-"+m+"][A-"+ limit +"]";
 		boolean respect = false;
 		char x = 0;
 		int y = 0;
@@ -310,10 +311,18 @@ public class Game
 			System.out.println(msg);
 			temp = sc.next();
 			temp = temp.toUpperCase();
-			respect = temp.matches(regex);
+			respect = (temp.matches(regex))^(temp.matches(regexTwo));
 			if(respect) {
-				x = temp.charAt(0);
-				y =Character.getNumericValue(temp.charAt(1));
+				if(temp.matches(regex)) {
+					x = temp.charAt(0);
+					y =Character.getNumericValue(temp.charAt(1));	
+				}
+				else {
+					x = temp.charAt(1);
+					y =Character.getNumericValue(temp.charAt(0));
+				}
+				
+				
 			} 
 		}				
 		coord[0] = Game.changeX(x);
