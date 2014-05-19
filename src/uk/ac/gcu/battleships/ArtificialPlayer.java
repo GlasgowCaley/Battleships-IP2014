@@ -1,13 +1,11 @@
 package uk.ac.gcu.battleships;
 
-import java.util.Random;
-import java.util.Scanner;
-
 public class ArtificialPlayer extends Player{
 
 	private boolean hitBefore, hitLine, hitRow, back;
-	private Guess lastHit;
+	private Guess lastHit, firstHit;
 	private int r,l,rl;
+	char resul;
 
 
 	public ArtificialPlayer(){
@@ -17,10 +15,11 @@ public class ArtificialPlayer extends Player{
 		hitLine=false;
 		hitRow=false;
 		back = false;
-		lastHit = new Guess(0,0);
-		r=(int) Math.floor(Math.random()*1);
-		l=(int) Math.floor(Math.random()*1);
-		rl=(int) Math.floor(Math.random()*3);		
+		lastHit = new Guess(-1,-1);
+		firstHit = new Guess(-1,-1);
+		r=(int) Math.floor(Math.random()*2);
+		l=(int) Math.floor(Math.random()*2);
+		rl=(int) Math.floor(Math.random()*4);		
 	}
 
 	public void inputName() 
@@ -30,14 +29,17 @@ public class ArtificialPlayer extends Player{
 	
 
 	public boolean makeGuess(Guess G){
-		char resul;
+		System.out.println("Last hit: "+lastHit.get_Y()+" "+lastHit.get_X());
+		System.out.println("First hit: "+firstHit.get_Y()+" "+firstHit.get_X());
+
+		
 		do{
-			if(!hitBefore){
-				G.set_X((int)(Math.random()*4));
-				G.set_Y((int)(Math.random()*4));
+			if(!hitBefore){								//If it didn't hit before, it does a random guess
+				G.set_X((int)(Math.random()*5));
+				G.set_Y((int)(Math.random()*5));
 			}
 
-			else if(hitLine)
+			else if(hitLine)							//If it hit before on a line, keep shooting in the same line
 			{
 				switch(l){
 				case 0:
@@ -49,8 +51,9 @@ public class ArtificialPlayer extends Player{
 					G.set_X(lastHit.get_X());
 					break;
 				}
+				l = (l+1)%2; //esto no es aqui
 			}
-			else if(hitRow)
+			else if(hitRow)								//If it hit before on a row, keep shooting in the same row
 			{
 				switch(r){
 				case 0:
@@ -63,92 +66,141 @@ public class ArtificialPlayer extends Player{
 					G.set_Y(lastHit.get_Y());
 					break;
 				}
+				r = (r+1)%2;
 			}
 
-			else
+			else										//If it hit before, shoot to the near positions
 			{
-				switch(rl){
+				
+				switch(rl){								//Made a validation of the lastHit to not go out of the grid
 				case 0:
-					G.set_Y(lastHit.get_Y()-1);
-					G.set_X(lastHit.get_X());
-					break;
-
-				case 1:
-					G.set_X(lastHit.get_X()+1);
-					G.set_Y(lastHit.get_Y());
-					break;
-
-				case 2:
+					if(lastHit.get_Y()<4){				
 					G.set_Y(lastHit.get_Y()+1);
 					G.set_X(lastHit.get_X());
+					System.out.println("ITS WORKING0.");//output for testing
+					}
+					else
+						G=lastHit;
+					break;
+				case 1:
+					if(lastHit.get_Y()>0){
+					G.set_Y(lastHit.get_Y()-1);
+					G.set_X(lastHit.get_X());
+					System.out.println("ITS WORKING2.");//output for testing
+					}
+					else
+						G=lastHit;
+					break;
+				case 2:
+					if(lastHit.get_X()<4){
+					G.set_X(lastHit.get_X()+1);
+					G.set_Y(lastHit.get_Y());
+					System.out.println("ITS WORKING1.");//output for testing
+					}
+					else
+						G=lastHit;
 					break;
 
+				
 				case 3:
+					if(lastHit.get_X()>0){
 					G.set_X(lastHit.get_X()-1);
 					G.set_Y(lastHit.get_Y());
+					System.out.println("ITS WORKING3.");//output for testing
+					}
+					else
+						G=lastHit;
 					break;
 				}
-				rl = (rl+1)%4;
+				rl = (rl+1)%4; //esto tambien debe de fallar
 			}
-			//By now the computer only do randomly movements. We improve that
-			//G.set_X((int)Math.random()*5);
-			//G.set_Y((int)Math.random()*5);
-		}while(!(this.opponentGrid.returnCharacter(G.get_X(), G.get_Y()) == Grid.DEFAULT_CHAR) && !(this.opponentGrid.returnCharacter(G.get_X(), G.get_Y()) == 's') && !(this.opponentGrid.returnCharacter(G.get_X(), G.get_Y()) == 'd') && !(this.opponentGrid.returnCharacter(G.get_X(), G.get_Y()) == 'b'));
+			
+		}while((this.opponentGrid.returnCharacter(G.get_Y(), G.get_X()) == 'x')||(this.opponentGrid.returnCharacter(G.get_Y(), G.get_X())=='o'));
 
-		resul=opponentGrid.checkGuessAI(G);
+		resul = opponentGrid.checkGuessAI(G);
+		System.out.println(resul);
 
 		switch(resul){
-		case 'h':
-			if(hitBefore)
+		case 'h':							//It has been a hit
+			lastHit.set_X(G.get_X());		//put the the guess on the lastHit
+			lastHit.set_Y(G.get_Y());
+			if(hitBefore)					//if it hit before, check were is the hit now to put hitLine o hit row to true
 			{
-				if(rl == 1 || rl == 3)
-					hitRow = true;
-				else
-					hitLine = true;
+				if(hitLine)  
+					l--;
+					else if (hitRow) 
+						r--;
+						else if(rl==1){
+							hitLine = true;
+							l=1;
+						}
+							else if(rl==2){
+								hitLine=true;
+								l=0;
+							}
+								else if(rl==3){
+									hitRow= true;
+									r=1;
+								}
+									else{
+										hitRow= true;
+										r=0;
+									}
 			}
-			else 
+			else {
 				hitBefore = true;
+				firstHit.set_X(G.get_X());		
+				firstHit.set_Y(G.get_Y());
+			}
 			break;
 
-		case 's':
+		case 's':						//It has sunk a ship. Resets all the values and start again ramdomly moves
 			hitBefore = false;
 			hitLine = false;
 			hitRow = false;
 			back = false;
 			break;
-		case 'm':
-			if (hitLine){
-				if (back){
-					hitBefore = false;
-					hitLine = false;
-					hitRow = false;
-					back = false;
+			
+		case 'm':						//It has been a miss
+			if(hitBefore){
+				
+				lastHit.set_X(firstHit.get_X());		
+				lastHit.set_Y(firstHit.get_Y());
+				
+				if (hitLine){
+					lastHit.set_X(firstHit.get_X());		
+					lastHit.set_Y(firstHit.get_Y());
+					
+					if (back){
+						hitBefore = false;
+						hitLine = false;
+						hitRow = false;
+						back = false;
+					}
+					else{
+						back = true;
+					}
 				}
-				else{
-					l=(l+1)%2;
-					back = true;
+				else if (hitRow){
+					
+					if (back){
+						hitBefore = false;
+						hitLine = false;
+						hitRow = false;
+						back = false;
+					}
+					else{
+						back = true;
+					}
 				}
 			}
-			if (hitRow){
-				if (back){
-					hitBefore = false;
-					hitLine = false;
-					hitRow = false;
-					back = false;
-				}
-				else{
-					r = (r+1)%2;
-					back = true;
-				}
-			}
+			break;
 		case 'w':
 			return true;    		
 		}
-
-		lastHit = G;
-		//hitBefore = (this.opponentGrid.returnCharacter(G.get_X(), G.get_Y()) == Grid.HIT);
-		//if (hitBefore) lastHit=G;
-
+		System.out.println("Current guess: "+G.get_Y()+" "+G.get_X()); //output for testing
+		System.out.println("Last hit: "+lastHit.get_Y()+" "+lastHit.get_X());
+		System.out.println("First hit: "+firstHit.get_Y()+" "+firstHit.get_X());
 		return false;
 	}
 
