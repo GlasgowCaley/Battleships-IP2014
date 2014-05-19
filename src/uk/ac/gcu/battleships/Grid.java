@@ -78,48 +78,7 @@ public class Grid {
 			}
 		}
 	}
-
-	/**
-	 * Method displaying the grid into the console.
-	 */
-	public String toString(){
-		int k = 4;
-		String format = "%-3s";
-		String limit = "    +"+new String(new char[this.board.length]).replace("\0","---+");
-		String deca = new String(new char[k]).replace("\0"," ");
-		String res = deca;
-		char row = 'A';
-		int line = 1;
-
-		//loop to display row letter
-		for(int i = 0; i<this.board.length;i++){
-			res+= "  "+row+" ";	 	 
-			row++;
-		}
-		res+= System.getProperty("line.separator");
-		res+= limit;
-
-		//loop to display line number and each character
-		for(int i = 0; i<this.board.length;i++){
-			res+= System.getProperty("line.separator");
-			res += " "+String.format(format, line);
-
-			for(int j = 0; j<this.board[i].length;j++) {
-				res+= "| ";
-				res += this.board[i][j]+" ";
-			}
-			res+= "|";
-			res+= System.getProperty("line.separator");
-			res+= limit;
-			line++;
-		}
-
-		// Word wrap
-		res+= System.getProperty("line.separator");
-
-		return res;
-	}
-
+	
 	/**
 	 * Method adding a Ship in this Grid and in the list. 
 	 * @param s Ship to add.
