@@ -29,8 +29,8 @@ public class ArtificialPlayer extends Player{
 	
 
 	public boolean makeGuess(Guess G){
-		System.out.println("Last hit: "+lastHit.get_Y()+" "+lastHit.get_X());
-		System.out.println("First hit: "+firstHit.get_Y()+" "+firstHit.get_X());
+		//System.out.println("Last hit: "+lastHit.get_Y()+" "+lastHit.get_X());
+		//System.out.println("First hit: "+firstHit.get_Y()+" "+firstHit.get_X());
 
 		
 		do{
@@ -51,7 +51,7 @@ public class ArtificialPlayer extends Player{
 					G.set_X(lastHit.get_X());
 					break;
 				}
-				l = (l+1)%2; //esto no es aqui
+				l = (l+1)%2; 
 			}
 			else if(hitRow)								//If it hit before on a row, keep shooting in the same row
 			{
@@ -74,51 +74,41 @@ public class ArtificialPlayer extends Player{
 				
 				switch(rl){								//Made a validation of the lastHit to not go out of the grid
 				case 0:
-					if(lastHit.get_Y()<4){				
 					G.set_Y(lastHit.get_Y()+1);
 					G.set_X(lastHit.get_X());
-					System.out.println("ITS WORKING0.");//output for testing
-					}
-					else
-						G=lastHit;
+					//System.out.println("ITS WORKING0.");//output for testing
+					
 					break;
 				case 1:
-					if(lastHit.get_Y()>0){
 					G.set_Y(lastHit.get_Y()-1);
 					G.set_X(lastHit.get_X());
-					System.out.println("ITS WORKING2.");//output for testing
-					}
-					else
-						G=lastHit;
+					//System.out.println("ITS WORKING2.");//output for testing
+					
 					break;
 				case 2:
-					if(lastHit.get_X()<4){
 					G.set_X(lastHit.get_X()+1);
 					G.set_Y(lastHit.get_Y());
-					System.out.println("ITS WORKING1.");//output for testing
-					}
-					else
-						G=lastHit;
+					//System.out.println("ITS WORKING1.");//output for testing
+				
 					break;
 
 				
 				case 3:
-					if(lastHit.get_X()>0){
+					
 					G.set_X(lastHit.get_X()-1);
 					G.set_Y(lastHit.get_Y());
-					System.out.println("ITS WORKING3.");//output for testing
-					}
-					else
-						G=lastHit;
+					//System.out.println("ITS WORKING3.");//output for testing
+				
 					break;
 				}
-				rl = (rl+1)%4; //esto tambien debe de fallar
+				rl = (rl+1)%4;
 			}
 			
-		}while((this.opponentGrid.returnCharacter(G.get_Y(), G.get_X()) == 'x')||(this.opponentGrid.returnCharacter(G.get_Y(), G.get_X())=='o'));
+		}while((this.opponentGrid.returnCharacter(G.get_Y(), G.get_X()) == 'x')||(this.opponentGrid.returnCharacter(G.get_Y(), G.get_X())=='o')
+				||G.get_Y()<0 ||G.get_Y()>4||G.get_X()>4|| G.get_X()<0);
 
 		resul = opponentGrid.checkGuessAI(G);
-		System.out.println(resul);
+		//System.out.println(resul);//output for testing
 
 		switch(resul){
 		case 'h':							//It has been a hit
@@ -154,7 +144,7 @@ public class ArtificialPlayer extends Player{
 			}
 			break;
 
-		case 's':						//It has sunk a ship. Resets all the values and start again ramdomly moves
+		case 's':						//It has sunk a ship. Resets all the values and start again randomly moves
 			hitBefore = false;
 			hitLine = false;
 			hitRow = false;
@@ -168,9 +158,6 @@ public class ArtificialPlayer extends Player{
 				lastHit.set_Y(firstHit.get_Y());
 				
 				if (hitLine){
-					lastHit.set_X(firstHit.get_X());		
-					lastHit.set_Y(firstHit.get_Y());
-					
 					if (back){
 						hitBefore = false;
 						hitLine = false;
@@ -198,9 +185,11 @@ public class ArtificialPlayer extends Player{
 		case 'w':
 			return true;    		
 		}
+		/*
 		System.out.println("Current guess: "+G.get_Y()+" "+G.get_X()); //output for testing
 		System.out.println("Last hit: "+lastHit.get_Y()+" "+lastHit.get_X());
 		System.out.println("First hit: "+firstHit.get_Y()+" "+firstHit.get_X());
+		*/
 		return false;
 	}
 
@@ -227,3 +216,4 @@ public class ArtificialPlayer extends Player{
 
 
 }
+
