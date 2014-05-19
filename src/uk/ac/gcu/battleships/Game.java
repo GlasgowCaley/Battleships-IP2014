@@ -344,7 +344,8 @@ public class Game
 		return c;		
 	}
 
-	public static int changeX(char c){ //The method changes any letter into a number
+	/** Changes any letter into a number */
+	public static int changeX(char c){ 
 		int i=0;
 		boolean enc=false;
 		while(i<=27 && !enc){
@@ -356,6 +357,7 @@ public class Game
 		return i;
 	}
 
+	/** Clears the screen of the console */
 	public static void clearConsole() {
 		for(int i = 0; i <25;i++) {
 			System.out.println(System.getProperty("line.separator"));
