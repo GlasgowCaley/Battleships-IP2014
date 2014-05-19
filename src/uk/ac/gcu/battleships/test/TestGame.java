@@ -14,10 +14,12 @@ public class TestGame {
 	}
 	
 	@Test
-	public void testGuess() { // This doesn't work, I know why but not sure how to fix it
+	public void testGuess() { 
 		Guess g = new Guess(0,0);
-		assertEquals("Equal", g, 0);
+		assertEquals("Equal", g.get_X(), 0);
+		assertEquals("Equal", g.get_Y(), 0);	
 	}
+
 	
 	@Test
 	public void testTurn() {
