@@ -49,7 +49,7 @@ public class Player  {
 			}
 
 			while(!add) {
-				System.out.println(this.myGrid);
+				System.out.print(Game.display(this.myGrid.displayOwnGrid()));
 				System.out.println(name);				
 				add = this.addBoat(i);				
 			}    		

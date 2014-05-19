@@ -96,7 +96,6 @@ public class Game
 		case "Y":											// If user enters 'Y'
 			player[1] = new ArtificialPlayer();				// Create a new AI Player
 			player[1].addFleet();							// Add the AI's ships
-			System.out.println(player[1].myGrid);			// Display Grid
 			nb = 1;
 			break;
 		}
@@ -112,7 +111,7 @@ public class Game
 
 			player[i].addFleet(); 										// Call addFleet to start placing boats
 		}
-		System.out.println(player[1].myGrid);
+		System.out.print(Game.display(player[1].myGrid.displayOwnGrid())); // Show own grid
 		
 		/** Create "opponent" versions of each grid to display hits and misses only */
 		player[0].opponentGrid=player[1].myGrid;

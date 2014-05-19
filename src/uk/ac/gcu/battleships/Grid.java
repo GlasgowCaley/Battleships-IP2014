@@ -238,7 +238,6 @@ public class Grid {
 		int y = g.get_Y();
 		int l = this.ships.size();
 		boolean hit = false;
-		boolean miss = false;
 		boolean sunk = true;
 		char charac = 'm';
 		int i = 0;
