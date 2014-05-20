@@ -18,9 +18,9 @@ public class Player  {
 		return myGrid.addShip(boat);
 	}
 
-	public boolean makeGuess(Guess G){
-		PlayerInput.inputGuess(G, this);
-		return opponentGrid.checkGuess(G);
+	public boolean makeGuess(Guess g){
+		PlayerInput.inputGuess(g, this);
+		return opponentGrid.checkGuess(g);
 	}
 
 	public void addFleet(){ // Creates a fleet of boats
