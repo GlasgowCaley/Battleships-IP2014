@@ -27,7 +27,7 @@ public class ArtificialPlayer extends Player{
 		//System.out.println("Last hit: "+lastHit.get_Y()+" "+lastHit.get_X());
 		//System.out.println("First hit: "+firstHit.get_Y()+" "+firstHit.get_X());
 
-		
+
 		do{
 			if(!hitBefore){								//If it didn't hit before, it does a random guess
 				G.set_X((int)(Math.random()*5));
@@ -66,39 +66,39 @@ public class ArtificialPlayer extends Player{
 
 			else										//If it hit before, shoot to the near positions
 			{
-				
+
 				switch(rl){								//Made a validation of the lastHit to not go out of the grid
 				case 0:
 					G.set_Y(lastHit.get_Y()+1);
 					G.set_X(lastHit.get_X());
 					//System.out.println("ITS WORKING0.");//output for testing
-					
+
 					break;
 				case 1:
 					G.set_Y(lastHit.get_Y()-1);
 					G.set_X(lastHit.get_X());
 					//System.out.println("ITS WORKING2.");//output for testing
-					
+
 					break;
 				case 2:
 					G.set_X(lastHit.get_X()+1);
 					G.set_Y(lastHit.get_Y());
 					//System.out.println("ITS WORKING1.");//output for testing
-				
+
 					break;
 
-				
+
 				case 3:
-					
+
 					G.set_X(lastHit.get_X()-1);
 					G.set_Y(lastHit.get_Y());
 					//System.out.println("ITS WORKING3.");//output for testing
-				
+
 					break;
 				}
 				rl = (rl+1)%4;
 			}
-			
+
 		}while((this.opponentGrid.returnCharacter(G.get_Y(), G.get_X()) == 'x')||(this.opponentGrid.returnCharacter(G.get_Y(), G.get_X())=='o')
 				||G.get_Y()<0 ||G.get_Y()>4||G.get_X()>4|| G.get_X()<0);
 
@@ -113,24 +113,24 @@ public class ArtificialPlayer extends Player{
 			{
 				if(hitLine)  
 					l--;
-					else if (hitRow) 
-						r--;
-						else if(rl==1){
-							hitLine = true;
-							l=1;
-						}
-							else if(rl==2){
-								hitLine=true;
-								l=0;
-							}
-								else if(rl==3){
-									hitRow= true;
-									r=1;
-								}
-									else{
-										hitRow= true;
-										r=0;
-									}
+				else if (hitRow) 
+					r--;
+				else if(rl==1){
+					hitLine = true;
+					l=1;
+				}
+				else if(rl==2){
+					hitLine=true;
+					l=0;
+				}
+				else if(rl==3){
+					hitRow= true;
+					r=1;
+				}
+				else{
+					hitRow= true;
+					r=0;
+				}
 			}
 			else {
 				hitBefore = true;
@@ -145,13 +145,13 @@ public class ArtificialPlayer extends Player{
 			hitRow = false;
 			back = false;
 			break;
-			
+
 		case 'm':						//It has been a miss
 			if(hitBefore){
-				
+
 				lastHit.set_X(firstHit.get_X());		
 				lastHit.set_Y(firstHit.get_Y());
-				
+
 				if (hitLine){
 					if (back){
 						hitBefore = false;
@@ -164,7 +164,7 @@ public class ArtificialPlayer extends Player{
 					}
 				}
 				else if (hitRow){
-					
+
 					if (back){
 						hitBefore = false;
 						hitLine = false;
@@ -184,29 +184,36 @@ public class ArtificialPlayer extends Player{
 		System.out.println("Current guess: "+G.get_Y()+" "+G.get_X()); //output for testing
 		System.out.println("Last hit: "+lastHit.get_Y()+" "+lastHit.get_X());
 		System.out.println("First hit: "+firstHit.get_Y()+" "+firstHit.get_X());
-		*/
+		 */
 		return false;
 	}
 
 	public void addFleet(){ // Creates a fleet of boats
-		for(int i=2; i<=4; i++){
+		for(int i=0; i<3; i++){
 			boolean add = false;
 			while(!add) {
-				add = this.addBoat(i);				
-			}
+				Ship s = null;				
+				int x = (int) (Math.random()*4);
+				int y = (int) (Math.random()*4);
+				char orient;
+				int orien = (int) Math.random();
+				if (orien==0) orient='h';
+				else orient='v';
+				switch(i) {
+				case 0:
+					s = new Destroyer(x,y,orient);
+					break;
+				case 1:
+					s = new Submarine(x,y,orient);					
+					break;
+				case 2:
+					s = new Battleship(x,y,orient);					
+					break;
+				}
+				add = this.addShip(s);
+				
+			}  
 		}
-	}
-
-	public boolean addBoat(int b){
-		boolean add= false;
-		int x = (int) (Math.random()*4);
-		int y = (int) (Math.random()*4);
-		char orient;
-		int orien = (int) Math.random();
-		if (orien==0) orient='h';
-		else orient='v';
-		add  = this.createShip(b,x,y,orient);
-		return add;
 	}
 
 
