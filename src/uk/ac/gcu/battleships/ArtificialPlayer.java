@@ -10,7 +10,7 @@ public class ArtificialPlayer extends Player{
 
 	public ArtificialPlayer(){
 		super("Computer");
-		myGrid = new Grid();
+		myGrid = new Grid(GameConfiguration.gameConfiguration_SIZE);
 		hitBefore=false;
 		hitLine=false;
 		hitRow=false;
@@ -189,7 +189,7 @@ public class ArtificialPlayer extends Player{
 	}
 
 	public void addFleet(){ // Creates a fleet of boats
-		for(int i=0; i<3; i++){
+		for(int i=0; i<GameConfiguration.gameConfiguration_SIZE; i++){
 			boolean add = false;
 			while(!add) {
 				Ship s = null;				
