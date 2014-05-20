@@ -58,6 +58,8 @@ public class PlayerInput {
 				add = p.addShip(s);
 				if(!add) {
 					System.out.println("/!\\You can't add this ship at the defined position.\n");
+					Scanner sc = new Scanner(System.in);
+					sc.nextLine();
 				}
 			}    		
 		}
