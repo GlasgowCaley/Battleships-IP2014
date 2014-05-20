@@ -9,7 +9,7 @@ public class ArtificialPlayer extends Player{
 
 
 	public ArtificialPlayer(){
-
+		super("Computer");
 		myGrid = new Grid();
 		hitBefore=false;
 		hitLine=false;
@@ -22,11 +22,6 @@ public class ArtificialPlayer extends Player{
 		rl=(int) Math.floor(Math.random()*4);		
 	}
 
-	public void inputName() 
-	{
-		this.name = "Computer";
-	}
-	
 
 	public boolean makeGuess(Guess G){
 		//System.out.println("Last hit: "+lastHit.get_Y()+" "+lastHit.get_X());
