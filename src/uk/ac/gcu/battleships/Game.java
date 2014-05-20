@@ -56,7 +56,7 @@ public class Game
 			}
 			int i = choice.nextInt(); 						// Save the user's choice as int i
 
-		/** Ensure that the integer is a valid option and call the correct method */
+			/** Ensure that the integer is a valid option and call the correct method */
 			switch(i) {
 
 			default :
@@ -89,7 +89,7 @@ public class Game
 		System.out.println("Press Y to play against the AI or press any other key to play against a human");		
 		Scanner sc = new Scanner(System.in);
 		String yn = sc.nextLine().toUpperCase();			// Save entire input to String yn
-		
+
 		int nb = 2;											// nb stores the number of human players - 2 by default	
 
 		switch(yn) {
@@ -112,7 +112,7 @@ public class Game
 			player[i].addFleet(); 										// Call addFleet to start placing boats
 		}
 		System.out.print(Game.display(player[1].myGrid.displayOwnGrid())); // Show own grid
-		
+
 		/** Create "opponent" versions of each grid to display hits and misses only */
 		player[0].opponentGrid=player[1].myGrid;
 		player[1].opponentGrid=player[0].myGrid;
@@ -148,8 +148,44 @@ public class Game
 		}
 		while(!win); // while the game is not won
 		System.out.println(player[turn].name+" wins the game!");
-		this.viewResults();		
+		this.viewResults();
+		this.restart();
 	}
+
+	private void restart() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Play again? (Y or N)");
+		String res = sc.next();
+		switch(res.toUpperCase().charAt(0)) {
+		case 'Y' :
+			for(int i =0;i<this.player.length;i++) {
+				Game.clearConsole();
+				System.out.println("Captain " +player[i].name+", it is time to deploy your fleet\n");
+				if(player[1] instanceof ArtificialPlayer && i == 1) {
+					player[1] = new ArtificialPlayer();
+				} 
+				else
+					player[i] = new Player(player[i].name);
+				player[i].addFleet();				
+			}
+			player[0].opponentGrid=player[1].myGrid;
+			player[1].opponentGrid=player[0].myGrid;
+			this.playGame();
+			break;
+
+
+		case 'N':
+		default:
+			this.clearConsole();
+			this.showMenu();					
+		}
+
+
+
+
+
+	}
+
 
 	/** View the results and stats of the previous game */
 
