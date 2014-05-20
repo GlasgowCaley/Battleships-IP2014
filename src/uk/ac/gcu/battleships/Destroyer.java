@@ -6,7 +6,10 @@ package uk.ac.gcu.battleships;
 public class Destroyer extends Ship {
 	
 	/**
-	 * Constructor of Destroyer.
+	 * Only constructor for a Destroyer.
+	 * @param position_x Coordinate for the X axis. 
+	 * @param position_y Coordinate for the Y axis.
+	 * @param orientation Orientation wanted.
 	 */
 	public Destroyer(int position_x, int position_y, char orientation) {
 		super(2,position_x,position_y,orientation);
