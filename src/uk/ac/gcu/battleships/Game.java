@@ -88,7 +88,7 @@ public class Game
 		/** Choose mode - Player vs Player or Player vs Computer */
 		System.out.println("Press Y to play against the AI or press any other key to play against a human");		
 		Scanner sc = new Scanner(System.in);
-		String yn = sc.nextLine().toUpperCase();							// Save entire input to String yn
+		String yn = sc.nextLine().toUpperCase();			// Save entire input to String yn
 		
 		int nb = 2;											// nb stores the number of human players - 2 by default	
 
