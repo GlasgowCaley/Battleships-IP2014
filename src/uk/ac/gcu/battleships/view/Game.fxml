@@ -27,7 +27,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label id="playerA1" prefHeight="66.0" prefWidth="80.0" text="?" textAlignment="CENTER">
+                  <Label id="playerA1" fx:id="playerA1" prefHeight="66.0" prefWidth="80.0" textAlignment="CENTER">
                      <font>
                         <Font size="45.0" />
                      </font>
@@ -312,7 +312,10 @@
             </Label>
          </children>
       </Pane>
-      <Pane prefHeight="120.0" prefWidth="1100.0" />
+      <Pane prefHeight="120.0" prefWidth="1100.0">
+         <children>
+            <Button id="btnTest" fx:id="btnTest" layoutX="81.0" layoutY="60.0" mnemonicParsing="false" onAction="#btnClick" onMouseClicked="#btnClick" text="Button" />
+         </children></Pane>
       <Pane layoutY="115.0" prefHeight="82.0" prefWidth="1100.0">
          <children>
             <Label layoutX="101.0" layoutY="8.0" text="A    B    C    D    E">
