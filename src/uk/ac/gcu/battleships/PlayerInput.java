@@ -2,11 +2,25 @@ package uk.ac.gcu.battleships;
 
 import java.util.Scanner;
 
+/**
+ * This class contains all methods
+ * to manage all inputs of a Player.
+ * @author Yann Prono
+ */
 public class PlayerInput {
+	
+	/** String for keeping the same content through some methods. */	 
+	private static String input;
 
+	/**
+	 * Method which add the Fleet into the Grid.
+	 * This method manages all input for coordinates
+	 * orientation, et displays message if the Ship can't be added.
+	 * @param p The current Player.
+	 */
 	public static void inputFleet(Player p){
 		String nameBoat = "";
-		for(int i=0; i<GameConfiguration.gameConfiguration_SIZE; i++){ 
+		for(int i=0; i<GameConfiguration.gameConfiguration_NBSHIP; i++){ 
 			boolean add = false;
 			while(!add) {
 				Ship s = null;
@@ -41,12 +55,19 @@ public class PlayerInput {
 					break;
 				}
 
-				add = p.addShip(s);				
+				add = p.addShip(s);
+				if(!add) {
+					System.out.println("/!\\You can't add this ship at the defined position.\n");
+				}
 			}    		
 		}
 	}
 
-
+	/**
+	 * Method which enable for a Player to input a guess.
+	 * @param g Current Guess.
+	 * @param p The current Player.
+	 */
 	public static void inputGuess(Guess g, Player p) {
 		Scanner sc = new Scanner(System.in);
 		String dec = "      ";
@@ -77,52 +98,64 @@ public class PlayerInput {
 	}
 
 	/**
-	 * Method which enables to read the X axis.
-	 * @return the integer for the X axis.
+	 * Method which enables to read couple of coordinates (X and Y).
+	 * @return the array which contains the X axis (index 0) and Y axis (index 1).
 	 */	
 	public static int[] readCoordinate(String msg) {
 		Scanner sc = new Scanner(System.in);
-		String temp = "";		
+		input = "";		
 		boolean respect = false;
-		char x = 0;
-		int y = 0;
 		while(!respect) {
 			System.out.println(msg);
-			temp = sc.next();
-			temp = temp.toUpperCase();
-			respect = PlayerInput.checkRegex(temp);
- 
+			input = sc.next();
+			input = input.toUpperCase();
+			respect = PlayerInput.checkRegex();
 		}
-		
-		int[] coord = PlayerInput.separateCoordinate(temp);
+		int[] coord = PlayerInput.separateCoordinate();
 		return coord;
 	}
 
-	public static boolean checkRegex(String s) {
+	/**
+	 * Method which checks if the couple of coordinates
+	 * respect all conventions.
+	 * @return {@code true} only if the content respect the 
+	 * regular expression.
+	 */
+	public static boolean checkRegex() {
 		int size = GameConfiguration.gameConfiguration_SIZE;
-		int max = String.valueOf(size).length();
 		char limit  = (char)(((int)'A')+size-1);
 		String regex = "[A-"+ limit +"][1-"+size+"]";
 		String regexTwo = "[1-"+size+"][A-"+ limit +"]";
 		boolean match = false;
-		if(s.matches(regex)) {
+		if(input.matches(regex)) {
 			match = true;
 		}	
-		if(s.matches(regexTwo)) {
+		if(input.matches(regexTwo)) {
 			match = true;
-			s = Character.toString(s.charAt(1))+Character.toString(s.charAt(0));
+			String temp = Character.toString(input.charAt(1))+Character.toString(input.charAt(0));
+			input = temp;			
 		}	
 		return match;		
 	}
 	
-	public static int[] separateCoordinate(String s) {
+	/**
+	 * Method separating the X and Y axis into an array.
+	 * @return the array corresponding at coordinates.
+	 */
+	public static int[] separateCoordinate() {
 		//int size = GameConfiguration.gameConfiguration_SIZE;
 		int coord[] = new int[2];
-		coord[0] = PlayerInput.changeX(s.charAt(0));
-		coord[1] = Character.getNumericValue(s.charAt(1))-1;
+		coord[0] = PlayerInput.changeX(input.charAt(0));
+		coord[1] = Character.getNumericValue(input.charAt(1))-1;
+		
 		return coord;	
 	}
 
+	/**
+	 * Method reading the wanted orientation for a Ship.
+	 * @param msg Message to display before input.
+	 * @return the Character of the input.
+	 */
 	public static char readOrientation(String msg) {
 		Scanner sc = new Scanner(System.in);
 		String temp = "";
