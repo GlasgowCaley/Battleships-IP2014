@@ -1,7 +1,5 @@
 package uk.ac.gcu.battleships;
 
-import java.util.Scanner;
-
 public class Player  {
 	public String name;
 	public Grid myGrid;
@@ -16,23 +14,17 @@ public class Player  {
 		this.setSize(this.myGrid.getBoard().length);
 	}
 
-	public boolean createShip(int size, int x, int y, char orientation){
-		Ship S = new Ship(size, x, y, orientation); // Create new Ship S
-		return myGrid.addShip(S);
+	public boolean addShip(Ship boat){		
+		return myGrid.addShip(boat);
 	}
 
 	public boolean makeGuess(Guess G){
-		PlayerInput p = new PlayerInput();
-		p.inputGuess(G, this);
-		//this.enterGuess(G);
+		PlayerInput.inputGuess(G, this);
 		return opponentGrid.checkGuess(G);
 	}
 
 	public void addFleet(){ // Creates a fleet of boats
-
-		PlayerInput p = new PlayerInput();
-		p.inputFleet(this);
-
+		PlayerInput.inputFleet(this);
 	}
 
 	public int getSize() {
