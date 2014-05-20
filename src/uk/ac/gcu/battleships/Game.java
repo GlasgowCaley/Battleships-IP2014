@@ -103,8 +103,8 @@ public class Game
 		/** Instantiate 2 Players and their ships */
 		for (int i = 0; i<nb; i++){
 			Game.clearConsole(); 										// Clear the screen
-			System.out.print("Player "+(i+1)+", enter your name: "); 	// Player 1/2 - enter your name
-			player[i]= new Player();
+			System.out.print("Player "+(i+1)+", enter your name: "); 	// Player 1/2 - enter your nam			
+			player[i]= new Player(sc.next());
 
 			if(nb == 2) 												// If there are two human players
 				System.out.println("Captain " +player[i].name+", it is time to deploy your fleet\n");
