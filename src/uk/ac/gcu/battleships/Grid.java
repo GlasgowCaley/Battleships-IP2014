@@ -93,10 +93,7 @@ public class Grid {
 			//add  in the board
 			this.addShipIntoGrid(s);
 		}
-		else {
-			System.out.println(" /!\\You can't add this ship at the defined position.\n");
-		}
-		return add ;
+			return add;
 	}
 
 	/**
@@ -171,8 +168,8 @@ public class Grid {
 			hit = this.ships.get(i).testHit(x, y);
 			if(hit && (this.returnCharacter(y, x) != Grid.HIT)) { 
 				this.board[y][x] = Grid.HIT;
-				if(this.ships.get(i).isSunk()) 
-					System.out.println("A Ship has been sunk!");			
+				//if(this.ships.get(i).isSunk()) 
+				//	System.out.println("A Ship has been sunk!");			
 			}
 			else {
 				this.board[y][x] = Grid.HIT_MISSED;
@@ -180,8 +177,8 @@ public class Grid {
 
 			i++;
 		}
-		if(!hit) 
-			System.out.println("Miss!");
+		//if(!hit) 
+			//System.out.println("Miss!");
 
 		for(int j = 0;j<l;j++) {
 			if(!this.ships.get(j).isSunk())
