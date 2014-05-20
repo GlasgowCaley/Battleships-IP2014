@@ -3,7 +3,8 @@ package uk.ac.gcu.battleships;
 import java.util.Scanner;
 
 public class PlayerInput {
-	public void inputFleet(Player p){
+	
+	public static void inputFleet(Player p){
 		String name = "";
 		for(int i=2; i<=4; i++){ 
 			boolean add = false;
@@ -22,24 +23,24 @@ public class PlayerInput {
 			while(!add) {
 				System.out.println(Game.display(p.myGrid.displayOwnGrid()));
 				System.out.println(name);				
-				add = this.inputBoat(p, i);				
+				add = PlayerInput.inputBoat(p, i);				
 			}    		
 		}
 	}
-	public boolean inputBoat(Player p, int b){
+	public static boolean inputBoat(Player p, int b){
 		boolean add = false;
 		String msg = "Please enter the couple of coordinate of ship (like 'A1'): "; //+ count
 		String msgOrient = "Please enter the orientation of the ship (H or V)";
 
-		int coord [] = Game.readCoordinate(msg, p.getSize());
-		char orient = Game.readOrientation(msgOrient);
+		int coord [] = PlayerInput.readCoordinate(msg, p.getSize());
+		char orient = PlayerInput.readOrientation(msgOrient);
 
 		add  = p.createShip(b,coord[0],coord[1],orient);
 		return add;
 		
 	}
 	
-	public void inputGuess(Guess g, Player p) {
+	public static void inputGuess(Guess g, Player p) {
 		Scanner sc = new Scanner(System.in);
 		String dec = "      ";
 		Game.clearConsole(); // Empty the screen		
@@ -53,7 +54,7 @@ public class PlayerInput {
 		String msg = "Enter coordinates of you guess (like 'A1'): ";
 		int[] coord = new int[2];
 		while (!same) {
-			coord = Game.readCoordinate(msg, p.getSize());
+			coord = PlayerInput.readCoordinate(msg, p.getSize());
 			char c = p.opponentGrid.returnCharacter(coord[1], coord[0]);
 			if(c == Grid.HIT_MISSED || c == Grid.HIT) {
 				same = false;
@@ -66,5 +67,69 @@ public class PlayerInput {
 		}
 		g.set_X(coord[0]);
 		g.set_Y(coord[1]);
+	}
+	
+	/**
+	 * Method which enables to read the X axis.
+	 * @return the integer for the X axis.
+	 */	
+	public static int[] readCoordinate(String msg,int m) {
+		int[] coord = new int[2];
+		Scanner sc = new Scanner(System.in);
+		String temp = "";		
+		char limit  = (char)(((int)'A')+m-1);
+		String regex = "[A-"+ limit +"][1-"+m+"]";
+		String regexTwo = "[1-"+m+"][A-"+ limit +"]";
+		boolean respect = false;
+		char x = 0;
+		int y = 0;
+		while(!respect) {
+			System.out.println(msg);
+			temp = sc.next();
+			temp = temp.toUpperCase();
+			respect = (temp.matches(regex))^(temp.matches(regexTwo));
+			if(respect) {
+				if(temp.matches(regex)) {
+					x = temp.charAt(0);
+					y =Character.getNumericValue(temp.charAt(1));	
+				}
+				else {
+					x = temp.charAt(1);
+					y =Character.getNumericValue(temp.charAt(0));
+				}
+				
+				
+			} 
+		}				
+		coord[0] = PlayerInput.changeX(x);
+		coord[1] = y-1;
+		return coord;
+	}
+	
+	public static char readOrientation(String msg) {
+		Scanner sc = new Scanner(System.in);
+		String temp = "";
+		char c = 0;
+		boolean ok = false;
+		while (!ok){			
+			System.out.println(msg);
+			temp = sc.next();
+			c = temp.toUpperCase().charAt(0);
+			ok = (c == 'V' || c == 'H');			
+		}		
+		return c;		
+	}
+
+	/** Changes any letter into a number */
+	public static int changeX(char c){ 
+		int i=0;
+		boolean enc=false;
+		while(i<=27 && !enc){
+			if(c-'a'==i||c-'A'==i) 
+				enc=true;
+			else
+				i++;
+		}
+		return i;
 	}
 }
