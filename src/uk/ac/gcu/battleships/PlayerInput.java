@@ -95,9 +95,6 @@ public class PlayerInput {
 		}
 		
 		int[] coord = PlayerInput.separateCoordinate(temp);
-		for(int i =0;i<coord.length;i++) {
-			System.out.println(coord[i]);
-		}
 		return coord;
 	}
 
