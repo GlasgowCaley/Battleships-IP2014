@@ -5,39 +5,45 @@ import java.util.Scanner;
 public class PlayerInput {
 	
 	public static void inputFleet(Player p){
-		String name = "";
-		for(int i=2; i<=4; i++){ 
+		String nameBoat = "";
+		for(int i=0; i<3; i++){ 
 			boolean add = false;
-			switch(i) {
-			case 2:
-				name = "Get ready to place your Destroyer (Size 2)";
-				break;
-			case 3:
-				name = "Get ready to place your Submarine (Size 3)";
-				break;
-			case 4:
-				name = "Get ready to place your Battleship (Size 4)";
-				break;
-			}
-
 			while(!add) {
-				System.out.println(Game.display(p.myGrid.displayOwnGrid()));
-				System.out.println(name);				
-				add = PlayerInput.inputBoat(p, i);				
+				Ship s = null;
+				System.out.println(Game.display(p.myGrid.displayOwnGrid()));							
+				
+				switch(i) {
+				case 0:
+					nameBoat = "Get ready to place your Destroyer (Size 2)";
+					break;
+				case 1:
+					nameBoat = "Get ready to place your Submarine (Size 3)";
+					break;
+				case 2:
+					nameBoat = "Get ready to place your Battleship (Size 4)";
+					break;
+				}
+				
+				System.out.println(nameBoat);
+				String msg = "Please enter the couple of coordinate of ship (like 'A1'): "; //+ count
+				String msgOrient = "Please enter the orientation of the ship (H or V)";
+				int coord [] = PlayerInput.readCoordinate(msg, p.getSize());
+				char orient = PlayerInput.readOrientation(msgOrient);
+				switch(i) {
+				case 0:
+					s = new Destroyer(coord[0],coord[1],orient);
+					break;
+				case 1:
+					s = new Submarine(coord[0],coord[1],orient);					
+					break;
+				case 2:
+					s = new Battleship(coord[0],coord[1],orient);					
+					break;
+				}
+				
+				add = p.addShip(s);				
 			}    		
 		}
-	}
-	public static boolean inputBoat(Player p, int b){
-		boolean add = false;
-		String msg = "Please enter the couple of coordinate of ship (like 'A1'): "; //+ count
-		String msgOrient = "Please enter the orientation of the ship (H or V)";
-
-		int coord [] = PlayerInput.readCoordinate(msg, p.getSize());
-		char orient = PlayerInput.readOrientation(msgOrient);
-
-		add  = p.createShip(b,coord[0],coord[1],orient);
-		return add;
-		
 	}
 	
 	public static void inputGuess(Guess g, Player p) {
