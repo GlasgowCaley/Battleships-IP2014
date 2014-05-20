@@ -1,5 +1,10 @@
 package uk.ac.gcu.battleships;
 
+/**
+ * Class which enable to configurate the game
+ * 
+ *
+ */
 public class GameConfiguration {
 
 	/**
