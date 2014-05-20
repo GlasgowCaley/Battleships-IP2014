@@ -10,7 +10,7 @@ public class Player  {
 		char f = name.charAt(0);
 		name = Character.toUpperCase(f) + name.substring(1,name.length());
 		this.name = name;
-		myGrid = new Grid();
+		myGrid = new Grid(GameConfiguration.gameConfiguration_SIZE);
 		this.setSize(this.myGrid.getBoard().length);
 	}
 
