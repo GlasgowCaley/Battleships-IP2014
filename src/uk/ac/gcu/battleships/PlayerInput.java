@@ -3,15 +3,15 @@ package uk.ac.gcu.battleships;
 import java.util.Scanner;
 
 public class PlayerInput {
-	
+
 	public static void inputFleet(Player p){
 		String nameBoat = "";
-		for(int i=0; i<3; i++){ 
+		for(int i=0; i<GameConfiguration.gameConfiguration_SIZE; i++){ 
 			boolean add = false;
 			while(!add) {
 				Ship s = null;
 				System.out.println(Game.display(p.myGrid.displayOwnGrid()));							
-				
+
 				switch(i) {
 				case 0:
 					nameBoat = "Get ready to place your Destroyer (Size 2)";
@@ -23,11 +23,11 @@ public class PlayerInput {
 					nameBoat = "Get ready to place your Battleship (Size 4)";
 					break;
 				}
-				
+
 				System.out.println(nameBoat);
 				String msg = "Please enter the couple of coordinate of ship (like 'A1'): "; //+ count
 				String msgOrient = "Please enter the orientation of the ship (H or V)";
-				int coord [] = PlayerInput.readCoordinate(msg, p.getSize());
+				int coord [] = PlayerInput.readCoordinate(msg);
 				char orient = PlayerInput.readOrientation(msgOrient);
 				switch(i) {
 				case 0:
@@ -40,12 +40,13 @@ public class PlayerInput {
 					s = new Battleship(coord[0],coord[1],orient);					
 					break;
 				}
-				
+
 				add = p.addShip(s);				
 			}    		
 		}
 	}
-	
+
+
 	public static void inputGuess(Guess g, Player p) {
 		Scanner sc = new Scanner(System.in);
 		String dec = "      ";
@@ -60,7 +61,7 @@ public class PlayerInput {
 		String msg = "Enter coordinates of you guess (like 'A1'): ";
 		int[] coord = new int[2];
 		while (!same) {
-			coord = PlayerInput.readCoordinate(msg, p.getSize());
+			coord = PlayerInput.readCoordinate(msg);
 			char c = p.opponentGrid.returnCharacter(coord[1], coord[0]);
 			if(c == Grid.HIT_MISSED || c == Grid.HIT) {
 				same = false;
@@ -74,18 +75,14 @@ public class PlayerInput {
 		g.set_X(coord[0]);
 		g.set_Y(coord[1]);
 	}
-	
+
 	/**
 	 * Method which enables to read the X axis.
 	 * @return the integer for the X axis.
 	 */	
-	public static int[] readCoordinate(String msg,int m) {
-		int[] coord = new int[2];
+	public static int[] readCoordinate(String msg) {
 		Scanner sc = new Scanner(System.in);
 		String temp = "";		
-		char limit  = (char)(((int)'A')+m-1);
-		String regex = "[A-"+ limit +"][1-"+m+"]";
-		String regexTwo = "[1-"+m+"][A-"+ limit +"]";
 		boolean respect = false;
 		char x = 0;
 		int y = 0;
@@ -93,25 +90,42 @@ public class PlayerInput {
 			System.out.println(msg);
 			temp = sc.next();
 			temp = temp.toUpperCase();
-			respect = (temp.matches(regex))^(temp.matches(regexTwo));
-			if(respect) {
-				if(temp.matches(regex)) {
-					x = temp.charAt(0);
-					y =Character.getNumericValue(temp.charAt(1));	
-				}
-				else {
-					x = temp.charAt(1);
-					y =Character.getNumericValue(temp.charAt(0));
-				}
-				
-				
-			} 
-		}				
-		coord[0] = PlayerInput.changeX(x);
-		coord[1] = y-1;
+			respect = PlayerInput.checkRegex(temp);
+ 
+		}
+		
+		int[] coord = PlayerInput.separateCoordinate(temp);
+		for(int i =0;i<coord.length;i++) {
+			System.out.println(coord[i]);
+		}
 		return coord;
 	}
+
+	public static boolean checkRegex(String s) {
+		int size = GameConfiguration.gameConfiguration_SIZE;
+		int max = String.valueOf(size).length();
+		char limit  = (char)(((int)'A')+size-1);
+		String regex = "[A-"+ limit +"][1-"+size+"]";
+		String regexTwo = "[1-"+size+"][A-"+ limit +"]";
+		boolean match = false;
+		if(s.matches(regex)) {
+			match = true;
+		}	
+		if(s.matches(regexTwo)) {
+			match = true;
+			s = Character.toString(s.charAt(1))+Character.toString(s.charAt(0));
+		}	
+		return match;		
+	}
 	
+	public static int[] separateCoordinate(String s) {
+		//int size = GameConfiguration.gameConfiguration_SIZE;
+		int coord[] = new int[2];
+		coord[0] = PlayerInput.changeX(s.charAt(0));
+		coord[1] = Character.getNumericValue(s.charAt(1))-1;
+		return coord;	
+	}
+
 	public static char readOrientation(String msg) {
 		Scanner sc = new Scanner(System.in);
 		String temp = "";
