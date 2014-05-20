@@ -73,7 +73,6 @@ public class Ship {
 
 	/*	Ship constructor */
 	public Ship(int size, int position_x, int position_y, char orientation){
-
 		this.shipHealth = new char[size];
 		this.shipCoordinates = new int[size][2];
 		this.shipSize = size;
@@ -82,13 +81,5 @@ public class Ship {
 		this.shipOrientation = orientation;
 		resetShipHealth();
 		calculateShipPosition();
-		switch(size){
-		case 2: character = 'D';
-		break;
-		case 3: character = 'S';
-		break;
-		case 4: character = 'B';
-		break;
-		}
 	}
 }
