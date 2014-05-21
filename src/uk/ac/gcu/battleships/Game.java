@@ -35,13 +35,13 @@ public class Game
 	public Game() 
 	{
 		this.g= new Guess(0,0);
-		showMenu(); // call showMenu
+		//showMenu(); // call showMenu
 	}
 
 	/**
 	 * showMenu method
-	 */
-	private void showMenu()
+	 */	
+	public void showMenu()
 	{	
 		/** Prints "Battleships" in Kick-Ass ASCII Art */
 		System.out.println("  ____       _______ _______ _      ______  _____ _    _ _____ _____   _____ _ \r\n |  _ \\   /\\|__   __|__   __| |    |  ____|/ ____| |  | |_   _|  __ \\ / ____| |\r\n | |_) | /  \\  | |     | |  | |    | |__  | (___ | |__| | | | | |__) | (___ | |\r\n |  _ < / /\\ \\ | |     | |  | |    |  __|  \\___ \\|  __  | | | |  ___/ \\___ \\| |\r\n | |_) / ____ \\| |     | |  | |____| |____ ____) | |  | |_| |_| |     ____) |_|\r\n |____/_/    \\_\\_|     |_|  |______|______|_____/|_|  |_|_____|_|    |_____/(_)\r\n                                                                               \r\n                                                                               ");
