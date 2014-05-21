@@ -27,6 +27,7 @@ public class GameView extends JPanel {
 		
 		JPanel main = new JPanel();
 		main.add(player[0]);
+		JPanel infos = new JPanel();
 		this.add(main);
 		this.add(this.input);
 		
