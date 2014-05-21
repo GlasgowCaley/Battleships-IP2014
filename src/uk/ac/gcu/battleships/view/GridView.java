@@ -11,6 +11,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -28,6 +30,14 @@ public class GridView extends JPanel implements Observer {
 	private Grid g;
 	public static Border BLACKLINE = BorderFactory.createLineBorder(new Color(143,144,138),1);
 	private boolean action;
+	public Icon water = new ImageIcon("images/sea.png");
+	public Icon question = new ImageIcon("images/Help-icon.png");
+	public Icon hit = new ImageIcon("images/Military-Explosion-icon.png");
+	public Icon submarine=new ImageIcon("images/Letter-S-icon.png");
+	public Icon destructor=new ImageIcon("images/Letter-D-icon.png");
+	public Icon battleship=new ImageIcon("images/Letter-B-icon.png");
+	public Icon death=new ImageIcon("images/pirate_flag.png");
+
 
 	/**
 	 * Constructor 
@@ -101,11 +111,43 @@ public class GridView extends JPanel implements Observer {
 		this.setLayout(layout);
 		for (int i=0; i<size; i++) {
 			for (int j=0; j<size; j++) {
+				char op = array[i][j];
+				label[i][j] = new JLabel();
+				switch(op){
+					case '-':
+						label[i][j].setIcon(question);
+						break;
+					case 'x':
+						label[i][j].setIcon(hit);
+						break;
+					case 'o':
+						label[i][j].setIcon(water);
+						break;
+					case 'D':
+						label[i][j].setIcon(destructor);
+						break;
+					case 'B':
+						label[i][j].setIcon(battleship);
+						break;
+					case 'S':
+						label[i][j].setIcon(submarine);
+						break;
+					case '@':
+						label[i][j].setIcon(death);
+						break;
+					default:
+						label[i][j].setIcon(water);
+						break;
+					
+				}
+				label[i][j].setBorder(GridView.BLACKLINE);
+				this.add(label[i][j]);
+				/*
 				label[i][j] = new JLabel(Character.toString(array[i][j]),JLabel.CENTER);
 				label[i][j].setFont(new Font("Arial",Font.BOLD,15));
 				label[i][j].setForeground(Color.WHITE);
 				label[i][j].setBorder(GridView.BLACKLINE);
-				this.add(label[i][j]);
+				this.add(label[i][j]);*/
 			}
 		}
 	}
