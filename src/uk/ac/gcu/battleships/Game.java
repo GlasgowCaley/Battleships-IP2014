@@ -19,6 +19,13 @@ public class Game
 	/** Instantiate Guess */
 	private Guess g;
 
+	/**
+	 * getter for the player
+	 */
+	
+	public Player[] getPlayer(){
+		return this.player;
+	}
 	/** 
 	 * Game Method
 	 * Shows the menu
