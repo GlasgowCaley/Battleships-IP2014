@@ -4,10 +4,14 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+
 import javax.swing.border.BevelBorder;
 import javax.swing.border.MatteBorder;
+
 import java.awt.Color;
 
 public class GUI {
@@ -47,7 +51,7 @@ public class GUI {
 		
 		JPanel left_panel = new JPanel();
 		frame.getContentPane().add(left_panel, BorderLayout.WEST);
-		left_panel.setPreferredSize();
+		left_panel.setPreferredSize(new Dimension(500,500));
 		
 		JPanel right_panel = new JPanel();
 		frame.getContentPane().add(right_panel, BorderLayout.EAST);
