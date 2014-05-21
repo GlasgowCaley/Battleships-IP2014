@@ -16,13 +16,15 @@ public class GameController extends Observable{
 	/** attribut which enable to create a link with InputView */
 	private InputView iv ;
 
+
 	
-	/**
-	 * Constructor which lauch the game
+	/** 
+	 * Constructor for class GameController 
 	 */
 	public GameController(){
 		game = new Game();	
 	}
+
 
 	/**
 	 * method which enables to change the message
@@ -38,11 +40,7 @@ public class GameController extends Observable{
 	public void initGame(){
 		//input the name
 		for ( int i = 0 ; i < game.getPlayer().length; i++){
-			game.getPlayer()[i] = new Player(iv.getContent());
-		}
-
+			game.getPlayer()[i] = new Player(iv.getContent());}
 		// place the ship
-	
-
 	}
 }
