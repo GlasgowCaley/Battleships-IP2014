@@ -22,7 +22,7 @@ public class Instruction extends JPanel {
 		
 		public Instruction(){
 			super();
-			JLabel instruction = new JLabel();
+			this.instruction = new JLabel();
 			JPanel back = new JPanel (new GridLayout(2,1));
 			JLabel arrow = new JLabel () ;
 			arrow.setIcon(leftArrow);
@@ -34,34 +34,13 @@ public class Instruction extends JPanel {
 			setVisible(true);			
 			
 		}
+		
+		
 		public void setInstruction(String s)
 		{
 			this.instruction.setText(s);
 		}
-	    static JFrame frame = new JFrame("Juego");
-		public static void main(String[] args) {
-		
-			// TODO Auto-generated method stub
-			Instruction mm = new Instruction();
-			 frame.setUndecorated(true); // Remove title bar
-		        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-
-
-		        frame.addWindowListener(new WindowAdapter() {
-		            public void windowClosing(WindowEvent windowEvent) {
-		                System.exit(0);
-		            }
-		        });
-		        frame.setResizable(false);
-		        frame.getContentPane().add(mm);
-		        frame.pack();
-		        frame.setLocationRelativeTo(null);
-		        frame.setVisible(true);
-		    }
-		
-		
-
+	    	
 }
 
 
