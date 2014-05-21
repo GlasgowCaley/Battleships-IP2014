@@ -2,6 +2,7 @@ package uk.ac.gcu.battleships;
 
 import java.util.ArrayList;
 import java.util.List;
+import uk.ac.gcu.battleships.*;
 
 /**
  * Class representing the game board.
@@ -246,10 +247,10 @@ public class Grid {
 			hit = this.ships.get(i).testHit(x, y);
 			if(hit && (this.returnCharacter(y, x) != Grid.HIT)) { 
 				this.board[y][x] = Grid.HIT;
-				System.out.println("You have hit a Ship!");
+				System.out.println("Computer has hit a Ship!");
 				charac = 'h';
 				if(this.ships.get(i).isSunk()) {
-					System.out.println("Sunk!");
+					System.out.println("Computer has sunk one of your ships!");
 					charac = 's';
 				}
 			}
@@ -260,7 +261,7 @@ public class Grid {
 			i++;
 		}
 		if(this.returnCharacter(y, x) == Grid.HIT_MISSED){ 
-			System.out.println("Miss!");
+			System.out.println("Computer has missed!");
 			charac = 'm';
 		}
 
