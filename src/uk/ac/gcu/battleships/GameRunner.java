@@ -6,6 +6,7 @@ package uk.ac.gcu.battleships;
 public class GameRunner {
 	 public static void main(String[] args) {
 	    	Game game = new Game();
+	    	game.showMenu();
 	    }
 
 }
