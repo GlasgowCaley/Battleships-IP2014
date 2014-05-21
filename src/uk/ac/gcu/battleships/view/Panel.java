@@ -5,13 +5,10 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import uk.ac.gcu.battleships.Game;
-
 import java.awt.*;
 
 /**
@@ -32,7 +29,6 @@ public class Panel extends JPanel{
 		this.add (texte, BorderLayout.NORTH);
 		this.add(game,BorderLayout.CENTER);
 	}
-	
 	
 	
 	public static void main ( String [] args){

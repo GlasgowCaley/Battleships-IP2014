@@ -132,9 +132,6 @@ public class GridView extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if(this.action) {
-			this.g.
-		}
 		
 	}
 }
