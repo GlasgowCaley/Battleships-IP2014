@@ -31,7 +31,8 @@ public class GameController extends Observable{
 	 * method which enables to change the message
 	 * @param s = the message
 	 */
-	public void setMessage( String s ){
+	public void setMessage(String s){
+		this.setChanged();
 		this.notifyObservers(s);
 	}
 	/**
