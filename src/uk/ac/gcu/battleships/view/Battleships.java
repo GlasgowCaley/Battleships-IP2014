@@ -24,9 +24,9 @@ public class Battleships {
 		GridView eg = new GridView(g.displayEnnemyGrid());
 		JFrame frame = new JFrame()	;
 		JPanel back = new JPanel(new GridLayout(1,3));
-		Instruction inst = new Instruction();
+		MainPanel panel = new MainPanel();
 		back.add(og);
-		back.add(inst);
+		back.add(panel);
 
 		back.add(eg);
 		frame.setContentPane(back);

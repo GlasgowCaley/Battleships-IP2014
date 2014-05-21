@@ -74,7 +74,7 @@ public class PlayerInput {
 		Scanner sc = new Scanner(System.in);
 		String dec = "      ";
 		Game.clearConsole(); // Empty the screen		
-		System.out.println(dec+"-- Captain " +p.name+" --"); // Display name of player whose turn it is
+		System.out.println(dec+"-- Captain " +p.name+", press enter to proceed --"); // Display name of player whose turn it is
 		sc.nextLine();
 		System.out.println(dec+"State of your fleet"); // Display name of player whose turn it is
 		System.out.print(Game.display(p.myGrid.displayOwnGrid())); // Show own grid

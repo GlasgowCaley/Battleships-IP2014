@@ -46,7 +46,7 @@ public class Game
 		/** Prints "Battleships" in Kick-Ass ASCII Art */
 		System.out.println("  ____       _______ _______ _      ______  _____ _    _ _____ _____   _____ _ \r\n |  _ \\   /\\|__   __|__   __| |    |  ____|/ ____| |  | |_   _|  __ \\ / ____| |\r\n | |_) | /  \\  | |     | |  | |    | |__  | (___ | |__| | | | | |__) | (___ | |\r\n |  _ < / /\\ \\ | |     | |  | |    |  __|  \\___ \\|  __  | | | |  ___/ \\___ \\| |\r\n | |_) / ____ \\| |     | |  | |____| |____ ____) | |  | |_| |_| |     ____) |_|\r\n |____/_/    \\_\\_|     |_|  |______|______|_____/|_|  |_|_____|_|    |_____/(_)\r\n                                                                               \r\n                                                                               ");
 		/** Displays the menu */
-		System.out.println("Please type your choice (1-3)");
+		System.out.println("Please type your choice (1-3) and press enter to begin");
 		System.out.println("1. Start a New Game");
 		System.out.println("2. View Results");
 		System.out.println("3. Exit the Game");
@@ -93,7 +93,7 @@ public class Game
 	private void newGame()
 	{
 		/** Choose mode - Player vs Player or Player vs Computer */
-		System.out.println("Press Y to play against the AI or press any other key to play against a human");		
+		System.out.println("Press Y to play against the AI. \n Alternatively, press any other key to continue with 2 players. \n Confirm your choice by pressing Enter");
 		Scanner sc = new Scanner(System.in);
 		String yn = sc.nextLine().toUpperCase();			// Save entire input to String yn
 
@@ -110,11 +110,11 @@ public class Game
 		/** Instantiate 2 Players and their ships */
 		for (int i = 0; i<nb; i++){
 			Game.clearConsole(); 										// Clear the screen
-			System.out.print("Player "+(i+1)+", enter your name: "); 	// Player 1/2 - enter your nam			
+			System.out.print("Player "+(i+1)+", enter your name: "); 	// Player 1/2 - enter your name			
 			player[i]= new Player(sc.next());
 
 			if(nb == 2) 												// If there are two human players
-				System.out.println("Captain " +player[i].name+", it is time to deploy your fleet\n");
+				System.out.println("Captain " +player[i].name+", it is time to deploy your fleet! Press Enter to continue\n");
 
 			player[i].addFleet(); 										// Call addFleet to start placing boats
 		}
@@ -131,7 +131,7 @@ public class Game
 
 
 	/** Play the game */
-	private void playGame()
+	public void playGame()
 	{
 		System.out.println("The game has begun! Good luck!");
 		Scanner sc = new Scanner(System.in);  
@@ -144,13 +144,18 @@ public class Game
 			if( res == Grid.HIT ) {
 				switch(player[turn].name) {
 				case "Computer" :
-					System.out.println("One of your ships has been hit!");
+					System.out.println(player[(turn+1)%2].name+" - One of your ships has been hit! Press Enter to proceed");
 					break;
 				default :
-					System.out.println("You have hit an enemy ship!");
+					System.out.println(player[turn].name+" - You have hit an enemy ship! Press Enter to proceed");
 				}				
 			}
-			if(!win) turn = (turn+1)%2;
+			else {
+				System.out.println("You have missed! Press enter to proceed");
+			}
+			if(!win) {
+				turn = (turn+1)%2;
+			}
 			sc.nextLine();
 		}
 		while(!win); // while the game is not won
@@ -167,7 +172,7 @@ public class Game
 		case 'Y' :
 			for(int i =0;i<this.player.length;i++) {
 				Game.clearConsole();
-				System.out.println("Captain " +player[i].name+", it is time to deploy your fleet\n");
+				System.out.println("Captain " +player[i].name+", it is time to deploy your fleet! Press enter to continue\n");
 				if(player[1] instanceof ArtificialPlayer && i == 1) {
 					player[1] = new ArtificialPlayer();
 				} 
