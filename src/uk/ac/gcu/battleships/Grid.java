@@ -218,7 +218,7 @@ public class Grid extends Observable {
 		for(int i = 0; i<3; i++){
 			if(this.ships.get(i).isSunk()){
 				for(int j = 0; j < this.ships.get(i).shipSize; j++){
-				array[this.ships.get(i).shipCoordinates[j][1]][this.ships.get(i).shipCoordinates[j][0]] = 'Z';
+				array[this.ships.get(i).shipCoordinates[j][1]][this.ships.get(i).shipCoordinates[j][0]] = '@';
 				}
 			}
 		}
@@ -247,6 +247,17 @@ public class Grid extends Observable {
 				}
 			}
 		}
+		
+		if(Game.playing){
+			for(int i = 0; i<3; i++){
+				if(this.ships.get(i).isSunk()){
+					for(int j = 0; j < this.ships.get(i).shipSize; j++){
+					array[this.ships.get(i).shipCoordinates[j][1]][this.ships.get(i).shipCoordinates[j][0]] = '@';
+					}
+				}
+			}
+			}
+		
 		return array ;		
 	}
 
