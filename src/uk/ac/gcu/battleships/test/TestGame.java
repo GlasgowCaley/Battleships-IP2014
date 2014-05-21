@@ -19,7 +19,6 @@ public class TestGame {
 		assertEquals("Equal", g.get_X(), 0);
 		assertEquals("Equal", g.get_Y(), 0);	
 	}
-
 	
 	@Test
 	public void testTurn() {

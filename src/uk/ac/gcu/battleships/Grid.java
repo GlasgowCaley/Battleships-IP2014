@@ -17,6 +17,9 @@ public class Grid {
 	/** Two-dimensional array which represents the grid. */
 	private char[][] board;
 
+	/** Default size of grid */
+	public static final int GRID_SIZE = 5;
+	
 	/** Default character used in the Grid. */
 	public static final char DEFAULT_CHAR = '-';
 
@@ -35,7 +38,7 @@ public class Grid {
 	 * By default, the size of the grid is 5.
 	 */
 	public Grid() {
-		this.board = new char[5][5];
+		this.board = new char[GRID_SIZE][GRID_SIZE];
 		Grid.initArray(this.board);
 		this.ships = new ArrayList <Ship>();
 	}

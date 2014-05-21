@@ -1,7 +1,6 @@
 
 package uk.ac.gcu.battleships.view;
 
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -27,6 +26,7 @@ public class GameController extends AnchorPane {
 	/**
 	 * Reference back to Game class
 	 */
+	
 	private Game game;
 	
 	/** 
@@ -52,7 +52,7 @@ public class GameController extends AnchorPane {
 			
 			@Override
 			public void handle(ActionEvent event) {
-		        playerA1.setText("a");
+		        playerA1.setText(valueProperty);
 			}
 		});
 	}
