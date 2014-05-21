@@ -1,16 +1,13 @@
 package uk.ac.gcu.battleships.view;
 
-<<<<<<< HEAD
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-=======
 import java.util.Observable;
 
->>>>>>> 37dbea328dba0251005c53810d4e88ffd05d4bc5
 import uk.ac.gcu.battleships.*;
 
 /**
@@ -28,23 +25,13 @@ public class GameController extends Observable{
 	/** attribut which enable to create a link with InputView */
 	private InputView iv ;
 
-	
-	/**
-	 * Constructor which lauch the game
-	 */
-<<<<<<< HEAD
-	
-	private Game game;
+
 	
 	/** 
 	 * Constructor for class GameController 
 	 */
 	public GameController () {
 		
-=======
-	public GameController(){
-		game = new Game();
->>>>>>> 37dbea328dba0251005c53810d4e88ffd05d4bc5
 	}
 
 	/**
@@ -61,12 +48,11 @@ public class GameController extends Observable{
 	public void initGame(){
 		//input the name
 		for ( int i = 0 ; i < game.getPlayer().length; i++){
-			game.getPlayer()[i] = new Player(iv.getContent());
+			game.getPlayer()[i] = new Player(iv.getContent());}
 		}
 
 		// place the ship
 	
-<<<<<<< HEAD
 	@FXML
 	private static void btnClick () {
 		String valueProperty = "!"; 								// Set the value to an exclamation mark
@@ -81,8 +67,5 @@ public class GameController extends Observable{
 		        playerA1.setText(valueProperty);
 			}
 		});
-=======
-
->>>>>>> 37dbea328dba0251005c53810d4e88ffd05d4bc5
 	}
 }
