@@ -174,7 +174,8 @@ public class Grid extends Observable {
 			hit = this.ships.get(i).testHit(x, y);
 			if(hit && (this.returnCharacter(y, x) != Grid.HIT)) { 
 				this.board[y][x] = Grid.HIT;
-				//if(this.ships.get(i).isSunk()) 
+				if(this.ships.get(i).isSunk()) {
+									}
 				//	System.out.println("A Ship has been sunk!");			
 			}
 			else {
@@ -212,11 +213,22 @@ public class Grid extends Observable {
 					array[i][j] = tmp;
 			}
 		}
+		
+		if(Game.playing){
+		for(int i = 0; i<3; i++){
+			if(this.ships.get(i).isSunk()){
+				for(int j = 0; j < this.ships.get(i).shipSize; j++){
+				array[this.ships.get(i).shipCoordinates[j][1]][this.ships.get(i).shipCoordinates[j][0]] = 'Z';
+				}
+			}
+		}
+		}
+		
 		return array;
 	}
 
 	/**
-	 * Method displaying the ennemy grid into the console.
+	 * Method displaying the enemy grid into the console.
 	 * @return : 2D Array which represents the Opponent's grid, with hit and misses
 	 */
 	public char[][] displayEnnemyGrid(){

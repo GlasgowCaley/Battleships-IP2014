@@ -15,7 +15,7 @@ public class Battleship extends Ship {
 	 */
 	public Battleship(int position_x, int position_y, char orientation) {
 		super(4,position_x,position_y,orientation);
-		this.character = 'B';		
+		this.character = 'B';	
 	}
 
 }

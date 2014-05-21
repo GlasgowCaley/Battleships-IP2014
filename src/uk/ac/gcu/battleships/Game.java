@@ -13,6 +13,7 @@ import java.util.Scanner;
 
 public class Game
 {
+	public static boolean playing = false;
 	/** Instantiates 2 players */
 	private Player []player=new Player[2];
 
@@ -90,8 +91,9 @@ public class Game
 	 * Starts a new game
 	 * Player can choose between playing against another person or against the AI
 	 */
-	private void newGame()
+	public void newGame()
 	{
+
 		/** Choose mode - Player vs Player or Player vs Computer */
 		System.out.println("Press Y to play against the AI. \n Alternatively, press any other key to continue with 2 players. \n Confirm your choice by pressing Enter");
 		Scanner sc = new Scanner(System.in);
@@ -125,6 +127,8 @@ public class Game
 		player[1].opponentGrid=player[0].myGrid;
 
 		/** Start the game by calling the playGame method */
+		
+		playing = true;
 		this.playGame();
 
 	}
@@ -271,13 +275,13 @@ public class Game
 				res += "\nNumber of Misses: " + nbMissByPlayerTwo ;
 				res += "\nNumber of Ships Sunk: " + nbShipSunkPlayerTwo;
 			}else{
-				res += winner+"\n\n"; 
+				res += loser+"\n\n"; 
 				res += "\nNumber of Hits: " + nbHitByPlayerTwo ;
 				res += "\nNumber of Misses: " + nbMissByPlayerTwo ;
 				res += "\nNumber of Ships Sunk: " + nbShipSunkPlayerTwo;
 
 
-				res += loser+"\n\n"; 
+				res += winner+"\n\n"; 
 				res += " \nNumber of Hits: " + nbHitByPlayerOne ;
 				res += " \nNumber of Misses: " + nbMissByPlayerOne ;
 				res += " \nNumber of Ships Sunk:  " + nbShipSunkPlayerOne;
