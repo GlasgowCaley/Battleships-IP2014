@@ -5,11 +5,6 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.*;
 
 import com.sun.glass.events.*;
@@ -17,10 +12,12 @@ import com.sun.javafx.applet.Splash;
 
 import java.awt.*;
 import java.awt.event.WindowAdapter;
+import java.util.Observable;
+import java.util.Observer;
 
 import com.sun.glass.events.WindowEvent;
 
-public class Instruction extends JPanel {
+public class Instruction extends JPanel implements Observer {
 
 	//Insanciar objetos del juego
 		private JLabel instruction;
@@ -70,6 +67,10 @@ public class Instruction extends JPanel {
 		        frame.setLocationRelativeTo(null);
 		        frame.setVisible(true);
 		    }
+		@Override
+		public void update(Observable o, Object arg) {
+			this.instruction.setText((String)arg);			
+		}
 		
 
 }
