@@ -28,17 +28,16 @@ public class MainPanel extends JPanel implements Observer {
 	}
 	
 
-	public static void main(String[] agrs) {
-		
+	public static void main(String[] agrs) {		
+		GameController g = new GameController();		
+		MainPanel  p = new MainPanel();
+		g.addObserver(p);
+		g.setMessage("Hola");
 		JFrame j = new JFrame("rnje");
-		GameController g = new GameController();
-		j.setContentPane(new MainPanel());
+		j.setContentPane(p);
 		j.pack();
 		j.requestFocus();
-		j.setVisible(true);		
-		
-		g.setMessage("Hola");
-		
+		j.setVisible(true);						
 	}
 
 	public void update(Observable o, Object arg) {
