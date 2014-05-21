@@ -24,12 +24,12 @@ public class Instruction extends JPanel {
 			super();
 			this.instruction = new JLabel();
 			JPanel back = new JPanel (new GridLayout(2,1));
-			JLabel arrow = new JLabel () ;
-			arrow.setIcon(leftArrow);
+			//JLabel arrow = new JLabel () ;
+			//arrow.setIcon(leftArrow);
 			//JTextField text = new JTextField ();
 			instruction.setText("Do something");
 			back.add(instruction);
-			back.add(arrow);
+			//back.add(arrow);
 			this.add(back, BorderLayout.CENTER);
 			setVisible(true);			
 			

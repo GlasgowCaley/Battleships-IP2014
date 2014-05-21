@@ -15,14 +15,17 @@ public class GameController extends Observable{
 
 	/** attribut which enable to create a link with InputView */
 	private InputView iv ;
-
-
 	
 	/** 
 	 * Constructor for class GameController 
 	 */
 	public GameController(){
-		game = new Game();	
+		this.game = new Game();
+		this.game.initPlayer();
+	}
+	
+	public GameController(Game g){
+		this.game = g;
 	}
 
 

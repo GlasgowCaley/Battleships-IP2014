@@ -18,7 +18,8 @@ import javax.swing.JTextField;
  * @author Yann Prono
  */
 public class InputView extends JPanel {
-
+	
+	private Instruction instr;
 	/** Element for getting input of user. */
 	private JTextField input;
 
@@ -29,7 +30,9 @@ public class InputView extends JPanel {
 	private String content;
 
 	public InputView() {
-		this.setMaximumSize(new Dimension(100,100));
+		this.setLayout(new BorderLayout());
+		this.instr = new Instruction();
+		this.setMaximumSize(new Dimension(100,50));
 		this.input = new JTextField();
 		this.input.addKeyListener(new KeyListener() {
 
@@ -49,7 +52,7 @@ public class InputView extends JPanel {
 			public void keyReleased(KeyEvent e) {}
 			
 		});
-		this.input.setFont(new Font("Arial",Font.BOLD,40));
+		this.input.setFont(new Font("Arial",Font.BOLD,20));
 		
 		this.enter = new JButton("Enter");
 		
@@ -60,9 +63,7 @@ public class InputView extends JPanel {
 			}			
 		});
 		
-		BorderLayout bl = new BorderLayout();
-		this.setLayout(bl);
-		this.add(new JPanel(), BorderLayout.WEST);
+		this.add(this.instr,BorderLayout.NORTH);
 		this.add(this.input, BorderLayout.CENTER);
 		this.add(this.enter, BorderLayout.EAST);
 	}

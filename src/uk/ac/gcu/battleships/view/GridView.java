@@ -1,28 +1,17 @@
 package uk.ac.gcu.battleships.view;
-
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.BorderFactory;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.border.Border;
 
 import uk.ac.gcu.battleships.GameConfiguration;
 import uk.ac.gcu.battleships.Grid;
 import uk.ac.gcu.battleships.Guess;
-import uk.ac.gcu.battleships.Submarine;
+
 
 public class GridView extends JPanel implements Observer {
 
@@ -112,8 +101,8 @@ public class GridView extends JPanel implements Observer {
 		for (int i=0; i<size; i++) {
 			for (int j=0; j<size; j++) {
 				char op = array[i][j];
-				label[i][j] = new JLabel();
-				switch(op){
+				label[i][j] = new JLabel(Character.toString(array[i][j]));
+				/*switch(op){
 					case '-':
 						label[i][j].setIcon(question);
 						break;
@@ -139,38 +128,18 @@ public class GridView extends JPanel implements Observer {
 						label[i][j].setIcon(water);
 						break;
 					
-				}
+				}*/
 				label[i][j].setBorder(GridView.BLACKLINE);
-				this.add(label[i][j]);
-				/*
+				//this.add(label[i][j]);
+				
 				label[i][j] = new JLabel(Character.toString(array[i][j]),JLabel.CENTER);
 				label[i][j].setFont(new Font("Arial",Font.BOLD,15));
 				label[i][j].setForeground(Color.WHITE);
 				label[i][j].setBorder(GridView.BLACKLINE);
-				this.add(label[i][j]);*/
+				this.add(label[i][j]);
 			}
 		}
 	}
-
-
-	public static void main(String[] args) {
-		JFrame f = new JFrame("dfkj");
-		Grid g = new Grid();
-		
-		JPanel j = new JPanel();
-		j.setBackground(new Color(39,40,34));
-		j.setLayout(new BorderLayout());
-		g.addShip(new Submarine(0,0,'H'));
-		GridView v = new GridView(g,g.displayOwnGrid(),false);
-		GridView v1 = new GridView(g,g.displayEnnemyGrid(),true);
-
-		j.add(v,BorderLayout.EAST);
-		j.add(v1,BorderLayout.WEST);
-		f.setContentPane(j);
-		j.requestFocus();
-		f.pack();f.setVisible(true);
-	}
-
 
 	@Override
 	public void update(Observable o, Object arg) {
