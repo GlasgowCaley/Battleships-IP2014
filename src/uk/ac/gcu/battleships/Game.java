@@ -13,7 +13,12 @@ import java.util.Scanner;
 
 public class Game
 {
+	/** 
+	 * Instantiate a boolean stating if the game is playing
+	 * Only becomes true once all ships have been placed and it is time to guess
+	 */
 	public static boolean playing = false;
+	
 	/** Instantiates 2 players */
 	private Player []player=new Player[2];
 
