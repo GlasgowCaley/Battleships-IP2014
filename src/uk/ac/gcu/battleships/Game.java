@@ -128,6 +128,28 @@ public class Game
 		this.playGame();
 
 	}
+	
+	public void initPlayer() {
+		int nb = 2;
+		Scanner sc = new Scanner(System.in);
+		for (int i = 0; i<nb; i++){
+			Game.clearConsole(); 										// Clear the screen
+			System.out.print("Player "+(i+1)+", enter your name: "); 	// Player 1/2 - enter your name			
+			player[i]= new Player(sc.next());
+
+			if(nb == 2) 												// If there are two human players
+				System.out.println("Captain " +player[i].name+", it is time to deploy your fleet! Press Enter to continue\n");
+
+			player[i].addFleet(); 										// Call addFleet to start placing boats
+		}
+		System.out.print(Game.display(player[1].myGrid.displayOwnGrid())); // Show own grid
+
+		/** Create "opponent" versions of each grid to display hits and misses only */
+		player[0].opponentGrid=player[1].myGrid;
+		player[1].opponentGrid=player[0].myGrid;
+
+		
+	}
 
 
 	/** Play the game */
