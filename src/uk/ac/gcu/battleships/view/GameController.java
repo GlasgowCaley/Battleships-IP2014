@@ -1,7 +1,5 @@
 package uk.ac.gcu.battleships.view;
-
 import java.util.Observable;
-
 import uk.ac.gcu.battleships.*;
 
 /**
@@ -9,7 +7,6 @@ import uk.ac.gcu.battleships.*;
  * @author Anthony Cerf 
  * @author Yann Prono
  */
-
 
 public class GameController extends Observable{
 
@@ -24,7 +21,7 @@ public class GameController extends Observable{
 	 * Constructor which lauch the game
 	 */
 	public GameController(){
-		game = new Game();
+		game = new Game();	
 	}
 
 	/**
