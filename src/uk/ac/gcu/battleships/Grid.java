@@ -2,6 +2,7 @@ package uk.ac.gcu.battleships;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 /**
  * Class representing the game board.
@@ -12,14 +13,14 @@ import java.util.List;
  * @author Anthony Cerf
  * @version 1.0
  */
-public class Grid {
+public class Grid extends Observable {
 
 	/** Two-dimensional array which represents the grid. */
 	private char[][] board;
 
 	/** Default size of grid */
 	public static final int GRID_SIZE = 5;
-	
+
 	/** Default character used in the Grid. */
 	public static final char DEFAULT_CHAR = '-';
 
@@ -81,7 +82,7 @@ public class Grid {
 			}
 		}
 	}
-	
+
 	/**
 	 * Method adding a Ship in this Grid and in the list. 
 	 * @param s Ship to add.
@@ -96,7 +97,9 @@ public class Grid {
 			//add  in the board
 			this.addShipIntoGrid(s);
 		}
-			return add;
+		this.setChanged();
+		this.notifyObservers();
+		return add;
 	}
 
 	/**
@@ -181,12 +184,14 @@ public class Grid {
 			i++;
 		}
 		//if(!hit) 
-			//System.out.println("Miss!");
+		//System.out.println("Miss!");
 
 		for(int j = 0;j<l;j++) {
 			if(!this.ships.get(j).isSunk())
 				sunk = false;
 		}
+		this.setChanged();
+		this.notifyObservers();
 
 		return sunk;		
 	}
