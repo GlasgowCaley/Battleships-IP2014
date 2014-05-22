@@ -27,6 +27,7 @@ public class GameView extends JPanel implements Observer {
 
 	public GameView(Game g) {		
 		GameView.game = g;
+		g.clearConsole();
 		grid = new GridView[2];
 		this.main = new JPanel();	
 		this.currentPlayer = new JLabel("Captain "+g.getPlayer()[g.current].name, JLabel.CENTER);		

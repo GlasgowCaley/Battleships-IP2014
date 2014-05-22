@@ -22,6 +22,7 @@ public class GridView extends JPanel {
 		super();
 		this.grid = new JPanel();
 		this.infos = new JPanel();
+		this.infos.setBackground(GameView.BACKGROUND);
 		this.setPreferredSize(new Dimension(500,500));
 		this.setBackground(new Color(39,40,34));
 		this.grid.setBackground(new Color(39,40,34));
@@ -65,8 +66,6 @@ public class GridView extends JPanel {
 			}
 		}
 		this.add(this.grid,BorderLayout.CENTER);
-		System.out.println("method");
-		System.out.println(this.action);
 		if(this.action)
 			
 			this.infos.add(new JLabel("Click on the left grid to make a guess",JLabel.CENTER));
