@@ -1,5 +1,9 @@
 package uk.ac.gcu.battleships.view;
-import java.util.Observable;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JLabel;
+
 import uk.ac.gcu.battleships.*;
 
 /**
@@ -8,42 +12,30 @@ import uk.ac.gcu.battleships.*;
  * @author Yann Prono
  */
 
-public class GameController extends Observable{
+public class GameController extends MouseAdapter{
 
-	/** attribut which instantiate the game*/
-	private Game game ;
-
-	/** attribut which enable to create a link with InputView */
-	private InputView iv ;
+	private Game game = GameView.game;
 	
-	/** 
-	 * Constructor for class GameController 
-	 */
-	public GameController(){
-		this.game = new Game();
-		this.game.initPlayer();
+	public GameController() {}
+	
+	public void mousePressed(MouseEvent e){
+		System.out.println("Gros con");		
+		if(e.getSource() instanceof JLabel) {
+			JLabel j = (JLabel)e.getSource();
+			int x = Character.getNumericValue(j.getName().charAt(0));
+			int y = Character.getNumericValue(j.getName().charAt(1));
+			System.out.println(j.getName());
+			boolean ok = game.getPlayer()[game.current].opponentGrid.checkGuess(new Guess(x,y));
+			if(!ok) {
+				game.changePlayer();
+			}
+			else {
+				
+			}
+			System.out.println(ok);
+		}	
+		
 	}
 	
-	public GameController(Game g){
-		this.game = g;
-	}
-
-
-	/**
-	 * method which enables to change the message
-	 * @param s = the message
-	 */
-	public void setMessage(String s){
-		this.setChanged();
-		this.notifyObservers(s);
-	}
-	/**
-	 * Method which initialize the beginning of the Game
-	 */
-	public void initGame(){
-		//input the name
-		for ( int i = 0 ; i < game.getPlayer().length; i++){
-			game.getPlayer()[i] = new Player(iv.getContent());}
-		// place the ship
-	}
+	
 }
