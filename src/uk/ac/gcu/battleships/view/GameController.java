@@ -18,21 +18,21 @@ public class GameController extends MouseAdapter{
 	
 	public GameController() {}
 	
-	public void mousePressed(MouseEvent e){
-		System.out.println("Gros con");		
+	public void mousePressed(MouseEvent e){		
 		if(e.getSource() instanceof JLabel) {
 			JLabel j = (JLabel)e.getSource();
 			int x = Character.getNumericValue(j.getName().charAt(0));
 			int y = Character.getNumericValue(j.getName().charAt(1));
-			System.out.println(j.getName());
+			
 			boolean ok = game.getPlayer()[game.current].opponentGrid.checkGuess(new Guess(x,y));
 			if(!ok) {
 				game.changePlayer();
 			}
 			else {
 				
+				
 			}
-			System.out.println(ok);
+			
 		}	
 		
 	}
