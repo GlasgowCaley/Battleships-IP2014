@@ -3,6 +3,7 @@ package uk.ac.gcu.battleships.test;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
 import uk.ac.gcu.battleships.*;
 public class TestGame {
 
@@ -39,4 +40,15 @@ public class TestGame {
 		
 	}
 
+	@Test
+	public void testAllTheHits() {
+		int allGuesses[][];
+		
+		for (int i=0; i < Grid.GRID_SIZE; i++) {
+			for (int j=0; j < Grid.GRID_SIZE; j++) {
+				Guess guess = new Guess(i, j);
+				allGuesses[j][i] = (int)guess.get_X() (int)guess.get_Y();
+			}
+		}
+	}
 }
