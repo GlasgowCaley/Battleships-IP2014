@@ -40,7 +40,7 @@ public class TestGame {
 		
 	}
 
-	@Test
+	/*@Test
 	public void testAllTheHits() {
 		int allGuesses[][];
 		
@@ -50,5 +50,5 @@ public class TestGame {
 				allGuesses[j][i] = (int)guess.get_X() (int)guess.get_Y();
 			}
 		}
-	}
+	}*/
 }
