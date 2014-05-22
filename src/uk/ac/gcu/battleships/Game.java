@@ -1,4 +1,5 @@
 package uk.ac.gcu.battleships;
+import java.util.Observable;
 import java.util.Scanner;
 
 /**
@@ -11,14 +12,17 @@ import java.util.Scanner;
  * 
  */
 
-public class Game
-{
+public class Game extends Observable {
+	
 	public static boolean playing = false;
+	
 	/** Instantiates 2 players */
 	private Player []player=new Player[2];
 
 	/** Instantiate Guess */
 	private Guess g;
+	
+	public int current;
 
 	/**
 	 * getter for the player
@@ -127,7 +131,6 @@ public class Game
 		player[1].opponentGrid=player[0].myGrid;
 
 		/** Start the game by calling the playGame method */
-		
 		playing = true;
 		this.playGame();
 
@@ -146,13 +149,10 @@ public class Game
 
 			player[i].addFleet(); 										// Call addFleet to start placing boats
 		}
-		System.out.print(Game.display(player[1].myGrid.displayOwnGrid())); // Show own grid
 
 		/** Create "opponent" versions of each grid to display hits and misses only */
 		player[0].opponentGrid=player[1].myGrid;
 		player[1].opponentGrid=player[0].myGrid;
-
-		
 	}
 
 
@@ -161,34 +161,39 @@ public class Game
 	{
 		System.out.println("The game has begun! Good luck!");
 		Scanner sc = new Scanner(System.in);  
-		int turn=0;
 		boolean win=false; 									// Game is not won by default
 
 		do {
-			win = player[turn].makeGuess(g);
-			char res  = player[turn].opponentGrid.returnCharacter(g.get_Y(), g.get_X());
+			win = player[this.current].makeGuess(g);
+			char res  = player[this.current].opponentGrid.returnCharacter(g.get_Y(), g.get_X());
 			if( res == Grid.HIT ) {
-				switch(player[turn].name) {
+				switch(player[this.current].name) {
 				case "Computer" :
-					System.out.println(player[(turn+1)%2].name+" - One of your ships has been hit! Press Enter to proceed");
+					System.out.println(player[(this.current+1)%2].name+" - One of your ships has been hit! Press Enter to proceed");
 					break;
 				default :
-					System.out.println(player[turn].name+" - You have hit an enemy ship! Press Enter to proceed");
+					System.out.println(player[this.current].name+" - You have hit an enemy ship! Press Enter to proceed");
 				}				
 			}
 			else {
 				System.out.println("You have missed! Press enter to proceed");
 			}
 			if(!win) {
-				turn = (turn+1)%2;
+			this.changePlayer();
 			}
 			sc.nextLine();
 		}
 		while(!win); // while the game is not won
-		System.out.println(player[turn].name+" wins the game!");
+		System.out.println(player[this.current].name+" wins the game!");
 		this.viewResults();
 		this.restart();
 	}
+	
+	public void changePlayer() {		
+			this.current = (this.current+1)%2;
+			this.setChanged();
+			this.notifyObservers();			
+	} 
 
 	private void restart() {
 		Scanner sc = new Scanner(System.in);
